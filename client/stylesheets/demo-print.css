@@ -1,0 +1,31 @@
+body {
+    background: #fff;
+    color: #000;
+    font: 100.1% "Lucida Grande", Lucida, Verdana, sans-serif;
+}
+#holder {
+    height: 480px;
+    left: 10%;
+    margin: 0 0 0 0px;
+    position: absolute;
+    top: 0;
+    width: 640px;
+}
+
+
+
+/*form {
+  position: absolute;
+  right: 10px;
+  top: 10px;
+}*/
+
+path {
+  stroke: #fff;
+  fill-rule: evenodd;
+}
+
+
+.wizard-custom > .content{
+  min-height: 450px;
+}

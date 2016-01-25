@@ -1,0 +1,2012 @@
+<template name="admin">
+
+
+
+{{> pageHeading title='Admin panel' }}
+
+
+<div class="wrapper wrapper-content animated fadeInRight ecommerce">
+
+
+
+
+
+
+  <div class="row">
+            <div class="col-md-12 col-sm-12">
+              <div class="tabs-container">
+                <ul class="nav nav-tabs" role="tablist">
+                  <li role="presentation"><a href="#companies_tab" aria-controls="companies_tab" role="tab" data-toggle="tab">Users</a></li>
+                  <li role="presentation"><a href="#products_tab" aria-controls="products_tab" role="tab" data-toggle="tab">Companies</a></li>
+                  <li role="presentation"><a href="#product_positions_tab" aria-controls="product_positions_tab" role="tab" data-toggle="tab">Spheres</a></li>
+                  <li role="presentation"><a href="#orders_tab" aria-controls="orders_tab" role="tab" data-toggle="tab">Segments</a></li>
+                  <li role="presentation"><a href="#technologies" aria-controls="technologies" role="tab" data-toggle="tab">Countries</a></li>
+                  <li role="presentation"><a href="#departments" aria-controls="departments" role="tab" data-toggle="tab">Departments</a></li>
+                  <li role="presentation"><a href="#news" aria-controls="news" role="tab" data-toggle="tab">News</a></li>
+                  <li role="presentation"><a href="#employees" aria-controls="employees" role="tab" data-toggle="tab">Employees</a></li>
+                  <li role="presentation"><a href="#activities" aria-controls="activities" role="tab" data-toggle="tab">Activities</a></li>
+                  <li role="presentation"><a href="#features" aria-controls="features" role="tab" data-toggle="tab">Features</a></li>
+                  <li role="presentation"><a href="#feature_lists" aria-controls="feature_lists" role="tab" data-toggle="tab">Features_lists</a></li>
+                  <li role="presentation"><a href="#products" aria-controls="products" role="tab" data-toggle="tab">Products</a></li>
+                  <li role="presentation" class="active"><a href="#marketing" aria-controls="marketing" role="tab" data-toggle="tab">Marketing</a></li>
+                </ul>
+
+                <!-- Tab panes -->
+                <div class="tab-content">
+                  <div role="tabpanel" class="tab-pane" id="companies_tab">
+                    {{>users}}
+                  </div>
+                  <div role="tabpanel" class="tab-pane" id="products_tab">
+                    {{>companies}}
+                  </div>
+                  <div role="tabpanel" class="tab-pane" id="product_positions_tab">
+                    {{>spheres}}
+                  </div>
+                  <div role="tabpanel" class="tab-pane" id="orders_tab">
+                    {{>segments}}
+                  </div>
+                  <div role="tabpanel" class="tab-pane" id="technologies">
+                    {{>countries}}
+                  </div>
+                  <div role="tabpanel" class="tab-pane" id="departments">
+                    {{>departments}}
+                  </div>
+                  <div role="tabpanel" class="tab-pane" id="news">
+                    {{>news_list}}
+                  </div>
+                  <div role="tabpanel" class="tab-pane" id="employees">
+                    {{>employees_list}}
+                  </div>
+                  <div role="tabpanel" class="tab-pane" id="activities">
+                    {{>activities_list}}
+                  </div>
+                  <div role="tabpanel" class="tab-pane" id="features">
+                    {{>features_list}}
+                  </div>
+                  <div role="tabpanel" class="tab-pane" id="feature_lists">
+                    {{>features_lists}}
+                  </div>
+                  <div role="tabpanel" class="tab-pane" id="products">
+                    {{>admin_products}}
+                  </div>
+                  <div role="tabpanel" class="tab-pane active" id="marketing">
+                    {{>admin_marketing}}
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+
+
+
+
+
+
+
+            <!-- <div class="ibox-content m-b-sm border-bottom">
+                <div class="row">
+                    <div class="col-sm-4">
+                        <div class="form-group">
+                            <label class="control-label" for="order_id">Order ID</label>
+                            <input type="text" id="order_id" name="order_id" value="" placeholder="Order ID" class="form-control">
+                        </div>
+                    </div>
+                    <div class="col-sm-4">
+                        <div class="form-group">
+                            <label class="control-label" for="status">Order status</label>
+                            <input type="text" id="status" name="status" value="" placeholder="Status" class="form-control">
+                        </div>
+                    </div>
+                    <div class="col-sm-4">
+                        <div class="form-group">
+                            <label class="control-label" for="customer">Customer</label>
+                            <input type="text" id="customer" name="customer" value="" placeholder="Customer" class="form-control">
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-4">
+                        <div class="form-group">
+                            <label class="control-label" for="date_added">Date added</label>
+                            <div class="input-group date">
+                                <span class="input-group-addon"><i class="fa fa-calendar"></i></span><input id="date_added" type="text" class="form-control" value="03/04/2014">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-4">
+                        <div class="form-group">
+                            <label class="control-label" for="date_modified">Date modified</label>
+                            <div class="input-group date">
+                                <span class="input-group-addon"><i class="fa fa-calendar"></i></span><input id="date_modified" type="text" class="form-control" value="03/06/2014">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-4">
+                        <div class="form-group">
+                            <label class="control-label" for="amount">Amount</label>
+                            <input type="text" id="amount" name="amount" value="" placeholder="Amount" class="form-control">
+                        </div>
+                    </div>
+                </div>
+            </div> -->
+
+</div>
+</template>
+
+
+
+
+
+
+<!-- ///////////////////////    USERS    ////////////////////////////// -->
+
+
+  <template name="users">
+
+              <div class="row">
+                  <div class="col-lg-12">
+                      <div class="ibox">
+
+
+
+                  <div class="ibox-content">
+
+                              <table class="footable table table-stripped toggle-arrow-tiny default footable-loaded" data-page-size="15">
+                                  <thead>
+                                  <tr>
+
+                                      <th class="footable-visible footable-first-column footable-sortable">User ID<span class="footable-sort-indicator"></span></th>
+                                      <th data-hide="phone" class="footable-visible footable-sortable">Username<span class="footable-sort-indicator"></span></th>
+                                      <th data-hide="phone" class="footable-visible footable-sortable">User email<span class="footable-sort-indicator"></span></th>
+                                      <!-- <th data-hide="phone" class="footable-visible footable-sortable">User password<span class="footable-sort-indicator"></span></th> -->
+                                      <th data-hide="phone" class="footable-visible footable-sortable">Profile name<span class="footable-sort-indicator"></span></th>
+                                      <th class="text-right footable-visible footable-last-column footable-sortable">Action<span class="footable-sort-indicator"></span></th>
+
+                                  </tr>
+                                  </thead>
+                                  <tbody>
+                                  {{#each users}}
+                                    {{>user}}
+                                  {{/each}}
+                                  </tbody>
+                                  <tfoot>
+                                  <tr>
+                                      <td colspan="2">
+                                        <div class="dataTables_info" id="example2_info" role="status" aria-live="polite">Showing 1 to {{number_of_users}} of {{number_of_users}} users</div>
+                                      </td>
+                                      <!-- <td colspan="3" class="footable-visible">
+                                          <ul class="pagination pull-right"><li class="footable-page-arrow disabled"><a data-page="first" href="#first">«</a></li><li class="footable-page-arrow disabled"><a data-page="prev" href="#prev">‹</a></li><li class="footable-page active"><a data-page="0" href="#">1</a></li><li class="footable-page"><a data-page="1" href="#">2</a></li><li class="footable-page"><a data-page="2" href="#">3</a></li><li class="footable-page-arrow"><a data-page="next" href="#next">›</a></li><li class="footable-page-arrow"><a data-page="last" href="#last">»</a></li></ul>
+                                      </td> -->
+                                  </tr>
+                                  </tfoot>
+                              </table>
+                          </div>
+                      </div>
+                  </div>
+              </div>
+  </template>
+
+  <template name="user">
+      <tr class="footable" style="display: table-row;">
+      		<td class="footable-visible">
+            {{_id}}
+          </td>
+        	<td class="footable-visible">
+            <!-- <input class="form-control" type="text" value="{{username}}" id="{{_id}}username"> -->
+            {{username}}
+          </td>
+        	<td class="footable-visible">
+            {{#each emails}}
+              <!-- <input class="form-control" type="text" value="{{address}}" id="address"> -->
+              {{address}}
+            {{/each}}
+          </td>
+        	<td class="footable-visible">
+            <!-- <input class="form-control" type="text" value="{{profile.name}}" id="{{_id}}profile_name"> -->
+            {{profile.name}}
+          </td>
+        	<td class="text-right footable-visible footable-last-column">
+            <div class="btn-group">
+              <!-- <button class="btn-white btn btn-xs" id="save">Save</button> -->
+              <button class="btn-white btn btn-xs" id="delete">Delete</button>
+            </div>
+          </td>
+      </tr>
+  </template>
+
+
+<!-- ////////////////////////////////////////////////////////////////// -->
+
+
+
+
+
+
+<!-- ///////////////////////  COMPANIES  ////////////////////////////// -->
+
+
+  <template name="companies">
+
+              <div class="row">
+                  <div class="col-lg-12">
+                      <div class="ibox">
+
+
+
+                  <div class="ibox-content">
+
+                              <table class="footable table table-stripped toggle-arrow-tiny default footable-loaded" data-page-size="15">
+                                  <thead>
+                                  <tr>
+
+                                      <th class="footable-visible footable-first-column footable-sortable">Company ID<span class="footable-sort-indicator"></span></th>
+                                      <th data-hide="phone" class="footable-visible footable-sortable">Company name<span class="footable-sort-indicator"></span></th>
+                                      <th data-hide="phone" class="footable-visible footable-sortable">Company org structure<span class="footable-sort-indicator"></span></th>
+                                      <th data-hide="phone" class="footable-visible footable-sortable">Company balance<span class="footable-sort-indicator"></span></th>
+                                      <th data-hide="phone" class="footable-visible footable-sortable">Created At<span class="footable-sort-indicator"></span></th>
+                                      <th data-hide="phone" class="footable-visible footable-sortable">Owner's username<span class="footable-sort-indicator"></span></th>
+                                      <th data-hide="phone" class="footable-visible footable-sortable">Sphere<span class="footable-sort-indicator"></span></th>
+                                      <th data-hide="phone" class="footable-visible footable-sortable">Segment<span class="footable-sort-indicator"></span></th>
+                                      <th data-hide="phone" class="footable-visible footable-sortable">Country<span class="footable-sort-indicator"></span></th>
+                                      <th data-hide="phone" class="footable-visible footable-sortable">Address<span class="footable-sort-indicator"></span></th>
+                                      <th class="text-right footable-visible footable-last-column footable-sortable">Action<span class="footable-sort-indicator"></span></th>
+
+                                  </tr>
+                                  </thead>
+                                  <tbody>
+                                  {{#each companies}}
+                                    {{>company}}
+                                  {{/each}}
+                                  </tbody>
+                                  <tfoot>
+                                  <tr>
+                                      <td colspan="2">
+                                        <div class="dataTables_info" id="example2_info" role="status" aria-live="polite">Showing 1 to {{number_of_companies}} of {{number_of_companies}} companies</div>
+                                      </td>
+                                      <!-- <td colspan="3" class="footable-visible">
+                                          <ul class="pagination pull-right"><li class="footable-page-arrow disabled"><a data-page="first" href="#first">«</a></li><li class="footable-page-arrow disabled"><a data-page="prev" href="#prev">‹</a></li><li class="footable-page active"><a data-page="0" href="#">1</a></li><li class="footable-page"><a data-page="1" href="#">2</a></li><li class="footable-page"><a data-page="2" href="#">3</a></li><li class="footable-page-arrow"><a data-page="next" href="#next">›</a></li><li class="footable-page-arrow"><a data-page="last" href="#last">»</a></li></ul>
+                                      </td> -->
+                                  </tr>
+                                  </tfoot>
+                              </table>
+                          </div>
+                      </div>
+                  </div>
+              </div>
+  </template>
+
+  <template name="company">
+      <tr class="footable" style="display: table-row;">
+          <td class="footable-visible">
+            {{_id}}
+          </td>
+          <td class="footable-visible">
+            <!-- <input class="form-control" type="text" value="{{username}}" id="{{_id}}username"> -->
+            {{company_name}}
+          </td>
+          <td class="footable-visible">
+            <!-- <input class="form-control" type="text" value="{{username}}" id="{{_id}}username"> -->
+            {{company_org_structure}}
+          </td>
+          <td class="footable-visible">
+              <input class="form-control" type="text" value="{{company_balance}}" id="company_balance">
+              <!-- $ {{company_balance}} -->
+          </td>
+          <td class="footable-visible">
+            <!-- <input class="form-control" type="text" value="{{profile.name}}" id="{{_id}}profile_name"> -->
+            {{createdAt}}
+          </td>
+          <td class="footable-visible">
+            {{username}}
+          </td>
+          <td class="footable-visible">
+            {{company_sphere}}
+          </td>
+          <td class="footable-visible">
+            {{company_segment}}
+          </td>
+          <td class="footable-visible">
+            {{company_country}}
+          </td>
+          <td class="footable-visible">
+            {{address}}
+          </td>
+          <td class="text-right footable-visible footable-last-column">
+            <div class="btn-group">
+              <button class="btn-white btn btn-xs" id="save">Save</button>
+              <button class="btn-white btn btn-xs" id="delete">Delete</button>
+            </div>
+          </td>
+      </tr>
+  </template>
+
+
+<!-- ////////////////////////////////////////////////////////////////// -->
+
+
+
+
+
+
+<!-- ///////////////////////   SPHERES   ////////////////////////////// -->
+
+
+  <template name="spheres">
+
+              <div class="row">
+                  <div class="col-lg-12">
+                    <div class="ibox">
+                      <div class="ibox-content">
+
+
+                  <div class="row">
+                    <div class="col-md-6 col-sm-12">
+                      <form class="form-horizontal" id="create_sphere">
+                        <div class="form-group">
+                            <label class="col-md-3 control-label" for="sphere_name">Sphere name</label>
+                            <div class="col-md-9">
+                              <input type="text" class="form-control" id="sphere_name" placeholder="Sphere name">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-md-3 control-label" for="segment_name">Segments</label>
+                              <div class="col-md-9">
+                                <input type="text" class="form-control" id="segment_name0" placeholder="Segment name">
+                              </div>
+                        </div>
+                        {{#each segments_list}}
+                        <div class="form-group">
+                              <div class="col-md-9 col-md-offset-3">
+                                <input type="text" class="form-control" id="segment_name{{value}}" placeholder="Segment name">
+                              </div>
+                        </div>
+                        {{/each}}
+                        <div class="form-group">
+                          <div class="col-md-9 col-md-offset-3">
+                            <button class="btn btn-sm btn-default" id="add_segment" type="button">Add</button>
+                            {{#if unremoveable}}
+                              <button class="btn btn-sm btn-default" id="remove_segment" type="button">Remove</button>
+                            {{/if}}
+                            <button type="submit" class="btn btn-sm btn-primary">Create sphere</button>
+                          </div>
+                        </div>
+                      </form>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+
+
+
+
+
+                <div class="row">
+                  <div class="col-lg-12">
+                    <div class="ibox">
+                      <div class="ibox-content">
+
+
+                              <table class="footable table table-stripped toggle-arrow-tiny default footable-loaded" data-page-size="15">
+                                  <thead>
+                                  <tr>
+
+                                      <th class="footable-visible footable-first-column footable-sortable">Sphere ID<span class="footable-sort-indicator"></span></th>
+                                      <th data-hide="phone" class="footable-visible footable-sortable">Sphere name<span class="footable-sort-indicator"></span></th>
+                                      <th data-hide="phone" class="footable-visible footable-sortable">Sphere segments<span class="footable-sort-indicator"></span></th>
+                                      <th data-hide="phone" class="footable-visible footable-sortable">Created At<span class="footable-sort-indicator"></span></th>
+                                      <th data-hide="phone" class="footable-visible footable-sortable">Owner's username<span class="footable-sort-indicator"></span></th>
+                                      <th class="text-right footable-visible footable-last-column footable-sortable">Action<span class="footable-sort-indicator"></span></th>
+
+                                  </tr>
+                                  </thead>
+                                  <tbody>
+                                  {{#each spheres}}
+                                    {{>sphere}}
+                                  {{/each}}
+                                  </tbody>
+                                  <tfoot>
+                                  <tr>
+                                      <td colspan="2">
+                                        <div class="dataTables_info" id="example2_info" role="status" aria-live="polite">Showing 1 to {{number_of_spheres}} of {{number_of_spheres}} spheres</div>
+                                      </td>
+                                      <!-- <td colspan="3" class="footable-visible">
+                                          <ul class="pagination pull-right"><li class="footable-page-arrow disabled"><a data-page="first" href="#first">«</a></li><li class="footable-page-arrow disabled"><a data-page="prev" href="#prev">‹</a></li><li class="footable-page active"><a data-page="0" href="#">1</a></li><li class="footable-page"><a data-page="1" href="#">2</a></li><li class="footable-page"><a data-page="2" href="#">3</a></li><li class="footable-page-arrow"><a data-page="next" href="#next">›</a></li><li class="footable-page-arrow"><a data-page="last" href="#last">»</a></li></ul>
+                                      </td> -->
+                                  </tr>
+                                  </tfoot>
+                              </table>
+                          </div>
+                      </div>
+                  </div>
+              </div>
+  </template>
+
+  <template name="sphere">
+      <tr class="footable" style="display: table-row;">
+          <td class="footable-visible">
+            {{_id}}
+          </td>
+          <td class="footable-visible">
+            <input class="form-control" type="text" value="{{sphere_name}}" id="{{_id}}sphere_name">
+            <!-- {{sphere_name}} -->
+          </td>
+          <td class="footable-visible">
+            {{#each sphere_segments}}
+              <!-- <input class="form-control" type="text" value="{{segment_name}}" id="{{_id}}segment_name"> -->
+              {{segment_name}}<br>
+            {{/each}}
+          </td>
+          <td class="footable-visible">
+            <!-- <input class="form-control" type="text" value="{{profile.name}}" id="{{_id}}profile_name"> -->
+            {{createdAt}}
+          </td>
+          <td class="footable-visible">
+            {{username}}
+          </td>
+          <td class="text-right footable-visible footable-last-column">
+            <div class="btn-group">
+              <button class="btn-white btn btn-xs" id="save">Save</button>
+              <button class="btn-white btn btn-xs" id="delete">Delete</button>
+            </div>
+          </td>
+      </tr>
+  </template>
+
+
+  <template name="sphere_segment">
+    {{segment_name}}<br>
+  </template>
+
+
+<!-- ////////////////////////////////////////////////////////////////// -->
+
+
+
+
+
+
+<!-- ///////////////////////   SEGMENTS  ////////////////////////////// -->
+
+
+  <template name="segments">
+
+              <div class="row">
+                  <div class="col-lg-12">
+                    <div class="ibox">
+                      <div class="ibox-content">
+
+
+                  <div class="row">
+                    <div class="col-md-6 col-sm-12">
+                      <form class="form-horizontal" id="create_segment">
+                        <div class="form-group">
+                            <label class="col-md-3 control-label" for="segment_name">Segment name</label>
+                            <div class="col-md-9">
+                              <input type="text" class="form-control" id="segment_name" placeholder="Segment name">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                          <div class="col-md-9 col-md-offset-3">
+                            <button type="submit" class="btn btn-sm btn-primary">Create segment</button>
+                          </div>
+                        </div>
+                      </form>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+
+
+
+
+
+                <div class="row">
+                  <div class="col-lg-12">
+                    <div class="ibox">
+                      <div class="ibox-content">
+
+
+                              <table class="footable table table-stripped toggle-arrow-tiny default footable-loaded" data-page-size="15">
+                                  <thead>
+                                  <tr>
+
+                                      <th class="footable-visible footable-first-column footable-sortable">Segment ID<span class="footable-sort-indicator"></span></th>
+                                      <th data-hide="phone" class="footable-visible footable-sortable">Segment name<span class="footable-sort-indicator"></span></th>
+                                      <th data-hide="phone" class="footable-visible footable-sortable">Sphere name<span class="footable-sort-indicator"></span></th>
+                                      <th data-hide="phone" class="footable-visible footable-sortable">Created At<span class="footable-sort-indicator"></span></th>
+                                      <th data-hide="phone" class="footable-visible footable-sortable">Owner's username<span class="footable-sort-indicator"></span></th>
+                                      <th class="text-right footable-visible footable-last-column footable-sortable">Action<span class="footable-sort-indicator"></span></th>
+
+                                  </tr>
+                                  </thead>
+                                  <tbody>
+                                  {{#each segments}}
+                                    {{>segment}}
+                                  {{/each}}
+                                  </tbody>
+                                  <tfoot>
+                                  <tr>
+                                      <td colspan="2">
+                                        <div class="dataTables_info" id="example2_info" role="status" aria-live="polite">Showing 1 to {{number_of_segments}} of {{number_of_segments}} segments</div>
+                                      </td>
+                                      <!-- <td colspan="3" class="footable-visible">
+                                          <ul class="pagination pull-right"><li class="footable-page-arrow disabled"><a data-page="first" href="#first">«</a></li><li class="footable-page-arrow disabled"><a data-page="prev" href="#prev">‹</a></li><li class="footable-page active"><a data-page="0" href="#">1</a></li><li class="footable-page"><a data-page="1" href="#">2</a></li><li class="footable-page"><a data-page="2" href="#">3</a></li><li class="footable-page-arrow"><a data-page="next" href="#next">›</a></li><li class="footable-page-arrow"><a data-page="last" href="#last">»</a></li></ul>
+                                      </td> -->
+                                  </tr>
+                                  </tfoot>
+                              </table>
+                          </div>
+                      </div>
+                  </div>
+              </div>
+  </template>
+
+
+  <template name="segment">
+      <tr class="footable" style="display: table-row;">
+          <td class="footable-visible">
+            {{_id}}
+          </td>
+          <td class="footable-visible">
+            <input class="form-control" type="text" value="{{segment_name}}" id="{{_id}}segment_name">
+            <!-- {{segment_name}} -->
+          </td>
+          <td class="footable-visible">
+            {{sphere_name}}
+          </td>
+          <td class="footable-visible">
+            <!-- <input class="form-control" type="text" value="{{profile.name}}" id="{{_id}}profile_name"> -->
+            {{createdAt}}
+          </td>
+          <td class="footable-visible">
+            {{username}}
+          </td>
+          <td class="text-right footable-visible footable-last-column">
+            <div class="btn-group">
+              <button class="btn-white btn btn-xs" id="save">Save</button>
+              <button class="btn-white btn btn-xs" id="delete">Delete</button>
+            </div>
+          </td>
+      </tr>
+  </template>
+
+
+
+<!-- ////////////////////////////////////////////////////////////////// -->
+
+
+
+
+
+
+<!-- ///////////////////////  COUNTRIES  ////////////////////////////// -->
+
+
+  <template name="countries">
+
+              <div class="row">
+                  <div class="col-lg-12">
+                    <div class="ibox">
+                      <div class="ibox-content">
+
+
+                  <div class="row">
+                    <div class="col-md-6 col-sm-12">
+                      <form class="form-horizontal" id="create_country">
+                        <div class="form-group">
+                            <label class="col-md-3 control-label" for="country_name">Country name</label>
+                            <div class="col-md-9">
+                              <input type="text" class="form-control" id="country_name" placeholder="Country name">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                          <div class="col-md-9 col-md-offset-3">
+                            <button type="submit" class="btn btn-sm btn-primary">Create country</button>
+                          </div>
+                        </div>
+                      </form>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+
+
+
+
+
+                <div class="row">
+                  <div class="col-lg-12">
+                    <div class="ibox">
+                      <div class="ibox-content">
+
+
+                              <table class="footable table table-stripped toggle-arrow-tiny default footable-loaded" data-page-size="15">
+                                  <thead>
+                                  <tr>
+
+                                      <th class="footable-visible footable-first-column footable-sortable">Country ID<span class="footable-sort-indicator"></span></th>
+                                      <th data-hide="phone" class="footable-visible footable-sortable">Country name<span class="footable-sort-indicator"></span></th>
+                                      <th data-hide="phone" class="footable-visible footable-sortable">Created At<span class="footable-sort-indicator"></span></th>
+                                      <th data-hide="phone" class="footable-visible footable-sortable">Owner's username<span class="footable-sort-indicator"></span></th>
+                                      <th class="text-right footable-visible footable-last-column footable-sortable">Action<span class="footable-sort-indicator"></span></th>
+
+                                  </tr>
+                                  </thead>
+                                  <tbody>
+                                  {{#each countries}}
+                                    {{>country}}
+                                  {{/each}}
+                                  </tbody>
+                                  <tfoot>
+                                  <tr>
+                                      <td colspan="2">
+                                        <div class="dataTables_info" id="example2_info" role="status" aria-live="polite">Showing 1 to {{number_of_countries}} of {{number_of_countries}} countries</div>
+                                      </td>
+                                      <!-- <td colspan="3" class="footable-visible">
+                                          <ul class="pagination pull-right"><li class="footable-page-arrow disabled"><a data-page="first" href="#first">«</a></li><li class="footable-page-arrow disabled"><a data-page="prev" href="#prev">‹</a></li><li class="footable-page active"><a data-page="0" href="#">1</a></li><li class="footable-page"><a data-page="1" href="#">2</a></li><li class="footable-page"><a data-page="2" href="#">3</a></li><li class="footable-page-arrow"><a data-page="next" href="#next">›</a></li><li class="footable-page-arrow"><a data-page="last" href="#last">»</a></li></ul>
+                                      </td> -->
+                                  </tr>
+                                  </tfoot>
+                              </table>
+                          </div>
+                      </div>
+                  </div>
+              </div>
+  </template>
+
+
+  <template name="country">
+      <tr class="footable" style="display: table-row;">
+          <td class="footable-visible">
+            {{_id}}
+          </td>
+          <td class="footable-visible">
+            <input class="form-control" type="text" value="{{country_name}}" id="{{_id}}country_name">
+            <!-- {{country_name}} -->
+          </td>
+          <td class="footable-visible">
+            <!-- <input class="form-control" type="text" value="{{profile.name}}" id="{{_id}}profile_name"> -->
+            {{createdAt}}
+          </td>
+          <td class="footable-visible">
+            {{username}}
+          </td>
+          <td class="text-right footable-visible footable-last-column">
+            <div class="btn-group">
+              <button class="btn-white btn btn-xs" id="save">Save</button>
+              <button class="btn-white btn btn-xs" id="delete">Delete</button>
+            </div>
+          </td>
+      </tr>
+  </template>
+
+
+
+<!-- ////////////////////////////////////////////////////////////////// -->
+
+
+
+
+
+
+<!-- /////////////////////// DEPARTMENTS ////////////////////////////// -->
+
+
+  <template name="departments">
+
+              <div class="row">
+                  <div class="col-lg-12">
+                    <div class="ibox">
+                      <div class="ibox-content">
+
+
+                  <div class="row">
+                    <div class="col-md-6 col-sm-12">
+                      <form class="form-horizontal" id="create_department">
+                        <div class="form-group">
+                            <label class="col-md-3 control-label" for="department_name">Department name</label>
+                            <div class="col-md-9">
+                              <input type="text" class="form-control" id="department_name" placeholder="Department name">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-md-3 control-label" for="employee_price">Department price per one employee</label>
+                            <div class="col-md-9">
+                              <input type="text" class="form-control" id="employee_price" placeholder="Employee price">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-md-3 control-label" for="department_description">Department description</label>
+                            <div class="col-md-9">
+                               <textarea rows="4" cols="50" type="text" class="form-control" id="department_description" placeholder="Department description"></textarea>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                          <div class="col-md-9 col-md-offset-3">
+                            <button type="submit" class="btn btn-sm btn-primary">Create department</button>
+                          </div>
+                        </div>
+                      </form>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+
+
+
+
+
+                <div class="row">
+                  <div class="col-lg-12">
+                    <div class="ibox">
+                      <div class="ibox-content">
+
+
+                              <table class="footable table table-stripped toggle-arrow-tiny default footable-loaded" data-page-size="15">
+                                  <thead>
+                                  <tr>
+
+                                      <th class="footable-visible footable-first-column footable-sortable">Department ID<span class="footable-sort-indicator"></span></th>
+                                      <th data-hide="phone" class="footable-visible footable-sortable">Department name<span class="footable-sort-indicator"></span></th>
+                                      <th data-hide="phone" class="footable-visible footable-sortable">Employee price<span class="footable-sort-indicator"></span></th>
+                                      <th data-hide="phone" class="footable-visible footable-sortable">Department description<span class="footable-sort-indicator"></span></th>
+                                      <th data-hide="phone" class="footable-visible footable-sortable">Created At<span class="footable-sort-indicator"></span></th>
+                                      <th data-hide="phone" class="footable-visible footable-sortable">Owner's username<span class="footable-sort-indicator"></span></th>
+                                      <th class="text-right footable-visible footable-last-column footable-sortable">Action<span class="footable-sort-indicator"></span></th>
+
+                                  </tr>
+                                  </thead>
+                                  <tbody>
+                                  {{#each departments}}
+                                    {{>department}}
+                                  {{/each}}
+                                  </tbody>
+                                  <tfoot>
+                                  <tr>
+                                      <td colspan="2">
+                                        <div class="dataTables_info" id="example2_info" role="status" aria-live="polite">Showing 1 to {{number_of_departments}} of {{number_of_departments}} departments</div>
+                                      </td>
+                                      <!-- <td colspan="3" class="footable-visible">
+                                          <ul class="pagination pull-right"><li class="footable-page-arrow disabled"><a data-page="first" href="#first">«</a></li><li class="footable-page-arrow disabled"><a data-page="prev" href="#prev">‹</a></li><li class="footable-page active"><a data-page="0" href="#">1</a></li><li class="footable-page"><a data-page="1" href="#">2</a></li><li class="footable-page"><a data-page="2" href="#">3</a></li><li class="footable-page-arrow"><a data-page="next" href="#next">›</a></li><li class="footable-page-arrow"><a data-page="last" href="#last">»</a></li></ul>
+                                      </td> -->
+                                  </tr>
+                                  </tfoot>
+                              </table>
+                          </div>
+                      </div>
+                  </div>
+              </div>
+  </template>
+
+
+  <template name="department">
+      <tr class="footable" style="display: table-row;">
+          <td class="footable-visible">
+            {{_id}}
+          </td>
+          <td class="footable-visible">
+            <input class="form-control" type="text" value="{{department_name}}" id="{{_id}}department_name">
+            <!-- {{country_name}} -->
+          </td>
+          <td class="footable-visible">
+         <!--    <div class="input-group col-md-3">
+              <span class="input-group-addon">$</span> -->
+              <input class="form-control" type="text" value="{{employee_price}}" id="{{_id}}employee_price">
+              <!-- {{employee_price}} -->
+            <!-- </div> -->
+          </td>
+          <td class="footable-visible">
+            {{department_description}}
+          </td>
+          <td class="footable-visible">
+            <!-- <input class="form-control" type="text" value="{{profile.name}}" id="{{_id}}profile_name"> -->
+            {{createdAt}}
+          </td>
+          <td class="footable-visible">
+            {{username}}
+          </td>
+          <td class="text-right footable-visible footable-last-column">
+            <div class="btn-group">
+              <button class="btn-white btn btn-xs" id="save">Save</button>
+              <button class="btn-white btn btn-xs" id="delete">Delete</button>
+            </div>
+          </td>
+      </tr>
+  </template>
+
+
+<!-- ////////////////////////////////////////////////////////////////// -->
+
+
+
+
+
+
+<!-- ///////////////////////     NEWS    ////////////////////////////// -->
+
+
+  <template name="news_list">
+
+              <div class="row">
+                  <div class="col-lg-12">
+                    <div class="ibox">
+                      <div class="ibox-content">
+
+
+                  <div class="row">
+                    <div class="col-md-6 col-sm-12">
+                      <form class="form-horizontal" id="create_news">
+                        <div class="form-group">
+                            <label class="col-md-3 control-label" for="news_title">Title</label>
+                            <div class="col-md-9">
+                              <input type="text" class="form-control" id="news_title" placeholder="Title">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-md-3 control-label" for="news_type">Type</label>
+                            <div class="col-md-9">
+                              <!-- <input type="text" class="form-control" id="news_type" placeholder="Type"> -->
+                              <select class="form-control" id="news_type">
+                                <option value="type" selected="">Type</option>
+                                <option value="product">Product</option>
+                                <option value="economy">Economy</option>
+                                <option value="warning">Warning</option>
+                                <option value="article">Article</option>
+                                <option value="player">Player</option>
+                                <option value="world">World</option>
+                              </select>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-md-3 control-label" for="news_subject">Subject</label>
+                            <div class="col-md-9">
+                              <!-- <input type="text" class="form-control" id="news_subject" placeholder="Subject"> -->
+                              <select class="form-control" id="news_subject">
+                                <option value="company" selected="">Company</option>
+                                {{#each companies}}
+                                  <option value="{{company_name}}">{{company_name}}</option>
+                                {{/each}}
+                              </select>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-md-3 control-label" for="news_parameter">Parameter</label>
+                            <div class="col-md-9">
+                              <!-- <input type="text" class="form-control" id="news_parameter" placeholder="Parameter"> -->
+                              <select class="form-control" id="news_parameter">
+                                <option value="parameter" selected="">Parameter</option>
+                                <option value="version">Version</option>
+                                <option value="demand">Demand</option>
+                                <option value="market">Market</option>
+                                <option value="trend">Trend</option>
+                                <option value="invest_climate">Invest climate</option>
+                                <option value="market_share">Market share</option>
+                              </select>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-md-3 control-label" for="news_value">Value</label>
+                            <div class="col-md-9">
+                              <input type="text" class="form-control" id="news_value" placeholder="Value">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-md-3 control-label" for="news_message">Message</label>
+                            <div class="col-md-9">
+                              <textarea rows="4" cols="50" type="text" class="form-control" id="news_message" placeholder="Message"></textarea>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                          <div class="col-md-9 col-md-offset-3">
+                            <button type="submit" class="btn btn-sm btn-primary">Create news</button>
+                          </div>
+                        </div>
+                      </form>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+
+
+
+
+
+                <div class="row">
+                  <div class="col-lg-12">
+                    <div class="ibox">
+                      <div class="ibox-content">
+
+
+                              <table class="footable table table-stripped toggle-arrow-tiny default footable-loaded" data-page-size="15">
+                                  <thead>
+                                  <tr>
+
+                                      <th class="footable-visible footable-first-column footable-sortable">News ID<span class="footable-sort-indicator"></span></th>
+                                      <th data-hide="phone" class="footable-visible footable-sortable">News title<span class="footable-sort-indicator"></span></th>
+                                      <th data-hide="phone" class="footable-visible footable-sortable">News type<span class="footable-sort-indicator"></span></th>
+                                      <th data-hide="phone" class="footable-visible footable-sortable">News subject<span class="footable-sort-indicator"></span></th>
+                                      <th data-hide="phone" class="footable-visible footable-sortable">News parameter<span class="footable-sort-indicator"></span></th>
+                                      <th data-hide="phone" class="footable-visible footable-sortable">News value<span class="footable-sort-indicator"></span></th>
+                                      <th data-hide="phone" class="footable-visible footable-sortable">News message<span class="footable-sort-indicator"></span></th>
+                                      <th data-hide="phone" class="footable-visible footable-sortable">Created At<span class="footable-sort-indicator"></span></th>
+                                      <th data-hide="phone" class="footable-visible footable-sortable">Owner's username<span class="footable-sort-indicator"></span></th>
+                                      <th class="text-right footable-visible footable-last-column footable-sortable">Action<span class="footable-sort-indicator"></span></th>
+
+                                  </tr>
+                                  </thead>
+                                  <tbody>
+                                  {{#each news_list}}
+                                    {{>news_admin}}
+                                  {{/each}}
+                                  </tbody>
+                              </table>
+                          </div>
+                      </div>
+                  </div>
+              </div>
+  </template>
+
+
+  <template name="news_admin">
+      <tr class="footable" style="display: table-row;">
+          <td class="footable-visible">
+            {{_id}}
+          </td>
+          <td class="footable-visible">
+            {{news_title}}
+          </td>
+          <td class="footable-visible">
+            {{news_type}}
+          </td>
+          <td class="footable-visible">
+            {{news_subject}}
+          </td>
+          <td class="footable-visible">
+            {{news_parameter}}
+          </td>
+          <td class="footable-visible">
+            {{news_value}}
+          </td>
+          <td class="footable-visible">
+            {{news_message}}
+          </td>
+          <td class="footable-visible">
+            {{createdAt}}
+          </td>
+          <td class="footable-visible">
+            {{username}}
+          </td>
+          <td class="text-right footable-visible footable-last-column">
+            <div class="btn-group">
+              <button class="btn-white btn btn-xs" id="save">Save</button>
+              <button class="btn-white btn btn-xs" id="delete">Delete</button>
+            </div>
+          </td>
+      </tr>
+  </template>
+
+
+<!-- ////////////////////////////////////////////////////////////////// -->
+
+
+
+
+
+<!-- ///////////////////////  EMPLOYEES  ////////////////////////////// -->
+
+
+  <template name="employees_list">
+
+              <div class="row">
+                  <div class="col-lg-12">
+                    <div class="ibox">
+                      <div class="ibox-content">
+
+
+                  <div class="row">
+                    <div class="col-md-6 col-sm-12">
+                      <form class="form-horizontal" id="create_news">
+                        <div class="form-group">
+                            <label class="col-md-3 control-label" for="news_title">Title</label>
+                            <div class="col-md-9">
+                              <input type="text" class="form-control" id="news_title" placeholder="Title">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-md-3 control-label" for="news_type">Type</label>
+                            <div class="col-md-9">
+                              <!-- <input type="text" class="form-control" id="news_type" placeholder="Type"> -->
+                              <select class="form-control" id="news_type">
+                                <option value="type" selected="">Type</option>
+                                <option value="product">Product</option>
+                                <option value="economy">Economy</option>
+                                <option value="warning">Warning</option>
+                                <option value="article">Article</option>
+                                <option value="player">Player</option>
+                                <option value="world">World</option>
+                              </select>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-md-3 control-label" for="news_subject">Subject</label>
+                            <div class="col-md-9">
+                              <!-- <input type="text" class="form-control" id="news_subject" placeholder="Subject"> -->
+                              <select class="form-control" id="news_subject">
+                                <option value="company" selected="">Company</option>
+                                {{#each companies}}
+                                  <option value="{{company_name}}">{{company_name}}</option>
+                                {{/each}}
+                              </select>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-md-3 control-label" for="news_parameter">Parameter</label>
+                            <div class="col-md-9">
+                              <!-- <input type="text" class="form-control" id="news_parameter" placeholder="Parameter"> -->
+                              <select class="form-control" id="news_parameter">
+                                <option value="parameter" selected="">Parameter</option>
+                                <option value="version">Version</option>
+                                <option value="demand">Demand</option>
+                                <option value="market">Market</option>
+                                <option value="trend">Trend</option>
+                                <option value="invest_climate">Invest climate</option>
+                                <option value="market_share">Market share</option>
+                              </select>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-md-3 control-label" for="news_value">Value</label>
+                            <div class="col-md-9">
+                              <input type="text" class="form-control" id="news_value" placeholder="Value">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-md-3 control-label" for="news_message">Message</label>
+                            <div class="col-md-9">
+                              <textarea rows="4" cols="50" type="text" class="form-control" id="news_message" placeholder="Message"></textarea>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                          <div class="col-md-9 col-md-offset-3">
+                            <button type="submit" class="btn btn-sm btn-primary">Create news</button>
+                          </div>
+                        </div>
+                      </form>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+
+
+
+
+
+                <div class="row">
+                  <div class="col-lg-12">
+                    <div class="ibox">
+                      <div class="ibox-content">
+
+
+                              <table class="footable table table-stripped toggle-arrow-tiny default footable-loaded" data-page-size="15">
+                                  <thead>
+                                  <tr>
+
+                                      <th class="footable-visible footable-first-column footable-sortable">News ID<span class="footable-sort-indicator"></span></th>
+                                      <th data-hide="phone" class="footable-visible footable-sortable">Company name<span class="footable-sort-indicator"></span></th>
+                                      <th data-hide="phone" class="footable-visible footable-sortable">Department name<span class="footable-sort-indicator"></span></th>
+                                      <th data-hide="phone" class="footable-visible footable-sortable">Employee level<span class="footable-sort-indicator"></span></th>
+                                      <th data-hide="phone" class="footable-visible footable-sortable">Employee number<span class="footable-sort-indicator"></span></th>
+                                      <th data-hide="phone" class="footable-visible footable-sortable">Sum of department<span class="footable-sort-indicator"></span></th>
+                                      <th data-hide="phone" class="footable-visible footable-sortable">Created At<span class="footable-sort-indicator"></span></th>
+                                      <th data-hide="phone" class="footable-visible footable-sortable">Owner's username<span class="footable-sort-indicator"></span></th>
+                                      <th class="text-right footable-visible footable-last-column footable-sortable">Action<span class="footable-sort-indicator"></span></th>
+
+                                  </tr>
+                                  </thead>
+                                  <tbody>
+                                  {{#each employees_list}}
+                                    {{>employees}}
+                                  {{/each}}
+                                  </tbody>
+                              </table>
+                          </div>
+                      </div>
+                  </div>
+              </div>
+  </template>
+
+
+  <template name="employees">
+      <tr class="footable" style="display: table-row;">
+          <td class="footable-visible">
+            {{_id}}
+          </td>
+          <td class="footable-visible">
+            {{company_name}}
+          </td>
+          <td class="footable-visible">
+            {{department_name}}
+          </td>
+          <td class="footable-visible">
+            {{employee_level}}
+          </td>
+          <td class="footable-visible">
+            {{employee_number}}
+          </td>
+          <td class="footable-visible">
+            {{sum_of_department}}
+          </td>
+          <td class="footable-visible">
+            {{createdAt}}
+          </td>
+          <td class="footable-visible">
+            {{username}}
+          </td>
+          <td class="text-right footable-visible footable-last-column">
+            <div class="btn-group">
+              <button class="btn-white btn btn-xs" id="save">Save</button>
+              <button class="btn-white btn btn-xs" id="delete">Delete</button>
+            </div>
+          </td>
+      </tr>
+  </template>
+
+
+<!-- ////////////////////////////////////////////////////////////////// -->
+
+
+
+
+
+<!-- ///////////////////////  ACTIVITIES ////////////////////////////// -->
+
+
+  <template name="activities_list">
+
+              <div class="row">
+                  <div class="col-lg-12">
+                    <div class="ibox">
+                      <div class="ibox-content">
+
+
+                  <div class="row">
+                    <div class="col-md-6 col-sm-12">
+                      <form class="form-horizontal" id="create_news">
+                        <div class="form-group">
+                            <label class="col-md-3 control-label" for="news_title">Title</label>
+                            <div class="col-md-9">
+                              <input type="text" class="form-control" id="news_title" placeholder="Title">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-md-3 control-label" for="news_type">Type</label>
+                            <div class="col-md-9">
+                              <!-- <input type="text" class="form-control" id="news_type" placeholder="Type"> -->
+                              <select class="form-control" id="news_type">
+                                <option value="type" selected="">Type</option>
+                                <option value="product">Product</option>
+                                <option value="economy">Economy</option>
+                                <option value="warning">Warning</option>
+                                <option value="article">Article</option>
+                                <option value="player">Player</option>
+                                <option value="world">World</option>
+                              </select>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-md-3 control-label" for="news_subject">Subject</label>
+                            <div class="col-md-9">
+                              <!-- <input type="text" class="form-control" id="news_subject" placeholder="Subject"> -->
+                              <select class="form-control" id="news_subject">
+                                <option value="company" selected="">Company</option>
+                                {{#each companies}}
+                                  <option value="{{company_name}}">{{company_name}}</option>
+                                {{/each}}
+                              </select>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-md-3 control-label" for="news_parameter">Parameter</label>
+                            <div class="col-md-9">
+                              <!-- <input type="text" class="form-control" id="news_parameter" placeholder="Parameter"> -->
+                              <select class="form-control" id="news_parameter">
+                                <option value="parameter" selected="">Parameter</option>
+                                <option value="version">Version</option>
+                                <option value="demand">Demand</option>
+                                <option value="market">Market</option>
+                                <option value="trend">Trend</option>
+                                <option value="invest_climate">Invest climate</option>
+                                <option value="market_share">Market share</option>
+                              </select>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-md-3 control-label" for="news_value">Value</label>
+                            <div class="col-md-9">
+                              <input type="text" class="form-control" id="news_value" placeholder="Value">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-md-3 control-label" for="news_message">Message</label>
+                            <div class="col-md-9">
+                              <textarea rows="4" cols="50" type="text" class="form-control" id="news_message" placeholder="Message"></textarea>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                          <div class="col-md-9 col-md-offset-3">
+                            <button type="submit" class="btn btn-sm btn-primary">Create news</button>
+                          </div>
+                        </div>
+                      </form>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+
+
+
+
+
+                <div class="row">
+                  <div class="col-lg-12">
+                    <div class="ibox">
+                      <div class="ibox-content">
+
+
+                              <table class="footable table table-stripped toggle-arrow-tiny default footable-loaded" data-page-size="15">
+                                  <thead>
+                                  <tr>
+
+                                      <th class="footable-visible footable-first-column footable-sortable">News ID<span class="footable-sort-indicator"></span></th>
+                                      <th data-hide="phone" class="footable-visible footable-sortable">Company name<span class="footable-sort-indicator"></span></th>
+                                      <th data-hide="phone" class="footable-visible footable-sortable">Status<span class="footable-sort-indicator"></span></th>
+                                      <th data-hide="phone" class="footable-visible footable-sortable">Title<span class="footable-sort-indicator"></span></th>
+                                      <th data-hide="phone" class="footable-visible footable-sortable">Start date<span class="footable-sort-indicator"></span></th>
+                                      <th data-hide="phone" class="footable-visible footable-sortable">End date<span class="footable-sort-indicator"></span></th>
+                                      <th data-hide="phone" class="footable-visible footable-sortable">Comments<span class="footable-sort-indicator"></span></th>
+                                      <th data-hide="phone" class="footable-visible footable-sortable">Created At<span class="footable-sort-indicator"></span></th>
+                                      <th data-hide="phone" class="footable-visible footable-sortable">Owner's username<span class="footable-sort-indicator"></span></th>
+                                      <th class="text-right footable-visible footable-last-column footable-sortable">Action<span class="footable-sort-indicator"></span></th>
+
+                                  </tr>
+                                  </thead>
+                                  <tbody>
+                                  {{#each activities_list}}
+                                    {{>activities}}
+                                  {{/each}}
+                                  </tbody>
+                              </table>
+                          </div>
+                      </div>
+                  </div>
+              </div>
+  </template>
+
+
+  <template name="activities">
+      <tr class="footable" style="display: table-row;">
+          <td class="footable-visible">
+            {{_id}}
+          </td>
+          <td class="footable-visible">
+            {{company_name}}
+          </td>
+          <td class="footable-visible">
+            {{status}}
+          </td>
+          <td class="footable-visible">
+            {{title}}
+          </td>
+          <td class="footable-visible">
+            {{start_time}}
+          </td>
+          <td class="footable-visible">
+            {{end_time}}
+          </td>
+          <td class="footable-visible">
+            {{comments}}
+          </td>
+          <td class="footable-visible">
+            {{createdAt}}
+          </td>
+          <td class="footable-visible">
+            {{username}}
+          </td>
+          <td class="text-right footable-visible footable-last-column">
+            <div class="btn-group">
+              <button class="btn-white btn btn-xs" id="save">Save</button>
+              <button class="btn-white btn btn-xs" id="delete">Delete</button>
+            </div>
+          </td>
+      </tr>
+  </template>
+
+
+<!-- ////////////////////////////////////////////////////////////////// -->
+
+
+
+
+
+<!-- ///////////////////////  FEATURES   ////////////////////////////// -->
+
+
+  <template name="features_list">
+
+              <div class="row">
+                  <div class="col-lg-12">
+                    <div class="ibox">
+                      <div class="ibox-content">
+
+
+                  <div class="row">
+                    <div class="col-md-6 col-sm-12">
+                      <form class="form-horizontal" id="create_feature">
+                        <div class="form-group">
+                            <label class="col-md-3 control-label" for="feature_name">Name</label>
+                            <div class="col-md-9">
+                              <input type="text" class="form-control" id="feature_name" placeholder="Name">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-md-3 control-label" for="time_to_achieve">Time to achieve</label>
+                            <div class="col-md-9">
+                              <input type="text" class="form-control" id="time_to_achieve" placeholder="Seconds">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-md-3 control-label" for="feature_level">Feature level</label>
+                            <div class="col-md-9">
+                              <input type="text" class="form-control" id="feature_level" placeholder="Level">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-md-3 control-label" for="feature_price">Feature price</label>
+                            <div class="col-md-9">
+                              <input type="text" class="form-control" id="feature_price" placeholder="$">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-md-3 control-label" for="neccessary_level">Neccessary company level</label>
+                            <div class="col-md-9">
+                              <input type="text" class="form-control" id="neccessary_level" placeholder="Neccessary company level">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-md-3 control-label" for="feature_segment">Feature segment</label>
+                            <div class="col-md-9">
+                              <!-- <input type="text" class="form-control" id="feature_segment" placeholder="Type"> -->
+                              <select class="form-control" id="feature_segment">
+                                <option value="" selected="">Choose feature segment</option>
+                                {{#each segments}}
+                                  <option value="{{segment_name}}">{{segment_name}}</option>
+                                {{/each}}
+                              </select>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-md-3 control-label" for="neccesssary_department">Neccessary department</label>
+                            <div class="col-md-9">
+                              <!-- <input type="text" class="form-control" id="neccesssary_department" placeholder="Type"> -->
+                              <select class="form-control" id="neccesssary_department">
+                                <option value="" selected="">Choose department</option>
+                                {{#each departments}}
+                                  <option value="{{department_name}}">{{department_name}}</option>
+                                {{/each}}
+                              </select>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-md-3 control-label" for="neccessary_department_level">Neccessary department level</label>
+                            <div class="col-md-9">
+                              <input type="text" class="form-control" id="neccessary_department_level" placeholder="Neccessary department level">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-md-3 control-label" for="neccessary_employees_number">Neccessary employees number</label>
+                            <div class="col-md-9">
+                              <input type="text" class="form-control" id="neccessary_employees_number" placeholder="Neccessary employees number">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-md-3 control-label" for="feature_description">Description</label>
+                            <div class="col-md-9">
+                              <textarea rows="4" cols="50" type="text" class="form-control" id="feature_description" placeholder="Feature description"></textarea>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                          <div class="col-md-9 col-md-offset-3">
+                            <button type="submit" class="btn btn-sm btn-primary">Create feature</button>
+                          </div>
+                        </div>
+                      </form>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+
+
+
+
+
+                <div class="row">
+                  <div class="col-lg-12">
+                    <div class="ibox">
+                      <div class="ibox-content">
+
+
+                              <table class="footable table table-stripped toggle-arrow-tiny default footable-loaded" data-page-size="15">
+                                  <thead>
+                                  <tr>
+
+                                      <th class="footable-visible footable-first-column footable-sortable">Feature ID<span class="footable-sort-indicator"></span></th>
+                                      <th data-hide="phone" class="footable-visible footable-sortable">Feature name<span class="footable-sort-indicator"></span></th>
+                                      <th data-hide="phone" class="footable-visible footable-sortable">Time to achieve<span class="footable-sort-indicator"></span></th>
+                                      <th data-hide="phone" class="footable-visible footable-sortable">Feature level<span class="footable-sort-indicator"></span></th>
+                                      <th data-hide="phone" class="footable-visible footable-sortable">Feature price<span class="footable-sort-indicator"></span></th>
+                                      <th data-hide="phone" class="footable-visible footable-sortable">Neccessary level<span class="footable-sort-indicator"></span></th>
+                                      <th data-hide="phone" class="footable-visible footable-sortable">Feature segment<span class="footable-sort-indicator"></span></th>
+                                      <th data-hide="phone" class="footable-visible footable-sortable">Neccessary department<span class="footable-sort-indicator"></span></th>
+                                      <th data-hide="phone" class="footable-visible footable-sortable">Neccessary department level<span class="footable-sort-indicator"></span></th>
+                                      <th data-hide="phone" class="footable-visible footable-sortable">Neccessary employees number<span class="footable-sort-indicator"></span></th>
+                                      <th data-hide="phone" class="footable-visible footable-sortable">Description<span class="footable-sort-indicator"></span></th>
+                                      <th class="text-right footable-visible footable-last-column footable-sortable">Action<span class="footable-sort-indicator"></span></th>
+
+                                  </tr>
+                                  </thead>
+                                  <tbody>
+                                  {{#each features_list}}
+                                    {{>features}}
+                                  {{/each}}
+                                  </tbody>
+                              </table>
+                          </div>
+                      </div>
+                  </div>
+              </div>
+  </template>
+
+
+  <template name="features">
+      <tr class="footable" style="display: table-row;">
+          <td class="footable-visible">
+            {{_id}}
+          </td>
+          <td class="footable-visible">
+            {{feature_name}}
+          </td>
+          <td class="footable-visible">
+            {{time_to_achieve}}
+          </td>
+          <td class="footable-visible">
+            {{feature_level}}
+          </td>
+          <td class="footable-visible">
+            {{feature_price}}
+          </td>
+          <td class="footable-visible">
+            {{neccessary_level}}
+          </td>
+          <td class="footable-visible">
+            {{feature_segment}}
+          </td>
+          <td class="footable-visible">
+            {{neccessary_department}}
+          </td>
+          <td class="footable-visible">
+            {{neccessary_department_level}}
+          </td>
+          <td class="footable-visible">
+            {{neccessary_employees_number}}
+          </td>
+          <td class="footable-visible">
+            {{feature_description}}
+          </td>
+          <td class="text-right footable-visible footable-last-column">
+            <div class="btn-group">
+              <button class="btn-white btn btn-xs" id="save">Save</button>
+              <button class="btn-white btn btn-xs" id="delete">Delete</button>
+            </div>
+          </td>
+      </tr>
+  </template>
+
+
+<!-- ////////////////////////////////////////////////////////////////// -->
+
+
+
+
+
+<!-- /////////////////////  FEATURE_LISTS  //////////////////////////// -->
+
+
+  <template name="features_lists">
+
+              <div class="row">
+                  <div class="col-lg-12">
+                    <div class="ibox">
+                      <div class="ibox-content">
+
+
+                  <div class="row">
+                    <div class="col-md-6 col-sm-12">
+                      <form class="form-horizontal" id="create_news">
+                        <div class="form-group">
+                            <label class="col-md-3 control-label" for="news_title">Title</label>
+                            <div class="col-md-9">
+                              <input type="text" class="form-control" id="news_title" placeholder="Title">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-md-3 control-label" for="news_type">Type</label>
+                            <div class="col-md-9">
+                              <!-- <input type="text" class="form-control" id="news_type" placeholder="Type"> -->
+                              <select class="form-control" id="news_type">
+                                <option value="type" selected="">Type</option>
+                                <option value="product">Product</option>
+                                <option value="economy">Economy</option>
+                                <option value="warning">Warning</option>
+                                <option value="article">Article</option>
+                                <option value="player">Player</option>
+                                <option value="world">World</option>
+                              </select>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-md-3 control-label" for="news_subject">Subject</label>
+                            <div class="col-md-9">
+                              <!-- <input type="text" class="form-control" id="news_subject" placeholder="Subject"> -->
+                              <select class="form-control" id="news_subject">
+                                <option value="company" selected="">Company</option>
+                                {{#each companies}}
+                                  <option value="{{company_name}}">{{company_name}}</option>
+                                {{/each}}
+                              </select>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-md-3 control-label" for="news_parameter">Parameter</label>
+                            <div class="col-md-9">
+                              <!-- <input type="text" class="form-control" id="news_parameter" placeholder="Parameter"> -->
+                              <select class="form-control" id="news_parameter">
+                                <option value="parameter" selected="">Parameter</option>
+                                <option value="version">Version</option>
+                                <option value="demand">Demand</option>
+                                <option value="market">Market</option>
+                                <option value="trend">Trend</option>
+                                <option value="invest_climate">Invest climate</option>
+                                <option value="market_share">Market share</option>
+                              </select>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-md-3 control-label" for="news_value">Value</label>
+                            <div class="col-md-9">
+                              <input type="text" class="form-control" id="news_value" placeholder="Value">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-md-3 control-label" for="news_message">Message</label>
+                            <div class="col-md-9">
+                              <textarea rows="4" cols="50" type="text" class="form-control" id="news_message" placeholder="Message"></textarea>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                          <div class="col-md-9 col-md-offset-3">
+                            <button type="submit" class="btn btn-sm btn-primary">Create news</button>
+                          </div>
+                        </div>
+                      </form>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+
+
+
+
+
+                <div class="row">
+                  <div class="col-lg-12">
+                    <div class="ibox">
+                      <div class="ibox-content">
+
+
+                              <table class="footable table table-stripped toggle-arrow-tiny default footable-loaded" data-page-size="15">
+                                  <thead>
+                                  <tr>
+
+                                      <th class="footable-visible footable-first-column footable-sortable">Feature List ID<span class="footable-sort-indicator"></span></th>
+                                      <th data-hide="phone" class="footable-visible footable-sortable">Product ID<span class="footable-sort-indicator"></span></th>
+                                      <th data-hide="phone" class="footable-visible footable-sortable">Product name<span class="footable-sort-indicator"></span></th>
+                                      <th data-hide="phone" class="footable-visible footable-sortable">Feature name<span class="footable-sort-indicator"></span></th>
+                                      <th data-hide="phone" class="footable-visible footable-sortable">Feature level<span class="footable-sort-indicator"></span></th>
+                                      <th data-hide="phone" class="footable-visible footable-sortable">Max feature level<span class="footable-sort-indicator"></span></th>
+                                      <th data-hide="phone" class="footable-visible footable-sortable">Feature price<span class="footable-sort-indicator"></span></th>
+                                      <th data-hide="phone" class="footable-visible footable-sortable">Feature sum<span class="footable-sort-indicator"></span></th>
+                                      <th data-hide="phone" class="footable-visible footable-sortable">Neccessary time<span class="footable-sort-indicator"></span></th>
+                                      <th data-hide="phone" class="footable-visible footable-sortable">Progress<span class="footable-sort-indicator"></span></th>
+                                      <th data-hide="phone" class="footable-visible footable-sortable">Created At<span class="footable-sort-indicator"></span></th>
+                                      <th data-hide="phone" class="footable-visible footable-sortable">Owner's username<span class="footable-sort-indicator"></span></th>
+                                      <th class="text-right footable-visible footable-last-column footable-sortable">Action<span class="footable-sort-indicator"></span></th>
+
+                                  </tr>
+                                  </thead>
+                                  <tbody>
+                                  {{#each features_lists}}
+                                    {{>features_table}}
+                                  {{/each}}
+                                  </tbody>
+                              </table>
+                          </div>
+                      </div>
+                  </div>
+              </div>
+  </template>
+
+
+  <template name="features_table">
+      <tr class="footable" style="display: table-row;">
+          <td class="footable-visible">
+            {{_id}}
+          </td>
+          <td class="footable-visible">
+            {{product_id}}
+          </td>
+          <td class="footable-visible">
+            {{product_name}}
+          </td>
+          <td class="footable-visible">
+            {{feature_name}}
+          </td>
+          <td class="footable-visible">
+            {{feature_level}}
+          </td>
+          <td class="footable-visible">
+            {{max_feature_level}}
+          </td>
+          <td class="footable-visible">
+            {{feature_price}}
+          </td>
+          <td class="footable-visible">
+            {{feature_sum}}
+          </td>
+          <td class="footable-visible">
+            {{time_to_achieve}}
+          </td>
+          <td class="footable-visible">
+            {{progress}}
+          </td>
+          <td class="footable-visible">
+            {{createdAt}}
+          </td>
+          <td class="footable-visible">
+            {{username}}
+          </td>
+          <td class="text-right footable-visible footable-last-column">
+            <div class="btn-group">
+              <button class="btn-white btn btn-xs" id="save">Save</button>
+              <button class="btn-white btn btn-xs" id="delete">Delete</button>
+            </div>
+          </td>
+      </tr>
+  </template>
+
+
+<!-- ////////////////////////////////////////////////////////////////// -->
+
+
+
+
+
+<!-- /////////////////////     PRODUCTS    //////////////////////////// -->
+
+
+  <template name="admin_products">
+
+              <div class="row">
+                  <div class="col-lg-12">
+                    <div class="ibox">
+                      <div class="ibox-content">
+
+
+                  <div class="row">
+                    <div class="col-md-6 col-sm-12">
+                      <form class="form-horizontal" id="create_news">
+                        <div class="form-group">
+                            <label class="col-md-3 control-label" for="news_title">Title</label>
+                            <div class="col-md-9">
+                              <input type="text" class="form-control" id="news_title" placeholder="Title">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-md-3 control-label" for="news_type">Type</label>
+                            <div class="col-md-9">
+                              <!-- <input type="text" class="form-control" id="news_type" placeholder="Type"> -->
+                              <select class="form-control" id="news_type">
+                                <option value="type" selected="">Type</option>
+                                <option value="product">Product</option>
+                                <option value="economy">Economy</option>
+                                <option value="warning">Warning</option>
+                                <option value="article">Article</option>
+                                <option value="player">Player</option>
+                                <option value="world">World</option>
+                              </select>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-md-3 control-label" for="news_subject">Subject</label>
+                            <div class="col-md-9">
+                              <!-- <input type="text" class="form-control" id="news_subject" placeholder="Subject"> -->
+                              <select class="form-control" id="news_subject">
+                                <option value="company" selected="">Company</option>
+                                {{#each companies}}
+                                  <option value="{{company_name}}">{{company_name}}</option>
+                                {{/each}}
+                              </select>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-md-3 control-label" for="news_parameter">Parameter</label>
+                            <div class="col-md-9">
+                              <!-- <input type="text" class="form-control" id="news_parameter" placeholder="Parameter"> -->
+                              <select class="form-control" id="news_parameter">
+                                <option value="parameter" selected="">Parameter</option>
+                                <option value="version">Version</option>
+                                <option value="demand">Demand</option>
+                                <option value="market">Market</option>
+                                <option value="trend">Trend</option>
+                                <option value="invest_climate">Invest climate</option>
+                                <option value="market_share">Market share</option>
+                              </select>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-md-3 control-label" for="news_value">Value</label>
+                            <div class="col-md-9">
+                              <input type="text" class="form-control" id="news_value" placeholder="Value">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-md-3 control-label" for="news_message">Message</label>
+                            <div class="col-md-9">
+                              <textarea rows="4" cols="50" type="text" class="form-control" id="news_message" placeholder="Message"></textarea>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                          <div class="col-md-9 col-md-offset-3">
+                            <button type="submit" class="btn btn-sm btn-primary">Create news</button>
+                          </div>
+                        </div>
+                      </form>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+
+
+
+
+
+                <div class="row">
+                  <div class="col-lg-12">
+                    <div class="ibox">
+                      <div class="ibox-content">
+
+
+                              <table class="footable table table-stripped toggle-arrow-tiny default footable-loaded" data-page-size="15">
+                                  <thead>
+                                  <tr>
+
+                                      <th class="footable-visible footable-first-column footable-sortable">Feature List ID<span class="footable-sort-indicator"></span></th>
+                                      <th data-hide="phone" class="footable-visible footable-sortable">Product name<span class="footable-sort-indicator"></span></th>
+                                      <th data-hide="phone" class="footable-visible footable-sortable">Company name<span class="footable-sort-indicator"></span></th>
+                                      <th data-hide="phone" class="footable-visible footable-sortable">Created At<span class="footable-sort-indicator"></span></th>
+                                      <th data-hide="phone" class="footable-visible footable-sortable">Owner's username<span class="footable-sort-indicator"></span></th>
+                                      <th class="text-right footable-visible footable-last-column footable-sortable">Action<span class="footable-sort-indicator"></span></th>
+
+                                  </tr>
+                                  </thead>
+                                  <tbody>
+                                  {{#each products}}
+                                    {{>admin_product}}
+                                  {{/each}}
+                                  </tbody>
+                              </table>
+                          </div>
+                      </div>
+                  </div>
+              </div>
+  </template>
+
+
+  <template name="admin_product">
+      <tr class="footable" style="display: table-row;">
+          <td class="footable-visible">
+            {{_id}}
+          </td>
+          <td class="footable-visible">
+            {{product_name}}
+          </td>
+          <td class="footable-visible">
+            {{company_name}}
+          </td>
+          <td class="footable-visible">
+            {{createdAt}}
+          </td>
+          <td class="footable-visible">
+            {{username}}
+          </td>
+          <td class="text-right footable-visible footable-last-column">
+            <div class="btn-group">
+              <button class="btn-white btn btn-xs" id="save">Save</button>
+              <button class="btn-white btn btn-xs" id="delete">Delete</button>
+            </div>
+          </td>
+      </tr>
+  </template>
+
+
+<!-- ////////////////////////////////////////////////////////////////// -->
+
+
+
+
+
+
+<!-- /////////////////////     MARKETING   //////////////////////////// -->
+
+
+  <template name="admin_marketing">
+
+              <div class="row">
+                  <div class="col-lg-12">
+                    <div class="ibox">
+                      <div class="ibox-content">
+
+
+                  <div class="row">
+                    <div class="col-md-6 col-sm-12">
+                      <form class="form-horizontal" id="create_channel">
+                        <div class="form-group">
+                            <label class="col-md-3 control-label" for="channel_name">Channel</label>
+                            <div class="col-md-9">
+                              <input type="text" class="form-control" id="channel_name" placeholder="Channel">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-md-3 control-label" for="channel_capacity">Capacity</label>
+                            <div class="col-md-9">
+                              <input type="text" class="form-control" id="channel_capacity" placeholder="Capacity">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-md-3 control-label" for="channel_cost">Cost</label>
+                            <div class="col-md-9">
+                              <input type="text" class="form-control" id="channel_cost" placeholder="Cost">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-md-3 control-label" for="channel_description">Description</label>
+                            <div class="col-md-9">
+                              <textarea rows="4" cols="50" type="text" class="form-control" id="channel_description" placeholder="Description"></textarea>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                          <div class="col-md-9 col-md-offset-3">
+                            <button type="submit" class="btn btn-sm btn-primary">Create channel</button>
+                          </div>
+                        </div>
+                      </form>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+
+
+
+
+
+                <div class="row">
+                  <div class="col-lg-12">
+                    <div class="ibox">
+                      <div class="ibox-content">
+
+
+                              <table class="footable table table-stripped toggle-arrow-tiny default footable-loaded" data-page-size="15">
+                                  <thead>
+                                  <tr>
+
+                                      <th class="footable-visible footable-first-column footable-sortable">Channel ID<span class="footable-sort-indicator"></span></th>
+                                      <th data-hide="phone" class="footable-visible footable-sortable">Channel<span class="footable-sort-indicator"></span></th>
+                                      <th data-hide="phone" class="footable-visible footable-sortable">Capacity<span class="footable-sort-indicator"></span></th>
+                                      <th data-hide="phone" class="footable-visible footable-sortable">Cost<span class="footable-sort-indicator"></span></th>
+                                      <th data-hide="phone" class="footable-visible footable-sortable">Description<span class="footable-sort-indicator"></span></th>
+                                      <th data-hide="phone" class="footable-visible footable-sortable">Created At<span class="footable-sort-indicator"></span></th>
+                                      <th data-hide="phone" class="footable-visible footable-sortable">Owner's username<span class="footable-sort-indicator"></span></th>
+                                      <th class="text-right footable-visible footable-last-column footable-sortable">Action<span class="footable-sort-indicator"></span></th>
+
+                                  </tr>
+                                  </thead>
+                                  <tbody>
+                                  {{#each admin_marketing_channels}}
+                                    {{>admin_marketing_channel}}
+                                  {{/each}}
+                                  </tbody>
+                              </table>
+                          </div>
+                      </div>
+                  </div>
+              </div>
+  </template>
+
+
+  <template name="admin_marketing_channel">
+      <tr class="footable" style="display: table-row;">
+          <td class="footable-visible">
+            {{_id}}
+          </td>
+          <td class="footable-visible">
+            {{channel_name}}
+          </td>
+          <td class="footable-visible">
+            {{channel_capacity}}
+          </td>
+          <td class="footable-visible">
+            {{channel_cost}}
+          </td>
+          <td class="footable-visible">
+            {{channel_description}}
+          </td>
+          <td class="footable-visible">
+            {{createdAt}}
+          </td>
+          <td class="footable-visible">
+            {{username}}
+          </td>
+          <td class="text-right footable-visible footable-last-column">
+            <div class="btn-group">
+              <button class="btn-white btn btn-xs" id="save">Save</button>
+              <button class="btn-white btn btn-xs" id="delete">Delete</button>
+            </div>
+          </td>
+      </tr>
+  </template>
+
+
+<!-- ////////////////////////////////////////////////////////////////// -->

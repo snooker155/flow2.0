@@ -1,0 +1,265 @@
+{
+    "name": "world",
+    "children": [{
+        "name": "Eurasia",
+        "children": [{
+            "name": "Europe",
+            "children": [{
+                "name": "Russia",
+                "children": [{
+                    "name": "Product1",
+                    "size": 3938
+                }, {
+                    "name": "Product2",
+                    "size": 3812
+                }, {
+                    "name": "Product3",
+                    "size": 6714
+                }, {
+                    "name": "Product4",
+                    "size": 743
+                }]
+            }, {
+                "name": "UK",
+                "children": [{
+                    "name": "Product1",
+                    "size": 3534
+                }, {
+                    "name": "Product2",
+                    "size": 5731
+                }, {
+                    "name": "Product3",
+                    "size": 7840
+                }, {
+                    "name": "Product4",
+                    "size": 5914
+                }]
+            }, {
+                "name": "France",
+                "children": [{
+                    "name": "Product1",
+                    "size": 3534
+                }, {
+                    "name": "Product2",
+                    "size": 5731
+                }, {
+                    "name": "Product3",
+                    "size": 7840
+                }, {
+                    "name": "Product4",
+                    "size": 5914
+                }]
+            }, {
+                "name": "Germany",
+                "children": [{
+                    "name": "Product1",
+                    "size": 3534
+                }, {
+                    "name": "Product2",
+                    "size": 5731
+                }, {
+                    "name": "Product3",
+                    "size": 7840
+                }, {
+                    "name": "Product4",
+                    "size": 5914
+                }]
+            }, {
+                "name": "Product1",
+                "size": 5914
+            }, {
+                "name": "Product2",
+                "size": 5914
+            }, {
+                "name": "Product3",
+                "size": 5914
+            }, {
+                "name": "Product4",
+                "size": 5914
+            }]
+        }, {
+            "name": "Middle asia",
+            "children": [{
+                "name": "Product1",
+                "size": 3534
+            }, {
+                "name": "Product2",
+                "size": 5731
+            }, {
+                "name": "Product3",
+                "size": 7840
+            }, {
+                "name": "Product4",
+                "size": 5914
+            }]
+        }, {
+            "name": "Eastern asia",
+            "children": [{
+                "name": "China",
+                "children": [{
+                    "name": "Product1",
+                    "size": 1983
+                }, {
+                    "name": "Product2",
+                    "size": 2047
+                }, {
+                    "name": "Product3",
+                    "size": 1375
+                }, {
+                    "name": "Product4",
+                    "size": 8746
+                }]
+            }, {
+                "name": "Japan",
+                "children": [{
+                    "name": "Product1",
+                    "size": 1983
+                }, {
+                    "name": "Product2",
+                    "size": 2047
+                }, {
+                    "name": "Product3",
+                    "size": 1375
+                }, {
+                    "name": "Product4",
+                    "size": 8746
+                }]
+            }, {
+                "name": "Product1",
+                "size": 5176
+            }, {
+                "name": "Product2",
+                "size": 5176
+            }, {
+                "name": "Product3",
+                "size": 449
+            }, {
+                "name": "Product4",
+                "size": 5593
+            }]
+        }]
+    }, {
+        "name": "America",
+        "children": [{
+            "name": "South America",
+            "children": [{
+                "name": "Brazil",
+                "children": [{
+                    "name": "Product1",
+                    "size": 1983
+                }, {
+                    "name": "Product2",
+                    "size": 2047
+                }, {
+                    "name": "Product3",
+                    "size": 1375
+                }, {
+                    "name": "Product4",
+                    "size": 8746
+                }]
+            }, {
+                "name": "Product1",
+                "size": 1041
+            }, {
+                "name": "Product2",
+                "size": 5176
+            }, {
+                "name": "Product3",
+                "size": 449
+            }, {
+                "name": "Product4",
+                "size": 5593
+            }]
+        }, {
+            "name": "North america",
+            "children": [{
+                "name": "USA",
+                "children": [{
+                    "name": "Product1",
+                    "size": 721
+                }, {
+                    "name": "Product2",
+                    "size": 4294
+                }, {
+                    "name": "Product3",
+                    "size": 9800
+                }, {
+                    "name": "Product4",
+                    "size": 1314
+                }]
+            }, {
+                "name": "Canada",
+                "children": [{
+                    "name": "Product1",
+                    "size": 721
+                }, {
+                    "name": "Product2",
+                    "size": 4294
+                }, {
+                    "name": "Product3",
+                    "size": 9800
+                }, {
+                    "name": "Product4",
+                    "size": 1314
+                }]
+            }, {
+                "name": "Product1",
+                "size": 2822
+            }, {
+                "name": "Product2",
+                "size": 9983
+            }, {
+                "name": "Product3",
+                "size": 2213
+            }, {
+                "name": "Product4",
+                "size": 1681
+            }]
+        }]
+    }, {
+        "name": "Oceania",
+        "children": [{
+            "name": "Australia",
+            "children": [{
+                "name": "Product1",
+                "size": 721
+            }, {
+                "name": "Product2",
+                "size": 4294
+            }, {
+                "name": "Product3",
+                "size": 9800
+            }, {
+                "name": "Product4",
+                "size": 1314
+            }]
+        }, {
+            "name": "Product1",
+            "size": 1759
+        }, {
+            "name": "Product2",
+            "size": 2165
+        }, {
+            "name": "Product3",
+            "size": 586
+        }, {
+            "name": "Product4",
+            "size": 3331
+        }]
+    }, {
+        "name": "Africa",
+        "children": [{
+            "name": "Product1",
+            "size": 8833
+        }, {
+            "name": "Product2",
+            "size": 1732
+        }, {
+            "name": "Product3",
+            "size": 3623
+        }, {
+            "name": "Product4",
+            "size": 10066
+        }]
+    }]
+}

@@ -1,0 +1,44 @@
+<template name="world_map">
+
+
+        <div class="row" id="world_map">
+            <div class="col-lg-3" style="padding-left:25px; padding-top:10px;">
+                <h3 style="color:white;">Market shares <span><a href="" id="set_to_world">World</a></span></h3>
+                <hr>
+                <div class="row">
+                    <div class="col-md-2" style="color:white;">
+                      Region: <br><strong id="regionHolderValue">{{region_name}}</strong>
+                    </div>
+                    <div class="col-md-2" style="color:white;">
+                      People: <br><strong id="shareHolderValue">{{region_people}}</strong>
+                    </div>
+                    <div class="col-md-2" style="color:white;">
+                      Share: <br><strong id="shareHolderValue">{{region_share}}%</strong>
+                    </div>
+                    <div class="col-md-2" style="color:white;">
+                      Profit: <br><strong id="profitHolderValue">${{region_profit}}</strong>
+                    </div>
+                    <div class="col-md-2" style="color:white;">
+                      Price: <br>
+                      <button class="btn btn-primary btn-xs" id='buyShare'>$ {{region_price}}</button>
+                    </div>
+                  </div>
+                <hr>
+                {{#each shares}}
+                    <h5 style="color:white;">{{player.username}}</h5>
+                    <div class="progress progress-mini">
+                        <div style="width: {{share}}%; background-color:{{color}};" aria-valuemax="100" aria-valuemin="0" aria-valuenow="35" role="progressbar" class="progress-bar progress-bar-success">
+                            <span class="sr-only">{{share}}% Complete (success)</span>
+                        </div>
+                    </div>
+                {{/each}}
+            </div>
+            <div class="col-lg-9">
+                    <div id="holder_1000">
+                        {{map}}
+                    </div>
+            </div>
+        </div>
+
+
+</template>

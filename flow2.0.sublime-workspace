@@ -1,0 +1,933 @@
+{
+	"auto_complete":
+	{
+		"selected_items":
+		[
+			[
+				"Sess",
+				"Session.get	Meteor: Session.get(key)"
+			],
+			[
+				"Meteor",
+				"Meteor.call	Meteor.call(name, param1, param2, ... [, asyncCallback])"
+			],
+			[
+				"onC",
+				"OnClick"
+			],
+			[
+				"Ses",
+				"Session.set	Meteor: Session.set(key, value)"
+			],
+			[
+				"s",
+				"strong	Tag"
+			],
+			[
+				"Mete",
+				"Meteor.user	Meteor.user()"
+			],
+			[
+				"Fea",
+				"Feature_lists (obj) [E]"
+			],
+			[
+				"preD",
+				"preventDefault()	Event"
+			],
+			[
+				"employee",
+				"employee_number"
+			],
+			[
+				"fin",
+				"findOne	Meteor: collection.findOne(selector, [options])"
+			],
+			[
+				"sum_of",
+				"sum_of_department"
+			],
+			[
+				"balance_",
+				"balance_log"
+			],
+			[
+				"balance_ar",
+				"balance_array_alt"
+			],
+			[
+				"call",
+				"call(${0:thisArg})	Function"
+			],
+			[
+				"feature_",
+				"feature_name"
+			],
+			[
+				"feature_level",
+				"feature_level"
+			],
+			[
+				"c",
+				"class	Attr"
+			],
+			[
+				"op",
+				"option	Tag"
+			],
+			[
+				"getE",
+				"getElementById(${0:id})	Element"
+			],
+			[
+				"for",
+				"forEach	Meteor: cursor.forEach(callback)"
+			],
+			[
+				"company_",
+				"company_name"
+			],
+			[
+				"M",
+				"Meteor.call	Meteor.call(name, param1, param2, ... [, asyncCallback])"
+			],
+			[
+				"add",
+				"address          (obj) [E]"
+			],
+			[
+				"SVT",
+				"SVT"
+			],
+			[
+				"wi",
+				"width"
+			],
+			[
+				"cons",
+				"console.log('$0');"
+			],
+			[
+				"margin-",
+				"margin-top"
+			],
+			[
+				"min",
+				"min-height"
+			],
+			[
+				"hea",
+				"header	Tag"
+			],
+			[
+				"row",
+				"rowcolor"
+			],
+			[
+				"option",
+				"option"
+			],
+			[
+				"my",
+				"myColor"
+			],
+			[
+				"sql_",
+				"sql_wert"
+			],
+			[
+				"prin",
+				"print_r"
+			],
+			[
+				"pad",
+				"padding"
+			],
+			[
+				"an",
+				"anfang"
+			],
+			[
+				"n",
+				"nParam"
+			],
+			[
+				"ein",
+				"eingabe"
+			],
+			[
+				"a",
+				"abfrage"
+			],
+			[
+				"con",
+				"console"
+			],
+			[
+				"_",
+				"_SESSION"
+			],
+			[
+				"eing",
+				"eingabe3"
+			],
+			[
+				"para",
+				"param2"
+			],
+			[
+				"_SE",
+				"_SESSION"
+			],
+			[
+				"we",
+				"webabfrage"
+			],
+			[
+				"ac",
+				"activewidgets_html"
+			],
+			[
+				"web",
+				"webabfrage_ohne_limit"
+			],
+			[
+				"pos",
+				"pos"
+			],
+			[
+				"auftragda",
+				"auftragdat_id_arr"
+			],
+			[
+				"Stoerungs",
+				"stoerungsmeldung"
+			],
+			[
+				"kun",
+				"kunde_alt"
+			],
+			[
+				"div",
+				"div_weg"
+			],
+			[
+				"func",
+				"function"
+			],
+			[
+				"bac",
+				"background-color"
+			],
+			[
+				"co",
+				"console"
+			],
+			[
+				"sty",
+				"stylesheet"
+			],
+			[
+				"style",
+				"style"
+			],
+			[
+				"grid",
+				"gridStyle"
+			],
+			[
+				"col",
+				"column"
+			],
+			[
+				"pri",
+				"print_r"
+			],
+			[
+				"d",
+				"document"
+			],
+			[
+				"sel",
+				"select_term"
+			],
+			[
+				"adre",
+				"adressaten_arr"
+			],
+			[
+				"stat",
+				"status"
+			],
+			[
+				"print",
+				"print_r"
+			],
+			[
+				"prod",
+				"produkt_opt"
+			],
+			[
+				"asba",
+				"asbangabe_f"
+			],
+			[
+				"onk",
+				"onkzangabe_f"
+			],
+			[
+				"gefa",
+				"gefangabe_f"
+			],
+			[
+				"auftra",
+				"auftrags_nr"
+			],
+			[
+				"oz",
+				"oztangabe_f"
+			],
+			[
+				"wr",
+				"write"
+			],
+			[
+				"active",
+				"activewidgets"
+			],
+			[
+				"kolo",
+				"kollo_oztrechte"
+			],
+			[
+				"kollo_use",
+				"kollo_uservorname"
+			],
+			[
+				"ref",
+				"ref_onkz_asb"
+			]
+		]
+	},
+	"buffers":
+	[
+		{
+			"file": "client/config/router.js",
+			"settings":
+			{
+				"buffer_size": 1323,
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "server/methods.js",
+			"settings":
+			{
+				"buffer_size": 6977,
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "server/server.js",
+			"settings":
+			{
+				"buffer_size": 2723,
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "client/views/flow/world_map.html",
+			"settings":
+			{
+				"buffer_size": 2057,
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "client/views/flow/world_map.js",
+			"settings":
+			{
+				"buffer_size": 269018,
+				"line_ending": "Windows"
+			}
+		}
+	],
+	"build_system": "",
+	"build_system_choices":
+	[
+	],
+	"build_varint": "",
+	"command_palette":
+	{
+		"height": 0.0,
+		"last_filter": "",
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"console":
+	{
+		"height": 174.0,
+		"history":
+		[
+		]
+	},
+	"distraction_free":
+	{
+		"menu_visible": true,
+		"show_minimap": false,
+		"show_open_files": false,
+		"show_tabs": false,
+		"side_bar_visible": false,
+		"status_bar_visible": false
+	},
+	"expanded_folders":
+	[
+		"/C/Users/anzubare/web/meteor/flow2.0",
+		"/C/Users/anzubare/web/meteor/flow2.0/.meteor/local",
+		"/C/Users/anzubare/web/meteor/flow2.0/client",
+		"/C/Users/anzubare/web/meteor/flow2.0/client/config",
+		"/C/Users/anzubare/web/meteor/flow2.0/client/views",
+		"/C/Users/anzubare/web/meteor/flow2.0/client/views/common",
+		"/C/Users/anzubare/web/meteor/flow2.0/client/views/flow",
+		"/C/Users/anzubare/web/meteor/flow2.0/client/views/pages",
+		"/C/Users/anzubare/web/meteor/flow2.0/client/views/pages/otherpages",
+		"/C/Users/anzubare/web/meteor/flow2.0/lib",
+		"/C/Users/anzubare/web/meteor/flow2.0/server"
+	],
+	"file_history":
+	[
+		"/C/Users/anzubare/web/meteor/flow2.0/client/views/pages/otherpages/register.js",
+		"/C/Users/anzubare/web/meteor/flow2.0/client/views/pages/otherpages/login.js",
+		"/C/Users/anzubare/web/meteor/flow2.0/client/views/common/top-navbar.js",
+		"/C/Users/anzubare/web/meteor/flow2.0/client/views/common/topGameNavbar.js",
+		"/C/Users/anzubare/web/meteor/flow2.0/client/views/flow/game_screen.js",
+		"/C/Users/anzubare/web/meteor/flow2.0/client/views/flow/game_screen.html",
+		"/C/Users/anzubare/web/meteor/flow2.0/server/server.js",
+		"/C/Users/anzubare/web/meteor/flow2.0/.meteor/platforms",
+		"/C/Users/anzubare/web/meteor/flow2.0/lib/collections.js",
+		"/C/Users/anzubare/web/meteor/flow2.0/.meteor/packages",
+		"/C/Users/anzubare/web/meteor/flow2.0/server/publish.js",
+		"/C/Users/anzubare/web/meteor/flow2.0/client/views/flow/_flow.js",
+		"/C/Users/anzubare/web/meteor/flow2.0/server/methods.js",
+		"/C/Users/anzubare/Github/CorpGlory/server/game/route.js",
+		"/C/Users/anzubare/Github/CorpGlory/server/public/js/game/marketShare.js",
+		"/N/wwwroot/beta.ssl.kollo-hwr.telekom.de/betriebsauftraege/ba_bearbeiten.php",
+		"/N/wwwroot/beta.ssl.kollo-hwr.telekom.de/funktionen/mailform.php",
+		"/N/wwwroot/beta.ssl.kollo-hwr.telekom.de/funktionen/mailen_req.php",
+		"/N/wwwroot/beta.ssl.kollo-hwr.telekom.de/betriebsauftraege/ba_excel_export.php",
+		"/N/wwwroot/beta.ssl.kollo-hwr.telekom.de/funktionen/session_start.inc",
+		"/N/wwwroot/beta.ssl.kollo-hwr.telekom.de/sonderauswertung/Excel_sonderauswertung.php",
+		"/N/wwwroot/beta.ssl.kollo-hwr.telekom.de/ko_navigator/ko_filtern.php",
+		"/N/wwwroot/beta.ssl.kollo-hwr.telekom.de/ko_navigator/ko_bearbeiten.php",
+		"/N/wwwroot/beta.ssl.kollo-hwr.telekom.de/javascript/jquery_V1_2_6.js",
+		"/N/wwwroot/beta.ssl.kollo-hwr.telekom.de/javascript/ko_filtern_req.js",
+		"/N/wwwroot/beta.ssl.kollo-hwr.telekom.de/ko_details/kol_bearbeiten.php",
+		"/N/wwwroot/beta.ssl.kollo-hwr.telekom.de/funktionen/rechte.php",
+		"/N/wwwroot/beta.ssl.kollo-hwr.telekom.de/betriebsauftraege/ba_filtern_req.php",
+		"/N/wwwroot/beta.ssl.kollo-hwr.telekom.de/ko_zusatzleistungen/zu_filtern_req.php",
+		"/N/wwwroot/beta.ssl.kollo-hwr.telekom.de/ko_zusatzleistungen/sis_bearbeiten.php",
+		"/N/wwwroot/beta.ssl.kollo-hwr.telekom.de/ko_kuendigung/kuendprot_pdf.php",
+		"/N/wwwroot/beta.ssl.kollo-hwr.telekom.de/ko_kuendigung/kue_functions.inc",
+		"/N/wwwroot/beta.ssl.kollo-hwr.telekom.de/ko_kuendigung/kue_bearbeiten.php",
+		"/N/wwwroot/beta.ssl.kollo-hwr.telekom.de/ko_kuendigung/matrueckprot.php",
+		"/N/wwwroot/beta.ssl.kollo-hwr.telekom.de/ko_details/kol_functions.inc",
+		"/N/wwwroot/beta.ssl.kollo-hwr.telekom.de/javascript/func_sammlung.js",
+		"/C/Users/anzubare/Github/CorpGlory/server/app.js",
+		"/C/Users/anzubare/Github/CorpGlory/server/game/playerConnection.js",
+		"/C/Users/anzubare/Github/CorpGlory/server/game/game.js",
+		"/C/Users/anzubare/Github/CorpGlory/server/public/js/game/gameScreen.js",
+		"/C/Users/anzubare/Github/CorpGlory/server/views/game.ejs",
+		"/C/Users/anzubare/Github/CorpGlory/server/public/js/game/playersList.js",
+		"/C/Users/anzubare/web/meteor/flow1/lib/methods.js",
+		"/C/Users/anzubare/web/meteor/flow1/client/views/corpglory/room.js",
+		"/C/Users/anzubare/web/meteor/flow1/client/views/corpglory/room.html",
+		"/C/Users/anzubare/web/meteor/flow1/client/views/corpglory/start_screen.js",
+		"/C/Users/anzubare/web/meteor/flow1/client/views/corpglory/start_screen.html",
+		"/C/Users/anzubare/web/meteor/flow1/client/views/corpglory/rooms.js",
+		"/C/Users/anzubare/web/meteor/flow1/client/views/corpglory/rooms.html",
+		"/C/Users/anzubare/web/meteor/flow1/client/views/common/topGameNavbar.html",
+		"/C/Users/anzubare/web/meteor/flow1/client/config/router.js",
+		"/C/Users/anzubare/web/meteor/flow1/client/views/corpglory/product_creation_form.js",
+		"/C/Users/anzubare/web/meteor/flow1/client/views/corpglory/team_creator_form.js",
+		"/C/Users/anzubare/web/meteor/flow1/client/views/pages/otherpages/login.html",
+		"/C/Users/anzubare/web/meteor/flow1/client/views/pages/otherpages/register.html",
+		"/C/Users/anzubare/web/meteor/flow1/client/views/pages/otherpages/login.js",
+		"/C/Users/anzubare/web/meteor/flow1/client/views/corpglory/game_marketing.js",
+		"/C/Users/anzubare/web/meteor/flow1/client/views/corpglory/product_creation_form.html",
+		"/C/Users/anzubare/web/meteor/flow1/client/views/corpglory/company_creation_form.html",
+		"/C/Users/anzubare/web/meteor/flow1/client/views/corpglory/game_company.html",
+		"/C/Users/anzubare/web/meteor/flow1/client/views/corpglory/startup.html",
+		"/C/Users/anzubare/web/meteor/flow1/client/views/corpglory/game_screen.js",
+		"/C/Users/anzubare/web/meteor/flow1/client/views/corpglory/game_screen.html",
+		"/C/Users/anzubare/web/meteor/flow1/server/publish.js",
+		"/C/Users/anzubare/web/meteor/flow1/lib/collections.js",
+		"/C/Users/anzubare/web/meteor/flow1/client/views/corpglory/_flow.js",
+		"/C/Users/anzubare/web/meteor/flow1/client/views/corpglory/_flow.html",
+		"/C/Users/anzubare/web/meteor/flow1/client/views/common/navigation.html",
+		"/C/Users/anzubare/web/meteor/flow1/client/views/common/top-navbar.html",
+		"/C/Users/anzubare/web/meteor/flow1/client/views/corpglory/game_product.js",
+		"/C/Users/anzubare/web/meteor/flow1/client/views/corpglory/game_product.html",
+		"/C/Users/anzubare/web/meteor/flow1/client/views/corpglory/game_team.js",
+		"/C/Users/anzubare/web/meteor/flow1/client/views/corpglory/company_stat.js",
+		"/C/Users/anzubare/web/meteor/flow1/client/views/corpglory/body.js",
+		"/C/Users/anzubare/web/meteor/flow1/client/views/corpglory/game_team.html",
+		"/C/Users/anzubare/web/meteor/flow1/client/views/test_flow_v2_pages/game_product.js",
+		"/C/Users/anzubare/web/meteor/flow1/client/views/test_flow_v2_pages/game_product.html",
+		"/C/Users/anzubare/web/meteor/flow1/client/views/test_flow_v2_pages/game_team.js",
+		"/C/Users/anzubare/web/meteor/flow1/client/views/test_flow_v2_pages/game_team.html",
+		"/C/Users/anzubare/web/meteor/flow1/client/views/test_flow_v2_pages/product_creation_form.js",
+		"/C/Users/anzubare/web/meteor/flow1/client/views/test_flow_v2_pages/product_creation_form.html",
+		"/C/Users/anzubare/web/meteor/flow1/client/views/test_flow_v2_pages/team_creator_form.html",
+		"/C/Users/anzubare/web/meteor/flow1/client/views/test_flow_v2_pages/startup.html",
+		"/C/Users/anzubare/web/meteor/flow1/client/views/test_flow_v2_pages/team_creator_form.js",
+		"/C/Users/anzubare/web/meteor/flow1/client/views/test_flow_v2_pages/company_stat.js",
+		"/C/Users/anzubare/web/meteor/flow1/client/views/test_flow_v2_pages/company_stat.html",
+		"/C/Users/anzubare/web/meteor/flow1/client/views/test_flow_v2_pages/company_creation_form.js",
+		"/C/Users/anzubare/web/meteor/flow1/client/views/test_flow_v2_pages/company_creation_form.html",
+		"/C/Users/anzubare/web/meteor/flow1/client/views/test_flow_v2_pages/game_company.js",
+		"/C/Users/anzubare/web/meteor/flow1/client/views/test_flow_v2_pages/registration_form.js",
+		"/C/Users/anzubare/web/meteor/flow1/client/views/test_flow_v2_pages/registration_form.html",
+		"/C/Users/anzubare/web/meteor/flow1/client/views/test_flow_v2_pages/company_card.html",
+		"/C/Users/anzubare/web/meteor/flow1/client/views/test_flow_v2_pages/game_company.html",
+		"/C/Users/anzubare/web/meteor/flow1/client/views/test_flow_v2_pages/finish.js",
+		"/C/Users/anzubare/web/meteor/flow1/client/views/test_flow_v2_pages/finish.html",
+		"/C/Users/anzubare/web/meteor/flow1/client/views/test_flow_v2_pages/company_register_form.html",
+		"/C/Users/anzubare/web/meteor/flow1/client/views/test_flow_v2_pages/company_register_form.js",
+		"/C/Users/anzubare/web/meteor/flow1/client/views/test_flow_v2_pages/team.html",
+		"/C/Users/anzubare/web/meteor/flow1/client/views/test_flow_v2_pages/customers.html",
+		"/C/Users/anzubare/web/meteor/flow1/client/views/test_flow_v2_pages/customers.js",
+		"/C/Users/anzubare/web/meteor/flow1/client/views/test_flow_v2_pages/world.html",
+		"/C/Users/anzubare/web/meteor/flow1/client/views/test_flow_v2_pages/world_stat.html",
+		"/C/Users/anzubare/web/meteor/flow_modern/client/views/test_flow_v2_pages/game_team.js",
+		"/C/Users/anzubare/web/meteor/flow_modern/client/views/test_flow_v2_pages/game_product.js",
+		"/C/Users/anzubare/web/meteor/flow_modern/client/views/test_flow_v2_pages/game_product.html",
+		"/C/Users/anzubare/web/meteor/flow_modern/client/config/router.js",
+		"/C/Users/anzubare/web/meteor/flow_modern/client/views/test_flow_v2_pages/game_marketing.html",
+		"/C/Users/anzubare/web/meteor/flow_modern/client/views/test_flow_v2_pages/game_team.html",
+		"/C/Users/anzubare/web/meteor/flow_modern/client/views/test_flow_v2_pages/admin.js",
+		"/C/Users/anzubare/web/meteor/flow_modern/client/views/test_flow_v2_pages/company_register_form.html",
+		"/C/Users/anzubare/web/meteor/flow_modern/client/views/test_flow_v2_pages/company_register_form.js",
+		"/C/Users/anzubare/web/meteor/flow_modern/client/views/test_flow_v2_pages/game_screen.html",
+		"/C/Users/anzubare/web/meteor/flow_modern/client/views/test_flow_v2_pages/startup.js",
+		"/C/Users/anzubare/web/meteor/flow_modern/client/views/test_flow_v2_pages/startup.html",
+		"/C/Users/anzubare/web/meteor/flow_modern/client/views/test_flow_v2_pages/team_creator_form.html",
+		"/C/Users/anzubare/web/meteor/flow_modern/client/views/test_flow_v2_pages/product_creation_form.html",
+		"/C/Users/anzubare/web/meteor/flow_modern/client/views/test_flow_v2_pages/company_stat.js",
+		"/C/Users/anzubare/web/meteor/flow_modern/client/views/test_flow_v2_pages/product_creation_form.js",
+		"/C/Users/anzubare/web/meteor/flow_modern/client/views/test_flow_v2_pages/team_creator_form.js",
+		"/C/Users/anzubare/web/meteor/flow_modern/client/views/test_flow_v2_pages/game_marketing.js",
+		"/C/Users/anzubare/web/meteor/flow_modern/client/views/test_flow_v2_pages/game_company.html",
+		"/C/Users/anzubare/web/meteor/flow_modern/client/views/test_flow_v2_pages/game_company.js",
+		"/C/Users/anzubare/web/meteor/flow_modern/client/views/test_flow_v2_pages/company_stat.html",
+		"/C/Users/anzubare/web/meteor/flow_modern/client/views/test_flow_v2_pages/admin.html",
+		"/C/Users/anzubare/web/meteor/flow_modern/client/views/test_flow_v2_pages/_flow.js",
+		"/C/Users/anzubare/web/meteor/flow_modern/server/publish.js",
+		"/C/Users/anzubare/web/meteor/flow_modern/lib/collections.js",
+		"/C/Users/anzubare/web/meteor/flow_modern/client/views/test_flow_v2_pages/news.js"
+	],
+	"find":
+	{
+		"height": 28.0
+	},
+	"find_in_files":
+	{
+		"height": 107.0,
+		"where_history":
+		[
+			"N:\\wwwroot\\beta.ssl.kollo-hwr.telekom.de",
+			"C:\\Users\\anzubare\\Github\\CorpGlory\\server",
+			"C:\\Users\\anzubare\\web\\meteor\\flow_modern\\client",
+			"C:\\kollo_localver\\ssl.kollo.telekom.de",
+			"C:\\kollo_localver\\ssl.kollo.telekom.de<textarea style=\"background-color:#dff;\"",
+			"C:\\kollolocal",
+			""
+		]
+	},
+	"find_state":
+	{
+		"case_sensitive": false,
+		"find_history":
+		[
+			"tab_werte",
+			"zeiterfassung",
+			"mailen",
+			"<?php if(strstr(($_SERVER['HTTP_USER_AGENT']), '/5.0')){ ?>",
+			"console",
+			".name",
+			"<input id='",
+			"vergleichswert_b",
+			"1vergleichswert_b",
+			".select()",
+			"document.getElementById(\"1vergleichswert_b\").select();",
+			"<a id='8vergleich_b' href='#' name='vergleichswert_b'><b>Datum <input id='1vergleichswert_b' type='text' class='text3' value='' title='erlaubtes Datumsformat: tt.mm.jjjj' onmouseleave='sonderfilter_laden((this))' onkeypress='datum_vervollstaendigen(this)'></input></b></a>",
+			"vergleich_b_t1",
+			"operator_b_t",
+			"vergleich_b_t1",
+			"operator_b_t",
+			"operator_o",
+			"vergleich_w",
+			"ter_array_b",
+			"termin_b",
+			"termin",
+			"terminfilter_laden",
+			"1operator_b",
+			"terminfilter_laden",
+			"vergleich_b_id",
+			"1vergleichswert_b",
+			"terminfilter_laden",
+			"alteFilter_setzen",
+			"vergleichswert_b",
+			"console.log",
+			"1operator_b",
+			"childNod",
+			"console",
+			"'id",
+			"childNodes",
+			"childNo",
+			"console",
+			"phase",
+			"weiterefilter_loeschen",
+			"vergleichswert_b",
+			"vergleichswert_b\").value=",
+			"vergleichswert_b",
+			"wert_schreiben",
+			"vergleichswert_b",
+			"sonderfilter_laden",
+			"sonderfilter_laden_enter",
+			"sonderfilter_laden",
+			"vergleichswert_b",
+			"wert_schreiben",
+			"vergleichswert_b",
+			"weiterefilter",
+			"Weiterefilter",
+			"speichern",
+			"all",
+			"speichern",
+			"Weiterefilter",
+			"keine Daten gefunden",
+			"keine Daten",
+			"button_class_mag1",
+			"ansicht_bemerkungen",
+			"$readonly",
+			"ansicht_bemerkungen",
+			"speichern",
+			"div_r15_r2",
+			"rueck_ana",
+			"material_rueck",
+			"all",
+			"update",
+			"playerRegionClick",
+			"updateCompanyShares",
+			"setTimeout",
+			"game_product",
+			"customers",
+			"updateFeatureLevel",
+			"features_array",
+			";\n",
+			"login",
+			"Highcharts",
+			"Hichcharts",
+			"Highcharts",
+			"ServerName",
+			"mod_acc",
+			"Der Termin f",
+			"Die Te",
+			"Die Termin ",
+			"tinycheckbetrag",
+			"checkbetrag",
+			"tinycheckbetrag",
+			"ssl.kollo-hwr.telekom.de",
+			"ssl.kollo.telekom.de",
+			"Weitergabe an",
+			"datum20",
+			"datum17",
+			"radio1",
+			"flag_arr",
+			"radio1",
+			"finwert_anzeigen",
+			"radio1",
+			"nav-pills",
+			"+",
+			"nav-pills",
+			"pills",
+			"pill",
+			"nav",
+			"width",
+			"worldmap",
+			"company_register_form",
+			",\n",
+			"console.log",
+			"console.",
+			"ssheet",
+			"seitenzahl",
+			"seite",
+			"kontakte_id",
+			"ansicht_auftrag_mail",
+			"ansicht_fertigmelden_button",
+			"popu",
+			"kontakte_id",
+			"grill",
+			"Kociemba",
+			"widget_laden_v",
+			"seitennranz",
+			"Seitennranz",
+			"Seite",
+			"SVT_kenner",
+			"tmp2",
+			"SVT_kenner",
+			"speichern"
+		],
+		"highlight": true,
+		"in_selection": false,
+		"preserve_case": false,
+		"regex": false,
+		"replace_history":
+		[
+		],
+		"reverse": false,
+		"show_context": true,
+		"use_buffer2": true,
+		"whole_word": false,
+		"wrap": true
+	},
+	"groups":
+	[
+		{
+			"selected": 3,
+			"sheets":
+			[
+				{
+					"buffer": 0,
+					"file": "client/config/router.js",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 1323,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								722,
+								722
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/JavaScript/JavaScript.tmLanguage",
+							"tab_size": 2,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 120.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 2,
+					"type": "text"
+				},
+				{
+					"buffer": 1,
+					"file": "server/methods.js",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 6977,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								4145,
+								4145
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/JavaScript/JavaScript.tmLanguage",
+							"tab_size": 2,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 2540.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 3,
+					"type": "text"
+				},
+				{
+					"buffer": 2,
+					"file": "server/server.js",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 2723,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								1196,
+								1196
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/JavaScript/JavaScript.tmLanguage",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 780.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 1,
+					"type": "text"
+				},
+				{
+					"buffer": 3,
+					"file": "client/views/flow/world_map.html",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 2057,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								992,
+								992
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/HTML/HTML.tmLanguage",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 0,
+					"type": "text"
+				},
+				{
+					"buffer": 4,
+					"file": "client/views/flow/world_map.js",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 269018,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								268697,
+								268697
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/JavaScript/JavaScript.tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 4797.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 4,
+					"type": "text"
+				}
+			]
+		}
+	],
+	"incremental_find":
+	{
+		"height": 28.0
+	},
+	"input":
+	{
+		"height": 40.0
+	},
+	"layout":
+	{
+		"cells":
+		[
+			[
+				0,
+				0,
+				1,
+				1
+			]
+		],
+		"cols":
+		[
+			0.0,
+			1.0
+		],
+		"rows":
+		[
+			0.0,
+			1.0
+		]
+	},
+	"menu_visible": true,
+	"output.find_results":
+	{
+		"height": 0.0
+	},
+	"pinned_build_system": "",
+	"project": "flow2.0.sublime-project",
+	"replace":
+	{
+		"height": 52.0
+	},
+	"save_all_on_build": true,
+	"select_file":
+	{
+		"height": 0.0,
+		"last_filter": "",
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"select_project":
+	{
+		"height": 0.0,
+		"last_filter": "",
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"select_symbol":
+	{
+		"height": 0.0,
+		"last_filter": "",
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"selected_group": 0,
+	"settings":
+	{
+	},
+	"show_minimap": true,
+	"show_open_files": false,
+	"show_tabs": true,
+	"side_bar_visible": true,
+	"side_bar_width": 334.0,
+	"status_bar_visible": true,
+	"template_settings":
+	{
+	}
+}

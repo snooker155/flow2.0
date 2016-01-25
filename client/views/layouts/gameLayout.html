@@ -1,0 +1,15 @@
+<template name="gameLayout">
+	
+	<!-- Page wrapper -->
+    {{> topGameNavbar }}
+
+    <!-- Main view  -->
+    {{> yield}}
+
+    {{#if has_company}}
+    <!-- Statistic row -->
+    	{{> stat_row}}
+
+    {{/if}}
+
+</template>

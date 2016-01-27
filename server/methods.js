@@ -150,9 +150,9 @@ function get_random_color() {
 
       game.players[Meteor.user().username] = {
         player: Meteor.user(),
-        balance: 100000,
+        player_balance: 100000,
         player_color: get_random_color(),
-        share: 0,
+        player_share: 0,
       };
 
       //console.log(this.connection.id);

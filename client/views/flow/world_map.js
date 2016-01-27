@@ -33,6 +33,7 @@ var WorldMapData = {
 
 
 var WorldMap = {};
+var buttons = {};
 
 
 
@@ -46,8 +47,8 @@ Template.world_map.onRendered(function(){
 //////////////////////////////////////////////////////////////////
 
 
-
     var current = null;
+    var current_region = null;
     var m = {};             
     var attr = {
         fill: "#eee",
@@ -63,7 +64,7 @@ Template.world_map.onRendered(function(){
     var R = Raphael("holder_1000", "100%", "100%");
     R.setViewBox(0, 0, svgWidth, svgHeight, false);
 
-      
+
     for(var regionId in WorldMapData) {
       WorldMap[regionId] = R.path(WorldMapData[regionId].path).attr(attr);
     }
@@ -74,15 +75,8 @@ Template.world_map.onRendered(function(){
 
     var game = Games.findOne({});
 
-    var buttons = {};
-
-
-	var current_region = null;
     for (var state in WorldMap) {
-    	//WorldMap[state].color = Raphael.getColor();
     	var point = WorldMap[state].getBBox(0);
-
- 
 
     	var rect = R.rect(point.cx-25, point.cy-10, 60, 20, 2).attr({
 				    fill: '#1ab394',
@@ -109,11 +103,11 @@ Template.world_map.onRendered(function(){
             st[0].style.cursor = "pointer";
           
             st[0].onclick = function (e) {
-            	console.log('it is clicked ' + state);
+            	//console.log('it is clicked ' + state);
             	Meteor.call("addRegionToPlayer", game, state, function(error, result){
             		if(!error){
 	            		var point1 = WorldMap[state].getBBox(0);
-	            		createDot(point1.cx, point1.cy, game.players[player].player_color);
+	            		createDot(point1.cx, point1.cy, game.players[Meteor.user().username].player_color);
 	            		buttons[state].hide();
             		}
             	});
@@ -141,45 +135,73 @@ Template.world_map.onRendered(function(){
 
 
     	//console.log(buttons);
+    };
 
 
-    	for(var player in game.players){
-    		if(game.players[player].regions !== undefined){
-		    	if(game.players[player].regions[state]){
-			        if(game.players[player].regions[state].people > 0){
-			        	var region_opacity = game.players[player].regions[state].people / Regions.findOne({region_name: state}).region_people;
-			        	WorldMap[state].attr({fill: game.players[player].player_color, "fill-opacity": region_opacity});
-			            createDot(point.cx, point.cy, game.players[player].player_color);
-			        }
-		    	}
-		    }
-    	}
+    Tracker.autorun(function(){
+
+    var game = Games.findOne({});
+
+    for (var state in WorldMap) {
+
+    	// for(var player in game.players){
+    	// 	if(game.players[player].regions !== undefined){
+		   //  	if(game.players[player].regions[state]){
+			  //       if(game.players[player].regions[state].people > 0){
+			  //       	var region_opacity = game.players[player].regions[state].people / Regions.findOne({region_name: state}).region_people;
+			  //       	//WorldMap[state].attr({fill: game.players[player].player_color, "fill-opacity": region_opacity});
+			  //       	WorldMap[state].attr({fill: game.players[player].player_color});
+			  //           createDot(point.cx, point.cy, game.players[player].player_color);
+			  //       }
+		   //  	}
+		   //  }
+    	// }
 
         
         (function (st, state) {
             st[0].style.cursor = "pointer";
             st[0].onmouseover = function () {
-            	if(game.players[player].regions !== undefined){
-	                current && WorldMap[current].animate({fill: game.players[player].player_color, stroke: "#666"}, 300);
+            	if(game.players[Meteor.user().username].regions !== undefined){
+            		console.log(game.players[Meteor.user().username].regions[state]);
+	            	if(game.players[Meteor.user().username].regions[state] !== undefined){
+		                var curr_over_color = game.players[Meteor.user().username].player_color;
+		                var over_color = "#aaa";
+		            }else{
+		            	var curr_over_color = "#fff";
+		            	var over_color = "#aaa";
+		            }
 	            }else{
-	            	current && WorldMap[current].animate({fill: "#fff", stroke: "#666"}, 300);
+	            	var curr_over_color = "#fff";
+		            var over_color = "#aaa";
 	            }
-                st.animate({fill: "ddd", stroke: "#000"}, 300);
+	            //current && WorldMap[current].animate({fill: curr_over_color, stroke: "#666"}, 300);
+                st.animate({fill: over_color, stroke: "#000"}, 300);
                 R.safari();
                 current = state;
             };
             st[0].onmouseout = function () {
-            	if(game.players[player].regions !== undefined){
-	                st.animate({fill: game.players[player].player_color, stroke: "#666"}, 300);
+            	if(game.players[Meteor.user().username].regions !== undefined){
+	            	if(game.players[Meteor.user().username].regions[state] !== undefined){
+		                var out_color = game.players[Meteor.user().username].player_color;
+		            }else{
+		            	var out_color = "#fff";
+		            }
 	            }else{
-	            	st.animate({fill: "#fff", stroke: "#666"}, 300);
+	            	var out_color = "#fff";
 	            }
+				st.animate({fill: out_color, stroke: "#666"}, 300);
                 R.safari();
             };
             
             st[0].onclick = function (e) {
             	if(game.players[Meteor.user().username].regions !== undefined){
-            		selected_region.set(state);
+	            	if (current_region == state){
+	            		current_region = null;
+	            		selected_region.set(null);
+	            	}else{
+	            		current_region = state;
+	            		selected_region.set(state);
+	            	}
             	}else{
             		if (current_region == state){
 	                    buttons[current_region].hide();
@@ -197,6 +219,8 @@ Template.world_map.onRendered(function(){
             };
         })(WorldMap[state], state);
     }; // end for
+
+  });
 
                 
 
@@ -277,25 +301,26 @@ Template.world_map.onRendered(function(){
     }; // end for
 
 
+
 });
 
 
 
 Template.world_map.helpers({
-	map: function(){
-		var game = Games.findOne({});
-		for (var state in WorldMap) {
-	    	for(var player in game.players){
-	    		if(game.players[player].regions){
-			    	if(game.players[player].regions[state]){
-				        if(game.players[player].regions[state].people > 0){
-				        	WorldMap[state].attr({fill: game.players[player].player_color});
-				        }
-			    	}
-		    	}
-	    	}
-    	}
-	},
+	// map: function(){
+	// 	var game = Games.findOne({});
+	// 	for (var state in WorldMap) {
+	//     	for(var player in game.players){
+	//     		if(game.players[player].regions){
+	// 		    	if(game.players[player].regions[state]){
+	// 			        if(game.players[player].regions[state].people > 0){
+	// 			        	WorldMap[state].attr({fill: game.players[player].player_color});
+	// 			        }
+	// 		    	}
+	// 	    	}
+	//     	}
+ //    	}
+	// },
 
 
 	has_region: function(){
@@ -374,12 +399,12 @@ Template.world_map.helpers({
         if(selected_region.get()){
             var shares_arr = [];
             for(var player in game.players){
-            	if(game.players[player].regions){
-	            	if(game.players[player].regions[selected_region.get()]){
+            	if(game.players[player].regions !== undefined){
+	            	if(game.players[player].regions[selected_region.get()] !== undefined){
 	                	shares_arr.push({
-	                		player: game.players[player],
-	                		color: game.players[player].player_color,
-	                		share: game.players[player].regions[selected_region.get()].share,
+	                		player: game.players[player].player,
+	                		player_color: game.players[player].player_color,
+	                		player_share: game.players[player].regions[selected_region.get()].share,
 	                	});
 	            	}
             	}
@@ -388,10 +413,8 @@ Template.world_map.helpers({
         }else{
             var shares_arr = [];
             for(var player in game.players){
-	            if(game.players[player].regions){
-		            for(var player in game.players){
-		                shares_arr.push(game.players[player]);
-		            }
+	            if(game.players[player].regions !== undefined){
+		            shares_arr.push(game.players[player]);
 	        	}
         	}
             return shares_arr;
@@ -412,7 +435,7 @@ Template.world_map.helpers({
         if(selected_region.get()){
             return Math.round(game.players[Meteor.user().username].regions[selected_region.get()].share);
         }else{
-            return Math.round(game.players[Meteor.user().username].share);
+            return Math.round(game.players[Meteor.user().username].player_share);
         }
     },
 

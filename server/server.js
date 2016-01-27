@@ -112,13 +112,13 @@ if(Meteor.isServer){
 	            	game.players[player].regions[region].share = game.players[player].regions[region].people / Regions.findOne({region_name: region}).region_people * 100;
 	            }
 
-	            game.players[player].share = players_people / total_people * 100;
+	            game.players[player].player_share = players_people / total_people * 100;
 	        }
     	}
 
     	if(game.players){
 	        for(var player in game.players){
-	          if(game.players[player].saher <= 0 || game.players[player].share >= 100){
+	          if(game.players[player].player_share < 0 || game.players[player].player_share >= 100){
 	            Meteor.clearInterval(interval);
 	          }
 	        }

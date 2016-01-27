@@ -71,8 +71,8 @@
                 {{#each shares}}
                     <h5 style="color:white;">{{player.username}}</h5>
                     <div class="progress progress-mini">
-                        <div style="width: {{share}}%; background-color:{{color}};" aria-valuemax="100" aria-valuemin="0" aria-valuenow="35" role="progressbar" class="progress-bar progress-bar-success">
-                            <span class="sr-only">{{share}}% Complete (success)</span>
+                        <div style="width: {{player_share}}%; background-color:{{player_color}};" aria-valuemax="100" aria-valuemin="0" aria-valuenow="35" role="progressbar" class="progress-bar progress-bar-success">
+                            <span class="sr-only">{{player_share}}% Complete (success)</span>
                         </div>
                     </div>
                 {{/each}}

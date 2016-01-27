@@ -3,9 +3,19 @@ if(Meteor.isServer){
 
 	Meteor.startup(function () {
 
-		// Games.find().fetch().forEach(function (game) {
-		// 	Games.remove(game._id);
-		// });
+
+		Meteor.onConnection(function(conn) {
+		    conn.onClose(function(){
+				Meteor.call('disconnectPlayer', conn);
+				console.log('closed');
+			});
+		    console.log('New connection %s from %s', conn.id, conn.clientAddress);
+		    //Meteor.call('addPlayer', Meteor.user().username);
+		});
+
+		Games.find().fetch().forEach(function (game) {
+			Games.remove(game._id);
+		});
 
 		Regions.find().fetch().forEach(function (region) {
 			Regions.remove(region._id);
@@ -13,38 +23,56 @@ if(Meteor.isServer){
 
 		Regions.insert({
 			region_name: "EU",
-			people_all: 1000 + Math.floor((Math.random() * 500) + 100),
-			pref: "Design",
+			region_people: 1000 + Math.floor((Math.random() * 500) + 100),
+			region_pref: "Design",
+			region_market: 15,
+			region_demand: 10,
+			region_trend: "Medium",
 		});
 
 		Regions.insert({
 			region_name: "AF",
-			people_all: 1000 + Math.floor((Math.random() * 500) + 100),
-			pref: "Support",
+			region_people: 1000 + Math.floor((Math.random() * 500) + 100),
+			region_pref: "Support",
+			region_market: 5,
+			region_demand: 7,
+			region_trend: "Low",
 		});
 
 		Regions.insert({
 			region_name: "SA",
-			people_all: 1000 + Math.floor((Math.random() * 500) + 100),
-			pref: "Design",
+			region_people: 1000 + Math.floor((Math.random() * 500) + 100),
+			region_pref: "Design",
+			region_market: -2,
+			region_demand: 0,
+			region_trend: "Negative",
 		});
 
 		Regions.insert({
 			region_name: "NA",
-			people_all: 1000 + Math.floor((Math.random() * 500) + 100),
-			pref: "Technology",
+			region_people: 1000 + Math.floor((Math.random() * 500) + 100),
+			region_pref: "Technology",
+			region_market: -17,
+			region_demand: -24,
+			region_trend: "Negative",
 		});
 
 		Regions.insert({
 			region_name: "AS",
-			people_all: 1000 + Math.floor((Math.random() * 500) + 100),
-			pref: "Technology",
+			region_people: 1000 + Math.floor((Math.random() * 500) + 100),
+			region_pref: "Technology",
+			region_market: 24,
+			region_demand: 30,
+			region_trend: "High",
 		});
 
 		Regions.insert({
 			region_name: "OC",
-			people_all: 1000 + Math.floor((Math.random() * 500) + 100),
-			pref: "Support",
+			region_people: 1000 + Math.floor((Math.random() * 500) + 100),
+			region_pref: "Support",
+			region_market: 2,
+			region_demand: 5,
+			region_trend: "Low",
 		});
 
 
@@ -54,17 +82,17 @@ if(Meteor.isServer){
       	var total_people = 0;
 
       	Regions.find().forEach(function (region) {
-      		total_people += region.people_all;
+      		total_people += region.region_people;
       	});
 
-      	// var game_id = Games.insert({
-      	// 	game_name: "test",
-       //  	players: players,
-       //  	regions: regions,
-       //  	status: "process",
-       //  	time_period: 0,
-       // 		total_people: total_people,
-      	// });
+      	var game_id = Games.insert({
+      		game_name: "test",
+        	players: players,
+        	regions: regions,
+        	status: "process",
+        	time_period: 0,
+       		total_people: total_people,
+      	});
 
 
 		//////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -81,7 +109,7 @@ if(Meteor.isServer){
 	            for(var region in game.players[player].regions){
 	            	game.players[player].regions[region].people -= 1;
 	            	players_people += game.players[player].regions[region].people;
-	            	game.players[player].regions[region].share = game.players[player].regions[region].people / Regions.findOne({region_name: region}).people_all * 100;
+	            	game.players[player].regions[region].share = game.players[player].regions[region].people / Regions.findOne({region_name: region}).region_people * 100;
 	            }
 
 	            game.players[player].share = players_people / total_people * 100;

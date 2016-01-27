@@ -4,10 +4,11 @@
         <div class="row" id="world_map">
             <div class="col-lg-3" style="padding-left:25px; padding-top:10px;">
                 <h3 style="color:white;">Market shares <span><a href="" id="set_to_world">World</a></span></h3>
+                {{#if has_region}}
                 <hr>
                 <div class="row">
                     <div class="col-md-2" style="color:white;">
-                      Region: <br><strong id="regionHolderValue">{{region_name}}</strong>
+                      Region: <br><strong id="regionHolderValue">{{selected_region_name}}</strong>
                     </div>
                     <div class="col-md-2" style="color:white;">
                       People: <br><strong id="shareHolderValue">{{region_people}}</strong>
@@ -22,7 +23,50 @@
                       Price: <br>
                       <button class="btn btn-primary btn-xs" id='buyShare'>$ {{region_price}}</button>
                     </div>
-                  </div>
+                </div>
+                {{else}}
+                    {{#if selected_region}}
+                    <div class="row">
+                        <div class="col-md-12">
+                                <table class="table">
+                                    <tbody>
+                                    <tr>
+                                        <td>
+                                            Region: <strong id="regionHolderValue">{{waiting_region_name}}</strong>
+                                        </td>
+                                        <td>
+                                            <strong>Trend: </strong> <span class="label label-{{trend_type}}" style="float:right">{{waiting_region_trend}}</span>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            People: <strong id="shareHolderValue">{{waiting_region_people}}</strong>
+                                        </td>
+                                        <td>
+                                            <div class="stat-percent font-bold text-{{demand_type}}">{{waiting_region_demand}}% <i class="fa fa-level-{{arrow_demand_type}}"></i></div><strong>Demand: </strong>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            Pref: <strong id="shareHolderValue">{{waiting_region_pref}}</strong>
+                                        </td>
+                                        <td>
+                                            <div class="stat-percent font-bold text-{{market_type}}">{{waiting_region_market}}% <i class="fa fa-level-{{arrow_market_type}}"></i></div><strong>Market: </strong>
+                                        </td>
+                                    </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                    </div>
+                    {{else}}
+                    <hr>
+                    <div class="row">
+                        <div class="col-md-12" style="color:white;">
+                          <strong>You have not selected start region yet.</strong>
+                        </div>
+                    </div>
+                    {{/if}}
+                {{/if}}
                 <hr>
                 {{#each shares}}
                     <h5 style="color:white;">{{player.username}}</h5>
@@ -36,6 +80,11 @@
             <div class="col-lg-9">
                     <div id="holder_1000">
                         {{map}}
+                        {{#each regions}}
+                        <div id="{{region_name}}" style="display:none; position:absolute;">
+                            <button class="btn btn-md btn-primary" id="choose">Choose {{region_name}}</button>
+                        </div>
+                        {{/each}}
                     </div>
             </div>
         </div>

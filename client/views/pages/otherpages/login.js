@@ -63,5 +63,9 @@ Template.login.events({
 					Router.go('/')
 				}
 			});
+
+		// var game = Games.findOne({game_name: "test"});
+  //       Meteor.call('addPlayer', game);
+  //       Session.set("game", game);
 	}
 });

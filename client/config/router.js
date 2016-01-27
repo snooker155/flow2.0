@@ -11,34 +11,33 @@ Router.configure({
 // We use Router.go method because dashboard1 is our nested view in menu
 
 
-// Router.onBeforeAction(function() {
-//   if (! Meteor.userId()) {
-//     this.render('login');
-//     this.layout('blankLayout');
-//   } else {
-//     this.next();
-//   }
-// });
-
-
 Router.route('/', {
 
-  onBeforeAction: function() {
-    var game = Games.findOne({game_name: "test"});
-    if (!Session.get("game")) {
-      Meteor.call('addPlayer', game, function (error, result) {
-        if (!error){
-          Session.set("game", game);
-        }
-      });
-    } else {
-      this.next();
-    }
-  },
+  // onBeforeAction: function() {
+  //   var game = Games.findOne({game_name: "test"});
+  //   if (!Session.get("game")) {
+  //     Meteor.call('addPlayer', game);
+  //     Session.set("game", game);
+  //   } else {
+  //     this.next();
+  //   }
+  // },
+
 
   action: function () {
-    this.render('gameScreen');
-    this.layout('gameLayout');
+    if(Meteor.userId()){
+      var game = Games.findOne({game_name: "test"});
+      if (!Session.get("game")) {
+        Meteor.call('addPlayer', game, function(error, result){
+            Session.set("game", game);
+        });
+      } else {
+        this.render('gameScreen');
+        this.layout('gameLayout');
+      }
+    }else{
+      Router.go('/login');
+    }
   },
 
 });

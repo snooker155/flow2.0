@@ -31,6 +31,7 @@ var WorldMapData = {
 };
 
 
+
 var WorldMap = {};
 
 
@@ -71,41 +72,132 @@ Template.world_map.onRendered(function(){
          R.circle(x,y,2).attr({fill: color, stroke: "#fff", "stroke-width": 2, r: 0}).animate({r: 5}, 1000, "elastic");
     };
 
-    var game = Session.get("game");
+    var game = Games.findOne({});
 
+    var buttons = {};
+
+
+	var current_region = null;
     for (var state in WorldMap) {
-    	WorldMap[state].color = Raphael.getColor();
+    	//WorldMap[state].color = Raphael.getColor();
+    	var point = WorldMap[state].getBBox(0);
+
+ 
+
+    	var rect = R.rect(point.cx-25, point.cy-10, 60, 20, 2).attr({
+				    fill: '#1ab394',
+				    stroke: '#1ab394',
+				    'stroke-width': 2,
+				});
+
+		(function (st, state) {
+            st[0].style.cursor = "pointer";
+          
+            st[0].onclick = function (e) {
+            	console.log('it is clicked ' + state);
+            };
+        })(rect, state);
+
+
+    	var text = R.text(rect.attrs.x + rect.attrs.width / 2, rect.attrs.y + rect.attrs.height / 2, 'Choose '+state).attr({
+				    "font-family": "Helvetica",
+				    "font-size": 10,
+				    fill: '#fff'
+				});
+
+		(function (st, state) {
+            st[0].style.cursor = "pointer";
+          
+            st[0].onclick = function (e) {
+            	console.log('it is clicked ' + state);
+            	Meteor.call("addRegionToPlayer", game, state, function(error, result){
+            		if(!error){
+	            		var point1 = WorldMap[state].getBBox(0);
+	            		createDot(point1.cx, point1.cy, game.players[player].player_color);
+	            		buttons[state].hide();
+            		}
+            	});
+            };
+        })(text, state);
+
+
+
+    	$(text.node).css({
+			"-webkit-touch-callout": "none",
+			"-webkit-user-select": "none",
+			"-khtml-user-select": "none",
+			"-moz-user-select": "none",
+			"-ms-user-select": "none",
+			"user-select": "none",
+		});
+
+		buttons[state] = R.set().attr({
+		    cursor: 'pointer'
+		});
+    	buttons[state].push(rect);
+    	buttons[state].push(text);
+
+		buttons[state].hide();
+
+
+    	//console.log(buttons);
+
+
     	for(var player in game.players){
-	    	if(game.players[player].regions[state]){
-		        var point = WorldMap[state].getBBox(0);
-		        if(game.players[player].regions[state].people > 0){
-		        	var region_opacity = game.players[player].regions[state].people / Regions.findOne({region_name: state}).people_all;
-		        	WorldMap[state].attr({fill: game.players[player].player_color, "fill-opacity": region_opacity});
-		            createDot(point.cx, point.cy, game.players[player].player_color);
-		        }
-	    	}
+    		if(game.players[player].regions !== undefined){
+		    	if(game.players[player].regions[state]){
+			        if(game.players[player].regions[state].people > 0){
+			        	var region_opacity = game.players[player].regions[state].people / Regions.findOne({region_name: state}).region_people;
+			        	WorldMap[state].attr({fill: game.players[player].player_color, "fill-opacity": region_opacity});
+			            createDot(point.cx, point.cy, game.players[player].player_color);
+			        }
+		    	}
+		    }
     	}
 
         
         (function (st, state) {
             st[0].style.cursor = "pointer";
             st[0].onmouseover = function () {
-                current && WorldMap[current].animate({fill: "#fff", stroke: "#666"}, 300);
-                st.animate({fill: st.color, stroke: "#ccc"}, 300);
+            	if(game.players[player].regions !== undefined){
+	                current && WorldMap[current].animate({fill: game.players[player].player_color, stroke: "#666"}, 300);
+	            }else{
+	            	current && WorldMap[current].animate({fill: "#fff", stroke: "#666"}, 300);
+	            }
+                st.animate({fill: "ddd", stroke: "#000"}, 300);
                 R.safari();
                 current = state;
             };
             st[0].onmouseout = function () {
-                st.animate({fill: "#fff", stroke: "#666"}, 300);
+            	if(game.players[player].regions !== undefined){
+	                st.animate({fill: game.players[player].player_color, stroke: "#666"}, 300);
+	            }else{
+	            	st.animate({fill: "#fff", stroke: "#666"}, 300);
+	            }
                 R.safari();
             };
             
             st[0].onclick = function (e) {
-                selected_region.set(state);
+            	if(game.players[Meteor.user().username].regions !== undefined){
+            		selected_region.set(state);
+            	}else{
+            		if (current_region == state){
+	                    buttons[current_region].hide();
+	                    current_region = null;
+	                    selected_region.set(null);
+	                }else{
+	                    if(buttons[current_region]){
+	                    	buttons[current_region].hide()	
+	                    };
+	                    buttons[state].show();
+	                    selected_region.set(state);
+	                    current_region = state;
+	                }
+            	}
             };
         })(WorldMap[state], state);
     }; // end for
-                
+
                 
 
     function lon2x(lon) {
@@ -194,42 +286,120 @@ Template.world_map.helpers({
 		var game = Games.findOne({});
 		for (var state in WorldMap) {
 	    	for(var player in game.players){
-		    	if(game.players[player].regions[state]){
-			        if(game.players[player].regions[state].people > 0){
-			        	var region_opacity = game.players[player].regions[state].people / Regions.findOne({region_name: state}).people_all;
-			        	WorldMap[state].attr({fill: game.players[player].player_color, "fill-opacity": region_opacity});
-			        }
+	    		if(game.players[player].regions){
+			    	if(game.players[player].regions[state]){
+				        if(game.players[player].regions[state].people > 0){
+				        	WorldMap[state].attr({fill: game.players[player].player_color});
+				        }
+			    	}
 		    	}
 	    	}
     	}
 	},
 
 
+	has_region: function(){
+		var game = Games.findOne({});
+		return game.players[Meteor.user().username].regions ? true:false;
+	},
+
+	regions: function(){
+		return Regions.find();
+	},
+
+	selected_region: function(){
+		return selected_region.get();
+	},
+
+	waiting_region_name: function(){
+		return Regions.findOne({region_name: selected_region.get()}).region_name;
+	},
+
+	waiting_region_people: function(){
+		return Regions.findOne({region_name: selected_region.get()}).region_people;
+	},
+
+	waiting_region_pref: function(){
+		return Regions.findOne({region_name: selected_region.get()}).region_pref;
+	},
+
+	waiting_region_trend: function(){
+		return Regions.findOne({region_name: selected_region.get()}).region_trend
+	},
+
+	waiting_region_demand: function(){
+		return Regions.findOne({region_name: selected_region.get()}).region_demand;
+	},
+
+	waiting_region_market: function(){
+		return Regions.findOne({region_name: selected_region.get()}).region_market;
+	},
+
+	demand_type: function(){
+		return Regions.findOne({region_name: selected_region.get()}).region_demand > 0 ? 'navy' : 'danger';
+	},
+
+	arrow_demand_type: function(){
+		return Regions.findOne({region_name: selected_region.get()}).region_demand > 0 ? 'up' : 'down';
+	},
+
+	market_type: function(){
+		return Regions.findOne({region_name: selected_region.get()}).region_market > 0 ? 'navy' : 'danger';
+	},
+
+	arrow_market_type: function(){
+		return Regions.findOne({region_name: selected_region.get()}).region_market > 0 ? 'up' : 'down';
+	},
+
+	trend_type: function(){
+		switch(Regions.findOne({region_name: selected_region.get()}).region_trend){
+			case "Negative":
+				return "danger";
+				break;
+			case "Low":
+				return "danger";
+				break;
+			case "Medium":
+				return "warning";
+				break;
+			case "High":
+				return "primary";
+				break;
+		}
+	},
+
+
     shares: function(){
-        var game = Session.get("game");
+    	var game = Games.findOne({});
         if(selected_region.get()){
             var shares_arr = [];
             for(var player in game.players){
-            	if(game.players[player].regions[selected_region.get()]){
-                	shares_arr.push({
-                		player: game.players[player],
-                		color: game.players[player].player_color,
-                		share: game.players[player].regions[selected_region.get()].share,
-                	});
+            	if(game.players[player].regions){
+	            	if(game.players[player].regions[selected_region.get()]){
+	                	shares_arr.push({
+	                		player: game.players[player],
+	                		color: game.players[player].player_color,
+	                		share: game.players[player].regions[selected_region.get()].share,
+	                	});
+	            	}
             	}
             }
             return shares_arr;
         }else{
             var shares_arr = [];
             for(var player in game.players){
-                shares_arr.push(game.players[player]);
-            }
+	            if(game.players[player].regions){
+		            for(var player in game.players){
+		                shares_arr.push(game.players[player]);
+		            }
+	        	}
+        	}
             return shares_arr;
         }
     },
 
 
-    region_name: function(){
+    selected_region_name: function(){
         if(selected_region.get()){
             return selected_region.get();
         }else{
@@ -238,7 +408,7 @@ Template.world_map.helpers({
     },
 
     region_share: function(){
-        var game = Session.get("game");
+    	var game = Games.findOne({});
         if(selected_region.get()){
             return Math.round(game.players[Meteor.user().username].regions[selected_region.get()].share);
         }else{
@@ -247,7 +417,7 @@ Template.world_map.helpers({
     },
 
     region_people: function(){
-        var game = Session.get("game");
+    	var game = Games.findOne({});
         if(selected_region.get()){
             return Math.round(game.players[Meteor.user().username].regions[selected_region.get()].people);
         }else{
@@ -256,7 +426,7 @@ Template.world_map.helpers({
     },
 
     region_profit: function(){
-        var game = Session.get("game");
+    	var game = Games.findOne({});
         if(selected_region.get()){
             return Math.round(game.players[Meteor.user().username].regions[selected_region.get()].profit);
         }else{
@@ -265,7 +435,7 @@ Template.world_map.helpers({
     },
 
     region_price: function(){
-        var game = Session.get("game");
+    	var game = Games.findOne({});
         if(selected_region.get()){
             return Math.round(game.players[Meteor.user().username].regions[selected_region.get()].price);
         }else{

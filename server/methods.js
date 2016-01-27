@@ -140,16 +140,52 @@ function get_random_color() {
 
 
 
-    addPlayer: function(game){
-      var regions = {};
+    addPlayer: function(){
+
+      //console.log('adding new player');
+
+      var game = Games.findOne({});
+
+      var connections = {};
 
       game.players[Meteor.user().username] = {
         player: Meteor.user(),
-        regions: regions,
         balance: 100000,
         player_color: get_random_color(),
         share: 0,
       };
+
+      //console.log(this.connection.id);
+
+      connections[this.connection.id] = {
+        player: Meteor.user(),
+      };
+
+      Games.update(game._id, {
+        $set: {
+          players: game.players,
+          connections: connections,
+        }
+      });
+
+    },
+
+
+    disconnectPlayer: function(connection){
+
+      //console.log(connection.id);
+
+      var game = Games.findOne({});
+
+      //console.log(game);
+
+      var disc_player = game.connections[connection.id].player.username;
+
+      //console.log(disc_player);
+
+      delete game.players[disc_player];
+
+      //console.log(game);
 
       Games.update(game._id, {
         $set: {
@@ -157,17 +193,35 @@ function get_random_color() {
         }
       });
 
+      //console.log('player disconnected');
+
+
     },
 
 
     addRegionToPlayer: function(game, region){
-      game.players[Meteor.user().username].regions[region.region_name] = {
-        region_name: region.region_name,
-        people: 0,
-        price: 0,
-        profit: 0,
-        share: 0,
-      };
+      if(game.players[Meteor.user().username].regions !== undefined){
+        game.players[Meteor.user().username].regions[region] = {
+          region_name: region,
+          people: 500,
+          price: 0,
+          profit: 0,
+          share: 0,
+        };
+      }else{
+        var regions = {};
+
+        regions[region] = {
+          region_name: region,
+          people: 500,
+          price: 0,
+          profit: 0,
+          share: 0,
+        };
+
+        game.players[Meteor.user().username].regions = regions;
+
+      }
 
       Games.update(game._id, {
         $set: {

@@ -83,6 +83,10 @@ if(Meteor.isServer){
 
       	Regions.find().forEach(function (region) {
       		total_people += region.region_people;
+      		regions[region.region_name] = {
+      			players: players,
+      			region_color: "#eee",
+      		}
       	});
 
       	var game_id = Games.insert({
@@ -93,6 +97,7 @@ if(Meteor.isServer){
         	time_period: 0,
        		total_people: total_people,
       	});
+
 
 
 		//////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -116,13 +121,13 @@ if(Meteor.isServer){
 	        }
     	}
 
-    	if(game.players){
-	        for(var player in game.players){
-	          if(game.players[player].player_share < 0 || game.players[player].player_share >= 100){
-	            Meteor.clearInterval(interval);
-	          }
-	        }
-    	}
+    	// if(game.players){
+	    //     for(var player in game.players){
+	    //       if(game.players[player].player_share < 0 || game.players[player].player_share >= 100){
+	    //         Meteor.clearInterval(interval);
+	    //       }
+	    //     }
+    	// }
 
     	game.time_period = game.time_period + 1;
 

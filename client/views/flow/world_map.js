@@ -49,13 +49,15 @@ Template.world_map.onRendered(function(){
 
     var current = null;
     var current_region = null;
-    var m = {};             
+    var m = {};
+    var game = Games.findOne({});
     var attr = {
-        fill: "#eee",
-        stroke: "#888",
-        "stroke-width": 0.5,
-        "stroke-linejoin": "round"
-    };              
+	    fill: "#eee",
+	    stroke: "#888",
+	    "stroke-width": 0.5,
+	    "stroke-linejoin": "round"
+	};      
+             
 
     
     var svgHeight = 320;
@@ -65,15 +67,38 @@ Template.world_map.onRendered(function(){
     R.setViewBox(0, 0, svgWidth, svgHeight, false);
 
 
+
     for(var regionId in WorldMapData) {
-      WorldMap[regionId] = R.path(WorldMapData[regionId].path).attr(attr);
+	    attr = {
+		    fill: game.regions[regionId].region_color,
+		    stroke: "#888",
+		    "stroke-width": 0.5,
+		    "stroke-linejoin": "round"
+		};
+	    WorldMap[regionId] = R.path(WorldMapData[regionId].path).attr(attr);
     }
+
+
+    Tracker.autorun(function () {
+    	var game = Games.findOne({});
+    	for (var state in WorldMap) {
+			var fill_color = game.regions[state].region_color;
+			if(game.players[Meteor.user().username].regions !== undefined && game.players[Meteor.user().username].regions[state] !== undefined){
+				var color_share = Math.round(game.players[Meteor.user().username].regions[state].share * 100);
+			}else{
+				var color_share = 0;
+			}
+			var basic_color_share = 100 - color_share;
+		    WorldMap[state].attr({fill: "90-"+fill_color+":"+color_share+"-#eee:"+basic_color_share, stroke: "#666"});
+           	R.safari();
+		}
+    });
+
+
 
     var createDot = function(x,y,color){
          R.circle(x,y,2).attr({fill: color, stroke: "#fff", "stroke-width": 2, r: 0}).animate({r: 5}, 1000, "elastic");
     };
-
-    var game = Games.findOne({});
 
     for (var state in WorldMap) {
     	var point = WorldMap[state].getBBox(0);
@@ -144,52 +169,17 @@ Template.world_map.onRendered(function(){
 
     for (var state in WorldMap) {
 
-    	// for(var player in game.players){
-    	// 	if(game.players[player].regions !== undefined){
-		   //  	if(game.players[player].regions[state]){
-			  //       if(game.players[player].regions[state].people > 0){
-			  //       	var region_opacity = game.players[player].regions[state].people / Regions.findOne({region_name: state}).region_people;
-			  //       	//WorldMap[state].attr({fill: game.players[player].player_color, "fill-opacity": region_opacity});
-			  //       	WorldMap[state].attr({fill: game.players[player].player_color});
-			  //           createDot(point.cx, point.cy, game.players[player].player_color);
-			  //       }
-		   //  	}
-		   //  }
-    	// }
-
-        
         (function (st, state) {
             st[0].style.cursor = "pointer";
             st[0].onmouseover = function () {
-            	if(game.players[Meteor.user().username].regions !== undefined){
-            		console.log(game.players[Meteor.user().username].regions[state]);
-	            	if(game.players[Meteor.user().username].regions[state] !== undefined){
-		                var curr_over_color = game.players[Meteor.user().username].player_color;
-		                var over_color = "#aaa";
-		            }else{
-		            	var curr_over_color = "#fff";
-		            	var over_color = "#aaa";
-		            }
-	            }else{
-	            	var curr_over_color = "#fff";
-		            var over_color = "#aaa";
-	            }
-	            //current && WorldMap[current].animate({fill: curr_over_color, stroke: "#666"}, 300);
-                st.animate({fill: over_color, stroke: "#000"}, 300);
+            	//current && WorldMap[current].animate({fill: curr_over_color, stroke: "#666"}, 300);
+                st.animate({opacity: 0.6}, 300);
                 R.safari();
                 current = state;
             };
             st[0].onmouseout = function () {
-            	if(game.players[Meteor.user().username].regions !== undefined){
-	            	if(game.players[Meteor.user().username].regions[state] !== undefined){
-		                var out_color = game.players[Meteor.user().username].player_color;
-		            }else{
-		            	var out_color = "#fff";
-		            }
-	            }else{
-	            	var out_color = "#fff";
-	            }
-				st.animate({fill: out_color, stroke: "#666"}, 300);
+			    var out_color = game.regions[state].region_color;
+				st.animate({opacity: 1}, 300);
                 R.safari();
             };
             
@@ -325,7 +315,20 @@ Template.world_map.helpers({
 
 	has_region: function(){
 		var game = Games.findOne({});
-		return game.players[Meteor.user().username].regions ? true:false;
+		return game.players[Meteor.user().username].regions!==undefined ? true:false;
+	},
+
+	in_region: function(){
+		if(selected_region.get()){
+			var game = Games.findOne({});
+			return game.players[Meteor.user().username].regions[selected_region.get()]!==undefined ? true:false;
+		}else{
+			return true;
+		}
+	},
+
+	branch_price: function(){
+		return "100000";
 	},
 
 	regions: function(){
@@ -337,59 +340,144 @@ Template.world_map.helpers({
 	},
 
 	waiting_region_name: function(){
-		return Regions.findOne({region_name: selected_region.get()}).region_name;
+		if(selected_region.get()){
+			return Regions.findOne({region_name: selected_region.get()}).region_name;
+		}else{
+			return "World";
+		}
 	},
 
 	waiting_region_people: function(){
-		return Regions.findOne({region_name: selected_region.get()}).region_people;
+		if(selected_region.get()){
+			return Regions.findOne({region_name: selected_region.get()}).region_people;
+		}else{
+			var total_people = 0;
+			Regions.find().fetch().forEach(function (region) {
+				total_people += region.region_people;
+			});
+			return total_people;
+		}
 	},
 
 	waiting_region_pref: function(){
-		return Regions.findOne({region_name: selected_region.get()}).region_pref;
+		if(selected_region.get()){
+			return Regions.findOne({region_name: selected_region.get()}).region_pref;
+		}else{
+			return "Technology";
+		}
 	},
 
 	waiting_region_trend: function(){
-		return Regions.findOne({region_name: selected_region.get()}).region_trend
+		if(selected_region.get()){
+			return Regions.findOne({region_name: selected_region.get()}).region_trend;
+		}else{
+			return "Low";
+		}
 	},
 
 	waiting_region_demand: function(){
-		return Regions.findOne({region_name: selected_region.get()}).region_demand;
+		if(selected_region.get()){
+			return Regions.findOne({region_name: selected_region.get()}).region_demand;
+		}else{
+			var total_demand = 0;
+			Regions.find().fetch().forEach(function (region) {
+				total_demand += region.region_demand;
+			});
+			return parseFloat((total_demand/6).toFixed(2));
+		}
 	},
 
 	waiting_region_market: function(){
-		return Regions.findOne({region_name: selected_region.get()}).region_market;
+		if(selected_region.get()){
+			return Regions.findOne({region_name: selected_region.get()}).region_market;
+		}else{
+			var total_market = 0;
+			Regions.find().fetch().forEach(function (region) {
+				total_market += region.region_market;
+			});
+			return parseFloat((total_market/6).toFixed(2));
+		}
 	},
 
 	demand_type: function(){
-		return Regions.findOne({region_name: selected_region.get()}).region_demand > 0 ? 'navy' : 'danger';
+		if(selected_region.get()){
+			return Regions.findOne({region_name: selected_region.get()}).region_demand > 0 ? 'navy' : 'danger';
+		}else{
+			var total_demand = 0;
+			Regions.find().fetch().forEach(function (region) {
+				total_demand += region.region_demand;
+			});
+			return total_demand > 0 ? 'navy' : 'danger';
+		}
 	},
 
 	arrow_demand_type: function(){
-		return Regions.findOne({region_name: selected_region.get()}).region_demand > 0 ? 'up' : 'down';
+		if(selected_region.get()){
+			return Regions.findOne({region_name: selected_region.get()}).region_demand > 0 ? 'up' : 'down';
+		}else{
+			var total_demand = 0;
+			Regions.find().fetch().forEach(function (region) {
+				total_demand += region.region_demand;
+			});
+			return total_demand > 0 ? 'up' : 'down';
+		}
 	},
 
 	market_type: function(){
-		return Regions.findOne({region_name: selected_region.get()}).region_market > 0 ? 'navy' : 'danger';
+		if(selected_region.get()){
+			return Regions.findOne({region_name: selected_region.get()}).region_market > 0 ? 'navy' : 'danger';
+		}else{
+			var total_market = 0;
+			Regions.find().fetch().forEach(function (region) {
+				total_market += region.region_market;
+			});
+			return total_market > 0 ? 'navy' : 'danger';
+		}
 	},
 
 	arrow_market_type: function(){
-		return Regions.findOne({region_name: selected_region.get()}).region_market > 0 ? 'up' : 'down';
+		if(selected_region.get()){
+			return Regions.findOne({region_name: selected_region.get()}).region_market > 0 ? 'up' : 'down';
+		}else{
+			var total_market = 0;
+			Regions.find().fetch().forEach(function (region) {
+				total_market += region.region_market;
+			});
+			return total_market > 0 ? 'up' : 'down';
+		}
 	},
 
 	trend_type: function(){
-		switch(Regions.findOne({region_name: selected_region.get()}).region_trend){
-			case "Negative":
-				return "danger";
-				break;
-			case "Low":
-				return "danger";
-				break;
-			case "Medium":
-				return "warning";
-				break;
-			case "High":
-				return "primary";
-				break;
+		if(selected_region.get()){
+			switch(Regions.findOne({region_name: selected_region.get()}).region_trend){
+				case "Negative":
+					return "danger";
+					break;
+				case "Low":
+					return "danger";
+					break;
+				case "Medium":
+					return "warning";
+					break;
+				case "High":
+					return "primary";
+					break;
+			}
+		}else{
+			switch("Low"){
+				case "Negative":
+					return "danger";
+					break;
+				case "Low":
+					return "danger";
+					break;
+				case "Medium":
+					return "warning";
+					break;
+				case "High":
+					return "primary";
+					break;
+			}
 		}
 	},
 

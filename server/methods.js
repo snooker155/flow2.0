@@ -1,8 +1,22 @@
-function get_random_color() {
-  function c() {
-    return Math.floor(Math.random()*256).toString(16)
-  }
-  return "#"+c()+c()+c();
+function rainbow(numOfSteps, step) {
+    // This function generates vibrant, "evenly spaced" colours (i.e. no clustering). This is ideal for creating easily distinguishable vibrant markers in Google Maps and other apps.
+    // Adam Cole, 2011-Sept-14
+    // HSV to RBG adapted from: http://mjijackson.com/2008/02/rgb-to-hsl-and-rgb-to-hsv-color-model-conversion-algorithms-in-javascript
+    var r, g, b;
+    var h = step / numOfSteps;
+    var i = ~~(h * 6);
+    var f = h * 6 - i;
+    var q = 1 - f;
+    switch(i % 6){
+        case 0: r = 1; g = f; b = 0; break;
+        case 1: r = q; g = 1; b = 0; break;
+        case 2: r = 0; g = 1; b = f; break;
+        case 3: r = 0; g = q; b = 1; break;
+        case 4: r = f; g = 0; b = 1; break;
+        case 5: r = 1; g = 0; b = q; break;
+    }
+    var c = "#" + ("00" + (~ ~(r * 255)).toString(16)).slice(-2) + ("00" + (~ ~(g * 255)).toString(16)).slice(-2) + ("00" + (~ ~(b * 255)).toString(16)).slice(-2);
+    return (c);
 }
 
 
@@ -145,13 +159,19 @@ function get_random_color() {
       //console.log('adding new player');
 
       var game = Games.findOne({});
+      var players_number = 0;
+      for(var player in game.players){
+        players_number++;
+      }
+
+      //console.log(players_number);
 
       var connections = {};
 
       game.players[Meteor.user().username] = {
         player: Meteor.user(),
         player_balance: 100000,
-        player_color: get_random_color(),
+        player_color: rainbow(12, players_number+1),
         player_share: 0,
       };
 
@@ -173,27 +193,25 @@ function get_random_color() {
 
     disconnectPlayer: function(connection){
 
-      //console.log(connection.id);
 
       var game = Games.findOne({});
 
-      //console.log(game);
-
       var disc_player = game.connections[connection.id].player.username;
 
-      //console.log(disc_player);
+      for(var region in game.players[disc_player].regions){
+        game.regions[region].region_color = "#eee";
+      }
 
       delete game.players[disc_player];
 
-      //console.log(game);
 
       Games.update(game._id, {
         $set: {
+          regions: game.regions,
           players: game.players,
         }
       });
 
-      //console.log('player disconnected');
 
 
     },
@@ -208,10 +226,12 @@ function get_random_color() {
           profit: 0,
           share: 0,
         };
-      }else{
-        var regions = {};
 
-        regions[region] = {
+        game.regions[region].players[Meteor.user().username] = game.players[Meteor.user().username];
+      }else{
+        var player_regions = {};
+
+        player_regions[region] = {
           region_name: region,
           people: 500,
           price: 0,
@@ -219,13 +239,17 @@ function get_random_color() {
           share: 0,
         };
 
-        game.players[Meteor.user().username].regions = regions;
+        game.players[Meteor.user().username].regions = player_regions;
+
+        game.regions[region].players[Meteor.user().username] = game.players[Meteor.user().username];
+        game.regions[region].region_color = game.players[Meteor.user().username].player_color;
 
       }
 
       Games.update(game._id, {
         $set: {
           players: game.players,
+          regions: game.regions,
         }
       });
     },

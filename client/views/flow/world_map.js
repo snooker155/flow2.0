@@ -83,13 +83,15 @@ Template.world_map.onRendered(function(){
     	var game = Games.findOne({});
     	for (var state in WorldMap) {
 			var fill_color = game.regions[state].region_color;
-			if(game.players[Meteor.user().username].regions !== undefined && game.players[Meteor.user().username].regions[state] !== undefined){
-				var color_share = Math.round(game.players[Meteor.user().username].regions[state].share * 100);
-			}else{
-				var color_share = 0;
+			//var fill_color = "#f00";
+			for (var player in game.players){
+				if(game.players[player].regions !== undefined && game.players[player].regions[state] !== undefined){
+					var color_share = Math.round(game.players[player].regions[state].share);
+				}
 			}
-			var basic_color_share = 100 - color_share;
-		    WorldMap[state].attr({fill: "90-"+fill_color+":"+color_share+"-#eee:"+basic_color_share, stroke: "#666"});
+			//var basic_color_share = 100 - color_share;
+		    WorldMap[state].attr({fill: "90-"+fill_color+"-#eee:"+color_share, stroke: "#666"});
+		    //WorldMap[state].attr({fill: "90-"+fill_color+"-#eee:85", stroke: "#666"});
            	R.safari();
 		}
     });

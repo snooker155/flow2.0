@@ -112,7 +112,7 @@ if(Meteor.isServer){
 	        for(var player in game.players){
 	        	var players_people = 0;
 	            for(var region in game.players[player].regions){
-	            	game.players[player].regions[region].people -= 1;
+	            	game.players[player].regions[region].people -= 10;
 	            	players_people += game.players[player].regions[region].people;
 	            	game.players[player].regions[region].share = game.players[player].regions[region].people / Regions.findOne({region_name: region}).region_people * 100;
 	            }
@@ -121,13 +121,13 @@ if(Meteor.isServer){
 	        }
     	}
 
-    	// if(game.players){
-	    //     for(var player in game.players){
-	    //       if(game.players[player].player_share < 0 || game.players[player].player_share >= 100){
-	    //         Meteor.clearInterval(interval);
-	    //       }
-	    //     }
-    	// }
+    	if(game.players){
+	        for(var player in game.players){
+	          if(game.players[player].player_share < 0 || game.players[player].player_share >= 100){
+	            Meteor.clearInterval(interval);
+	          }
+	        }
+    	}
 
     	game.time_period = game.time_period + 1;
 

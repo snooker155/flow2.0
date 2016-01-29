@@ -221,7 +221,7 @@ function rainbow(numOfSteps, step) {
       if(game.players[Meteor.user().username].regions !== undefined){
         game.players[Meteor.user().username].regions[region] = {
           region_name: region,
-          people: 500,
+          people: 1150,
           price: 0,
           profit: 0,
           share: 0,
@@ -233,7 +233,7 @@ function rainbow(numOfSteps, step) {
 
         player_regions[region] = {
           region_name: region,
-          people: 500,
+          people: 1150,
           price: 0,
           profit: 0,
           share: 0,

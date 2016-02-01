@@ -70,7 +70,7 @@ Template.world_map.onRendered(function(){
 
     for(var regionId in WorldMapData) {
 	    attr = {
-		    fill: game.regions[regionId].region_color,
+		    //fill: game.regions[regionId].region_color,
 		    stroke: "#888",
 		    "stroke-width": 0.5,
 		    "stroke-linejoin": "round"
@@ -82,17 +82,31 @@ Template.world_map.onRendered(function(){
     Tracker.autorun(function () {
     	var game = Games.findOne({});
     	for (var state in WorldMap) {
-			var fill_color = game.regions[state].region_color;
-			//var fill_color = "#f00";
-			for (var player in game.players){
-				if(game.players[player].regions !== undefined && game.players[player].regions[state] !== undefined){
-					var color_share = Math.round(game.players[player].regions[state].share);
+    		if(game.regions[state].region_color !== undefined){
+    			var fill_color = "90-";
+    			var color_share = 0;
+				for (var player in game.players){
+					if(game.players[player].regions !== undefined && game.players[player].regions[state] !== undefined){
+						fill_color += game.regions[state].region_color[player]+":"+color_share+"-";
+						color_share += Math.round(game.players[player].regions[state].share);
+					}
 				}
+				fill_color += "#eee:"+color_share;
+				//var fill_color = "90-#ff7f00-#ffff00:5-#eee:15";
+				console.log(fill_color);
+				//var fill_color = game.regions[state].region_color;
+				//WorldMap[state].attr({fill: "90-"+fill_color+"-#eee:"+color_share, stroke: "#666"});			
+				WorldMap[state].attr({fill: fill_color, stroke: "#666"});
+			}else{
+				var fill_color = "#eee";
+				WorldMap[state].attr({fill: fill_color, stroke: "#666"});
 			}
+			//var fill_color = "#f00";
+	
 			//var basic_color_share = 100 - color_share;
-		    WorldMap[state].attr({fill: "90-"+fill_color+"-#eee:"+color_share, stroke: "#666"});
+		    //WorldMap[state].attr({fill: "90-"+fill_color+"-#eee:"+color_share, stroke: "#666"});
 		    //WorldMap[state].attr({fill: "90-"+fill_color+"-#eee:85", stroke: "#666"});
-           	R.safari();
+           	//R.safari();
 		}
     });
 
@@ -484,6 +498,16 @@ Template.world_map.helpers({
 	},
 
 
+	player_name: function(){
+		return Games.findOne({}).players[Meteor.user().username].player.username;
+	},
+
+
+	player_balance: function(){
+		return Games.findOne({}).players[Meteor.user().username].player_balance;
+	},
+
+
     shares: function(){
     	var game = Games.findOne({});
         if(selected_region.get()){
@@ -534,7 +558,11 @@ Template.world_map.helpers({
         if(selected_region.get()){
             return Math.round(game.players[Meteor.user().username].regions[selected_region.get()].people);
         }else{
-            return "111";
+			var world_people = 0;
+			for (var region in game.players[Meteor.user().username].regions){
+				world_people += game.players[Meteor.user().username].regions[region].people;
+			}
+			return world_people;
         }
     },
 
@@ -543,7 +571,11 @@ Template.world_map.helpers({
         if(selected_region.get()){
             return Math.round(game.players[Meteor.user().username].regions[selected_region.get()].profit);
         }else{
-            return "22";
+            var world_profit = 0;
+			for (var region in game.players[Meteor.user().username].regions){
+				world_profit += game.players[Meteor.user().username].regions[region].profit;
+			}
+			return parseFloat((world_profit / 6).toFixed(2))
         }
     },
 
@@ -552,7 +584,11 @@ Template.world_map.helpers({
         if(selected_region.get()){
             return Math.round(game.players[Meteor.user().username].regions[selected_region.get()].price);
         }else{
-            return "33";
+            var world_price = 0;
+			for (var region in game.players[Meteor.user().username].regions){
+				world_price += game.players[Meteor.user().username].regions[region].price;
+			}
+			return world_price;
         }
     },
 
@@ -572,7 +608,8 @@ Template.world_map.events({
     'click #buyShare': function(){
     	event.preventDefault();
 
-    	Meteor.call('buyShare', Session.get("game"), selected_region.get(), function (error, result) {});
+    	//Meteor.call('buyShare', Session.get("game"), selected_region.get(), function (error, result) {});  #### For the full game version with Rooms
+    	Meteor.call('buyShare', selected_region.get(), function (error, result) {});
     },
 
 });

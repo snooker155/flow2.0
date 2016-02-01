@@ -172,7 +172,7 @@ function rainbow(numOfSteps, step) {
         player: Meteor.user(),
         player_balance: 100000,
         player_color: rainbow(12, players_number+1),
-        player_share: 0,
+        //player_share: 0,
       };
 
       //console.log(this.connection.id);
@@ -221,9 +221,9 @@ function rainbow(numOfSteps, step) {
       if(game.players[Meteor.user().username].regions !== undefined){
         game.players[Meteor.user().username].regions[region] = {
           region_name: region,
-          people: 1150,
-          price: 0,
-          profit: 0,
+          people: 1050,
+          price: Regions.findOne({region_name: region}).base_price_rate,
+          profit: Regions.findOne({region_name: region}).base_profit_rate,
           share: 0,
         };
 
@@ -233,16 +233,23 @@ function rainbow(numOfSteps, step) {
 
         player_regions[region] = {
           region_name: region,
-          people: 1150,
-          price: 0,
-          profit: 0,
+          people: 1050,
+          price: Regions.findOne({region_name: region}).base_price_rate,
+          profit: Regions.findOne({region_name: region}).base_profit_rate,
           share: 0,
         };
 
         game.players[Meteor.user().username].regions = player_regions;
 
         game.regions[region].players[Meteor.user().username] = game.players[Meteor.user().username];
-        game.regions[region].region_color = game.players[Meteor.user().username].player_color;
+
+        if(game.regions[region].region_color !== undefined){
+          game.regions[region].region_color[Meteor.user().username] = game.players[Meteor.user().username].player_color;
+        }else{
+          var region_color = {};
+          region_color[Meteor.user().username] = game.players[Meteor.user().username].player_color;
+          game.regions[region].region_color = region_color;
+        }
 
       }
 
@@ -265,48 +272,38 @@ function rainbow(numOfSteps, step) {
 
 
 
-    buyShare: function(game_id, region_name){
-      var game = Games.findOne({_id: game_id});
+
+
+    buyShare: function(region_name){
+      //var game = Games.findOne({_id: game_id});  #### For the full game version with Rooms
+      var game = Games.findOne({});
       var price = 0;
       var total_people = 0;
       if(region_name){
-        if(game.regions[region_name].players[Meteor.user().username]){
-          price = game.regions[region_name].players[Meteor.user().username].price;
-          game.regions[region_name].players[Meteor.user().username].people += 25;
-          game.regions[region_name].players[Meteor.user().username].share = game.regions[region_name].players[Meteor.user().username].people / game.regions[region_name].people_all * 100;
-          var people_of_player = 0;
-          for(var region in game.regions){
-            people_of_player += game.regions[region].players[Meteor.user().username].people;
-            total_people += game.regions[region].people_all;
-          }
-          game.players[Meteor.user().username].people = people_of_player;
-          game.players[Meteor.user().username].share = people_of_player / total_people * 100;
-        }
+        price = game.players[Meteor.user().username].regions[region_name].price;
+        game.players[Meteor.user().username].regions[region_name].people += 25;
+        //game.players[Meteor.user().username].regions[region_name].share = game.players[Meteor.user().username].regions[region_name].people / Regions.findOne({region_name: region_name}).region_people * 100;
       }else{
-        price = game.players[Meteor.user().username].price;
-        var people_of_player = 0;
-        for(var region in game.regions){
-          if(game.regions[region_name].players[Meteor.user().username]){
-            game.regions[region].players[Meteor.user().username].people += 25;
-            game.regions[region].players[Meteor.user().username].share = game.regions[region].players[Meteor.user().username].people / game.regions[region].people_all * 100;
-            people_of_player += game.regions[region].players[Meteor.user().username].people;
-          }
-          total_people += game.regions[region].people_all;
+        for(var region in game.players[Meteor.user().username].regions){
+          price += game.players[Meteor.user().username].regions[region].price;
+          game.players[Meteor.user().username].regions[region_name].people += 25;
+          //game.players[Meteor.user().username].regions[region_name].share = game.regions[region].players[Meteor.user().username].people / Regions.findOne({region_name: region_name}).region_people * 100;
         }
-        game.players[Meteor.user().username].people = people_of_player;
-        game.players[Meteor.user().username].share = people_of_player / total_people * 100;
       }
 
-      Games.update(game_id, {
+      game.players[Meteor.user().username].player_balance -= price;
+
+      Games.update(game._id, {
         $set:{
           players: game.players,
           regions: game.regions,
         }
       });
-
-      company.company_balance -= price;
-      
     },
+
+
+
+
 
 
 

@@ -28,6 +28,8 @@ if(Meteor.isServer){
 			region_market: 15,
 			region_demand: 10,
 			region_trend: "Medium",
+			base_profit_rate: Math.floor((Math.random() * 10) + 7),
+			base_price_rate: Math.floor((Math.random() * 10) + 15),
 		});
 
 		Regions.insert({
@@ -37,6 +39,8 @@ if(Meteor.isServer){
 			region_market: 5,
 			region_demand: 7,
 			region_trend: "Low",
+			base_profit_rate: Math.floor((Math.random() * 10) + 7),
+			base_price_rate: Math.floor((Math.random() * 10) + 15),
 		});
 
 		Regions.insert({
@@ -46,6 +50,8 @@ if(Meteor.isServer){
 			region_market: -2,
 			region_demand: 0,
 			region_trend: "Negative",
+			base_profit_rate: Math.floor((Math.random() * 10) + 7),
+			base_price_rate: Math.floor((Math.random() * 10) + 15),
 		});
 
 		Regions.insert({
@@ -55,6 +61,8 @@ if(Meteor.isServer){
 			region_market: -17,
 			region_demand: -24,
 			region_trend: "Negative",
+			base_profit_rate: Math.floor((Math.random() * 10) + 7),
+			base_price_rate: Math.floor((Math.random() * 10) + 15),
 		});
 
 		Regions.insert({
@@ -64,6 +72,8 @@ if(Meteor.isServer){
 			region_market: 24,
 			region_demand: 30,
 			region_trend: "High",
+			base_profit_rate: Math.floor((Math.random() * 10) + 7),
+			base_price_rate: Math.floor((Math.random() * 10) + 15),
 		});
 
 		Regions.insert({
@@ -73,6 +83,8 @@ if(Meteor.isServer){
 			region_market: 2,
 			region_demand: 5,
 			region_trend: "Low",
+			base_profit_rate: Math.floor((Math.random() * 10) + 7),
+			base_price_rate: Math.floor((Math.random() * 10) + 15),
 		});
 
 
@@ -85,7 +97,6 @@ if(Meteor.isServer){
       		total_people += region.region_people;
       		regions[region.region_name] = {
       			players: players,
-      			region_color: "#eee",
       		}
       	});
 
@@ -110,22 +121,19 @@ if(Meteor.isServer){
 
         if(game.players){
 	        for(var player in game.players){
-	        	var players_people = 0;
-	            for(var region in game.players[player].regions){
-	            	game.players[player].regions[region].people -= 10;
-	            	players_people += game.players[player].regions[region].people;
-	            	game.players[player].regions[region].share = game.players[player].regions[region].people / Regions.findOne({region_name: region}).region_people * 100;
-	            }
+	        	if(game.players[player].regions){
+		        	var players_people = 0;
+		            for(var region in game.players[player].regions){
+		            	game.players[player].regions[region].people -= 10;
+		            	players_people += game.players[player].regions[region].people;
+		            	game.players[player].regions[region].share = game.players[player].regions[region].people / Regions.findOne({region_name: region}).region_people * 100;
+		            }
+		            game.players[player].player_share = players_people / total_people * 100;
+	        	}
 
-	            game.players[player].player_share = players_people / total_people * 100;
-	        }
-    	}
-
-    	if(game.players){
-	        for(var player in game.players){
-	          if(game.players[player].player_share < 0 || game.players[player].player_share >= 100){
-	            Meteor.clearInterval(interval);
-	          }
+	            if(game.players[player].player_share <= 0 || game.players[player].player_share >= 100){
+		            Meteor.clearInterval(interval);
+		        }
 	        }
     	}
 

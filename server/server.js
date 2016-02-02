@@ -29,7 +29,8 @@ if(Meteor.isServer){
 			region_demand: 10,
 			region_trend: "Medium",
 			base_profit_rate: Math.floor((Math.random() * 10) + 7),
-			base_price_rate: Math.floor((Math.random() * 10) + 15),
+			base_price_rate: Math.floor((Math.random() * 5) + 2),
+			region_price: 10000 + Math.floor((Math.random() * 5000) + 1000),
 		});
 
 		Regions.insert({
@@ -40,7 +41,8 @@ if(Meteor.isServer){
 			region_demand: 7,
 			region_trend: "Low",
 			base_profit_rate: Math.floor((Math.random() * 10) + 7),
-			base_price_rate: Math.floor((Math.random() * 10) + 15),
+			base_price_rate: Math.floor((Math.random() * 5) + 2),
+			region_price: 10000 + Math.floor((Math.random() * 5000) + 1000),
 		});
 
 		Regions.insert({
@@ -51,7 +53,8 @@ if(Meteor.isServer){
 			region_demand: 0,
 			region_trend: "Negative",
 			base_profit_rate: Math.floor((Math.random() * 10) + 7),
-			base_price_rate: Math.floor((Math.random() * 10) + 15),
+			base_price_rate: Math.floor((Math.random() * 5) + 2),
+			region_price: 10000 + Math.floor((Math.random() * 5000) + 1000),
 		});
 
 		Regions.insert({
@@ -62,7 +65,8 @@ if(Meteor.isServer){
 			region_demand: -24,
 			region_trend: "Negative",
 			base_profit_rate: Math.floor((Math.random() * 10) + 7),
-			base_price_rate: Math.floor((Math.random() * 10) + 15),
+			base_price_rate: Math.floor((Math.random() * 5) + 2),
+			region_price: 10000 + Math.floor((Math.random() * 5000) + 1000),
 		});
 
 		Regions.insert({
@@ -73,7 +77,8 @@ if(Meteor.isServer){
 			region_demand: 30,
 			region_trend: "High",
 			base_profit_rate: Math.floor((Math.random() * 10) + 7),
-			base_price_rate: Math.floor((Math.random() * 10) + 15),
+			base_price_rate: Math.floor((Math.random() * 5) + 2),
+			region_price: 10000 + Math.floor((Math.random() * 5000) + 1000),
 		});
 
 		Regions.insert({
@@ -84,7 +89,8 @@ if(Meteor.isServer){
 			region_demand: 5,
 			region_trend: "Low",
 			base_profit_rate: Math.floor((Math.random() * 10) + 7),
-			base_price_rate: Math.floor((Math.random() * 10) + 15),
+			base_price_rate: Math.floor((Math.random() * 5) + 2),
+			region_price: 10000 + Math.floor((Math.random() * 5000) + 1000),
 		});
 
 
@@ -100,6 +106,7 @@ if(Meteor.isServer){
       		}
       	});
 
+
       	var game_id = Games.insert({
       		game_name: "test",
         	players: players,
@@ -113,10 +120,11 @@ if(Meteor.isServer){
 
 		//////////////////////////////////////////////////////////////////////////////////////////////////////
 
-      	var interval = Meteor.setInterval(function(){
+      var interval = Meteor.setInterval(function(){
 
       	var game = Games.findOne({});
 
+      	//console.log(game.getPlayerList()+" # "+game.getPlayersNumber());
         console.log(game.time_period);
 
         if(game.players){
@@ -124,10 +132,14 @@ if(Meteor.isServer){
 	        	if(game.players[player].regions){
 		        	var players_people = 0;
 		            for(var region in game.players[player].regions){
-		            	game.players[player].regions[region].people -= 10;
-		            	players_people += game.players[player].regions[region].people;
-		            	game.players[player].regions[region].share = game.players[player].regions[region].people / Regions.findOne({region_name: region}).region_people * 100;
-		            }
+		            	if(game.players[player].regions[region].people > 0){
+		            		game.players[player].player_balance += game.players[player].regions[region].people * Regions.findOne({region_name: region}).base_profit_rate; 
+			            	game.players[player].regions[region].people -= 1;
+			            	players_people += game.players[player].regions[region].people;
+			            	game.players[player].regions[region].share = game.players[player].regions[region].people / Regions.findOne({region_name: region}).region_people * 100;
+			            	game.updatePriceProfit(player, region);
+		            	}
+		        	}
 		            game.players[player].player_share = players_people / total_people * 100;
 	        	}
 

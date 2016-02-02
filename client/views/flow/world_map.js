@@ -35,6 +35,10 @@ var WorldMapData = {
 var WorldMap = {};
 var buttons = {};
 
+var createDot = function(R,x,y,color){
+     R.circle(x,y,2).attr({fill: color, stroke: "#fff", "stroke-width": 2, r: 0}).animate({r: 5}, 1000, "elastic");
+};
+
 
 
 Template.world_map.onRendered(function(){
@@ -69,12 +73,12 @@ Template.world_map.onRendered(function(){
 
 
     for(var regionId in WorldMapData) {
-	    attr = {
-		    //fill: game.regions[regionId].region_color,
-		    stroke: "#888",
-		    "stroke-width": 0.5,
-		    "stroke-linejoin": "round"
-		};
+	 //    attr = {
+		//     //fill: game.regions[regionId].region_color,
+		//     stroke: "#888",
+		//     "stroke-width": 0.5,
+		//     "stroke-linejoin": "round"
+		// };
 	    WorldMap[regionId] = R.path(WorldMapData[regionId].path).attr(attr);
     }
 
@@ -87,14 +91,15 @@ Template.world_map.onRendered(function(){
     			var color_share = 0;
 				for (var player in game.players){
 					if(game.players[player].regions !== undefined && game.players[player].regions[state] !== undefined){
-						fill_color += game.regions[state].region_color[player]+":"+color_share+"-";
-						color_share += Math.round(game.players[player].regions[state].share);
+						for(var i=0; i<2; i++){
+							fill_color += game.regions[state].region_color[player]+":"+color_share+"-";
+							color_share += Math.round(game.players[player].regions[state].share)/2;
+						}
 					}
 				}
 				fill_color += "#eee:"+color_share;
-				//var fill_color = "90-#ff7f00-#ffff00:5-#eee:15";
-				console.log(fill_color);
-				//var fill_color = game.regions[state].region_color;
+				//var fill_color = "90-#ff7f00-#ff7f00:50-#ffff00:55-#ffff00:85-#eee:95";
+
 				//WorldMap[state].attr({fill: "90-"+fill_color+"-#eee:"+color_share, stroke: "#666"});			
 				WorldMap[state].attr({fill: fill_color, stroke: "#666"});
 			}else{
@@ -111,10 +116,6 @@ Template.world_map.onRendered(function(){
     });
 
 
-
-    var createDot = function(x,y,color){
-         R.circle(x,y,2).attr({fill: color, stroke: "#fff", "stroke-width": 2, r: 0}).animate({r: 5}, 1000, "elastic");
-    };
 
     for (var state in WorldMap) {
     	var point = WorldMap[state].getBBox(0);
@@ -145,10 +146,10 @@ Template.world_map.onRendered(function(){
           
             st[0].onclick = function (e) {
             	//console.log('it is clicked ' + state);
-            	Meteor.call("addRegionToPlayer", game, state, function(error, result){
+            	Meteor.call("addRegionToPlayer", state, function(error, result){
             		if(!error){
 	            		var point1 = WorldMap[state].getBBox(0);
-	            		createDot(point1.cx, point1.cy, game.players[Meteor.user().username].player_color);
+	            		createDot(R, point1.cx, point1.cy, game.players[Meteor.user().username].player_color);
 	            		buttons[state].hide();
             		}
             	});
@@ -344,7 +345,7 @@ Template.world_map.helpers({
 	},
 
 	branch_price: function(){
-		return "100000";
+		return Regions.findOne({region_name: selected_region.get()}).region_price;
 	},
 
 	regions: function(){
@@ -592,6 +593,19 @@ Template.world_map.helpers({
         }
     },
 
+    disabled: function(){
+    	var game = Games.findOne({});
+        if(selected_region.get()){
+            return Math.round(game.players[Meteor.user().username].regions[selected_region.get()].price) > game.players[Meteor.user().username].player_balance ? "disabled":"";
+        }else{
+            var world_price = 0;
+			for (var region in game.players[Meteor.user().username].regions){
+				world_price += game.players[Meteor.user().username].regions[region].price;
+			}
+			return world_price > game.players[Meteor.user().username].player_balance ? "disabled":"";
+        }
+    },
+
 });
 
 
@@ -610,6 +624,16 @@ Template.world_map.events({
 
     	//Meteor.call('buyShare', Session.get("game"), selected_region.get(), function (error, result) {});  #### For the full game version with Rooms
     	Meteor.call('buyShare', selected_region.get(), function (error, result) {});
+    },
+
+    'click #buyBranch': function(){
+    	event.preventDefault();
+
+    	Meteor.call('addRegionToPlayer', selected_region.get(), function (error, result) {
+    		if(!error){
+    			Meteor.call('decreaseBalance', selected_region.get());
+           	}
+    	});	
     },
 
 });

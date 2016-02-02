@@ -57,12 +57,12 @@
                             <div class="col-md-2" style="color:white;">
                               Share: <br><strong id="shareHolderValue">{{region_share}}%</strong>
                             </div>
-                            <div class="col-md-3" style="color:white;">
-                              Profit: <br><strong id="profitHolderValue">$ {{region_profit}}</strong>
-                            </div>
                             <div class="col-md-2" style="color:white;">
+                              Profit: <br><strong id="profitHolderValue">${{region_profit}}</strong>
+                            </div>
+                            <div class="col-md-3" style="color:white;">
                               <!-- Price: <br> -->
-                              <button class="btn btn-primary btn-sm" id='buyShare'>$ {{region_price}}</button>
+                              <button class="btn btn-primary btn-sm" id='buyShare' {{disabled}}>$ {{region_price}}</button>
                             </div>
                         </div>
                     {{else}}

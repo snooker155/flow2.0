@@ -198,11 +198,16 @@ function rainbow(numOfSteps, step) {
 
       var disc_player = game.connections[connection.id].player.username;
 
-      for(var region in game.players[disc_player].regions){
-        game.regions[region].region_color = "#eee";
-      }
-
       delete game.players[disc_player];
+
+      for(var region in game.regions){
+        if(game.regions[region].players[disc_player] !== undefined){
+          delete game.regions[region].players[disc_player];
+        }
+        if(game.regions[region].region_color[disc_player] !== undefined){
+          delete game.regions[region].region_color[disc_player];
+        }
+      }
 
 
       Games.update(game._id, {
@@ -217,23 +222,35 @@ function rainbow(numOfSteps, step) {
     },
 
 
-    addRegionToPlayer: function(game, region){
+    addRegionToPlayer: function(region){
+      var game = Games.findOne({});
       if(game.players[Meteor.user().username].regions !== undefined){
         game.players[Meteor.user().username].regions[region] = {
           region_name: region,
-          people: 1050,
+          people: 0,
           price: Regions.findOne({region_name: region}).base_price_rate,
           profit: Regions.findOne({region_name: region}).base_profit_rate,
           share: 0,
         };
 
         game.regions[region].players[Meteor.user().username] = game.players[Meteor.user().username];
+
+        if(game.regions[region].region_color !== undefined){
+          game.regions[region].region_color[Meteor.user().username] = game.players[Meteor.user().username].player_color;
+        }else{
+          var region_color = {};
+          region_color[Meteor.user().username] = game.players[Meteor.user().username].player_color;
+          game.regions[region].region_color = region_color;
+        }
+
+        //console.log(game);
+
       }else{
         var player_regions = {};
 
         player_regions[region] = {
           region_name: region,
-          people: 1050,
+          people: 500,
           price: Regions.findOne({region_name: region}).base_price_rate,
           profit: Regions.findOne({region_name: region}).base_profit_rate,
           share: 0,
@@ -259,6 +276,9 @@ function rainbow(numOfSteps, step) {
           regions: game.regions,
         }
       });
+
+
+      //console.log(Games.findOne({}));
     },
 
 
@@ -279,19 +299,40 @@ function rainbow(numOfSteps, step) {
       var game = Games.findOne({});
       var price = 0;
       var total_people = 0;
-      if(region_name){
+      if(region_name !== null){
         price = game.players[Meteor.user().username].regions[region_name].price;
-        game.players[Meteor.user().username].regions[region_name].people += 25;
+        if(game.players[Meteor.user().username].regions[region_name].share < 100){
+          game.players[Meteor.user().username].regions[region_name].people += 10;
+        }
         //game.players[Meteor.user().username].regions[region_name].share = game.players[Meteor.user().username].regions[region_name].people / Regions.findOne({region_name: region_name}).region_people * 100;
       }else{
         for(var region in game.players[Meteor.user().username].regions){
           price += game.players[Meteor.user().username].regions[region].price;
-          game.players[Meteor.user().username].regions[region_name].people += 25;
+          if(game.players[Meteor.user().username].regions[region].share < 100){
+            game.players[Meteor.user().username].regions[region].people += 10;
+          }
           //game.players[Meteor.user().username].regions[region_name].share = game.regions[region].players[Meteor.user().username].people / Regions.findOne({region_name: region_name}).region_people * 100;
         }
       }
 
       game.players[Meteor.user().username].player_balance -= price;
+
+      Games.update(game._id, {
+        $set:{
+          players: game.players,
+          regions: game.regions,
+        }
+      });
+    },
+
+
+
+    decreaseBalance: function(region_name){
+
+      var game = Games.findOne({});
+      var region = Regions.findOne({region_name: region_name});
+
+      game.players[Meteor.user().username].player_balance -= region.region_price;
 
       Games.update(game._id, {
         $set:{

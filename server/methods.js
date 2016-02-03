@@ -166,8 +166,6 @@ function rainbow(numOfSteps, step) {
 
       //console.log(players_number);
 
-      var connections = {};
-
       game.players[Meteor.user().username] = {
         player: Meteor.user(),
         player_balance: 100000,
@@ -177,14 +175,14 @@ function rainbow(numOfSteps, step) {
 
       //console.log(this.connection.id);
 
-      connections[this.connection.id] = {
+      game.connections[this.connection.id] = {
         player: Meteor.user(),
       };
 
       Games.update(game._id, {
         $set: {
           players: game.players,
-          connections: connections,
+          connections: game.connections,
         }
       });
 
@@ -201,11 +199,12 @@ function rainbow(numOfSteps, step) {
       delete game.players[disc_player];
 
       for(var region in game.regions){
+
+        if(game.regions[region].region_color !== undefined && game.regions[region].region_color[disc_player] !== undefined){
+          delete game.regions[region].region_color[disc_player];
+        }
         if(game.regions[region].players[disc_player] !== undefined){
           delete game.regions[region].players[disc_player];
-        }
-        if(game.regions[region].region_color[disc_player] !== undefined){
-          delete game.regions[region].region_color[disc_player];
         }
       }
 
@@ -228,8 +227,7 @@ function rainbow(numOfSteps, step) {
         game.players[Meteor.user().username].regions[region] = {
           region_name: region,
           people: 0,
-          price: Regions.findOne({region_name: region}).base_price_rate,
-          profit: Regions.findOne({region_name: region}).base_profit_rate,
+          profit: game.regions[region].base_profit_rate,
           share: 0,
         };
 
@@ -251,8 +249,7 @@ function rainbow(numOfSteps, step) {
         player_regions[region] = {
           region_name: region,
           people: 500,
-          price: Regions.findOne({region_name: region}).base_price_rate,
-          profit: Regions.findOne({region_name: region}).base_profit_rate,
+          profit: game.regions[region].base_profit_rate,
           share: 0,
         };
 

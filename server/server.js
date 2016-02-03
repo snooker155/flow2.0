@@ -96,6 +96,7 @@ if(Meteor.isServer){
 
 		var players = {};
       	var regions = {};
+      	var connections = {};
 
       	var total_people = 0;
 
@@ -103,12 +104,22 @@ if(Meteor.isServer){
       		total_people += region.region_people;
       		regions[region.region_name] = {
       			players: players,
+      			region_name: region.region_name,
+				region_people: region.region_people,
+				region_pref: region.region_pref,
+				region_market: region.region_market,
+				region_demand: region.region_demand,
+				region_trend: region.region_trend,
+				base_profit_rate: region.base_profit_rate,
+				base_price_rate: region.base_price_rate,
+				region_price: region.region_price,
       		}
       	});
 
 
       	var game_id = Games.insert({
       		game_name: "test",
+      		connections: connections,
         	players: players,
         	regions: regions,
         	status: "process",
@@ -117,6 +128,7 @@ if(Meteor.isServer){
       	});
 
 
+      var i = 0;
 
 		//////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -126,6 +138,8 @@ if(Meteor.isServer){
 
       	//console.log(game.getPlayerList()+" # "+game.getPlayersNumber());
         console.log(game.time_period);
+
+        //console.log(Math.floor((Math.random() * 3) - 1)); ###     values: -1/0/1
 
         if(game.players){
 	        for(var player in game.players){
@@ -138,10 +152,12 @@ if(Meteor.isServer){
 			            	players_people += game.players[player].regions[region].people;
 			            	game.players[player].regions[region].share = game.players[player].regions[region].people / Regions.findOne({region_name: region}).region_people * 100;
 			            	game.updatePriceProfit(player, region);
+
 		            	}
 		        	}
 		            game.players[player].player_share = players_people / total_people * 100;
 	        	}
+
 
 	            if(game.players[player].player_share <= 0 || game.players[player].player_share >= 100){
 		            Meteor.clearInterval(interval);
@@ -149,12 +165,30 @@ if(Meteor.isServer){
 	        }
     	}
 
+    	// if(i == 20 || i ==40){
+	    	for(var region in game.regions){
+			    game.updateRegionBasePriceRate(region);
+			    game.updateRegionBaseProfitRate(region);
+			}
+		// }
+
+    	if(i == 30){
+	    	for(var region in game.regions){
+				game.updateRegionDemand(region);
+			    game.updateRegionMarket(region);
+			}
+			i = 0;
+		}
+
+		i++;
+
     	game.time_period = game.time_period + 1;
 
 
         Games.update(game._id, {
           $set:{
             players: game.players,
+            regions: game.regions,
             time_period: game.time_period,
           }
         });

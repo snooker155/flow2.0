@@ -356,117 +356,157 @@ Template.world_map.helpers({
 		return selected_region.get();
 	},
 
-	waiting_region_name: function(){
+
+	waiting_region_price: function(){
+		var game = Games.findOne({});
 		if(selected_region.get()){
-			return Regions.findOne({region_name: selected_region.get()}).region_name;
+			return parseFloat((game.regions[selected_region.get()].base_price_rate).toFixed(2));
+		}else{
+			var base_price_rate = 0;
+			for (var region in game.regions){
+				base_price_rate += game.regions[region].base_price_rate;
+			}
+			return parseFloat((base_price_rate).toFixed(2));
+		}
+	},
+
+
+	waiting_region_profit: function(){
+		var game = Games.findOne({});
+		if(selected_region.get()){
+			return parseFloat((game.regions[selected_region.get()].base_profit_rate).toFixed(2));
+		}else{
+			var base_profit_rate = 0;
+			for (var region in game.regions){
+				base_profit_rate += game.regions[region].base_profit_rate;
+			}
+			return parseFloat((base_profit_rate).toFixed(2));
+		}
+	},
+
+
+	waiting_region_name: function(){
+		var game = Games.findOne({});
+		if(selected_region.get()){
+			return game.regions[selected_region.get()].region_name;
 		}else{
 			return "World";
 		}
 	},
 
 	waiting_region_people: function(){
+		var game = Games.findOne({});
 		if(selected_region.get()){
-			return Regions.findOne({region_name: selected_region.get()}).region_people;
+			return game.regions[selected_region.get()].region_people;
 		}else{
 			var total_people = 0;
-			Regions.find().fetch().forEach(function (region) {
-				total_people += region.region_people;
-			});
+			for (var region in game.regions){
+				total_people += game.regions[region].region_people;
+			}
 			return total_people;
 		}
 	},
 
 	waiting_region_pref: function(){
+		var game = Games.findOne({});
 		if(selected_region.get()){
-			return Regions.findOne({region_name: selected_region.get()}).region_pref;
+			return game.regions[selected_region.get()].region_pref;
 		}else{
 			return "Technology";
 		}
 	},
 
 	waiting_region_trend: function(){
+		var game = Games.findOne({});
 		if(selected_region.get()){
-			return Regions.findOne({region_name: selected_region.get()}).region_trend;
+			return game.regions[selected_region.get()].region_trend;
 		}else{
 			return "Low";
 		}
 	},
 
 	waiting_region_demand: function(){
+		var game = Games.findOne({});
 		if(selected_region.get()){
-			return Regions.findOne({region_name: selected_region.get()}).region_demand;
+			return parseFloat((game.regions[selected_region.get()].region_demand).toFixed(2));
 		}else{
 			var total_demand = 0;
-			Regions.find().fetch().forEach(function (region) {
-				total_demand += region.region_demand;
-			});
+			for (var region in game.regions){
+				total_demand += game.regions[region].region_demand;
+			}
 			return parseFloat((total_demand/6).toFixed(2));
 		}
 	},
 
 	waiting_region_market: function(){
+		var game = Games.findOne({});
 		if(selected_region.get()){
-			return Regions.findOne({region_name: selected_region.get()}).region_market;
+			return parseFloat((game.regions[selected_region.get()].region_market).toFixed(2));
 		}else{
 			var total_market = 0;
-			Regions.find().fetch().forEach(function (region) {
-				total_market += region.region_market;
-			});
+			for (var region in game.regions){
+				total_market += game.regions[region].region_market;
+			}
 			return parseFloat((total_market/6).toFixed(2));
 		}
 	},
 
 	demand_type: function(){
+		var game = Games.findOne({});
 		if(selected_region.get()){
-			return Regions.findOne({region_name: selected_region.get()}).region_demand > 0 ? 'navy' : 'danger';
+			return game.regions[selected_region.get()].region_demand > 0 ? 'navy' : 'danger';
 		}else{
 			var total_demand = 0;
-			Regions.find().fetch().forEach(function (region) {
-				total_demand += region.region_demand;
-			});
+			for (var region in game.regions){
+				total_demand += game.regions[region].region_demand;
+			}
 			return total_demand > 0 ? 'navy' : 'danger';
 		}
 	},
 
 	arrow_demand_type: function(){
+		var game = Games.findOne({});
 		if(selected_region.get()){
-			return Regions.findOne({region_name: selected_region.get()}).region_demand > 0 ? 'up' : 'down';
+			return game.regions[selected_region.get()].region_demand > 0 ? 'up' : 'down';
 		}else{
 			var total_demand = 0;
-			Regions.find().fetch().forEach(function (region) {
-				total_demand += region.region_demand;
-			});
+			for (var region in game.regions){
+				total_demand += game.regions[region].region_demand;
+			}
 			return total_demand > 0 ? 'up' : 'down';
 		}
 	},
 
 	market_type: function(){
+		var game = Games.findOne({});
 		if(selected_region.get()){
-			return Regions.findOne({region_name: selected_region.get()}).region_market > 0 ? 'navy' : 'danger';
+			return game.regions[selected_region.get()].region_market > 0 ? 'navy' : 'danger';
 		}else{
 			var total_market = 0;
-			Regions.find().fetch().forEach(function (region) {
-				total_market += region.region_market;
-			});
+			for (var region in game.regions){
+				total_market += game.regions[region].region_market;
+			}
 			return total_market > 0 ? 'navy' : 'danger';
 		}
 	},
 
 	arrow_market_type: function(){
+		var game = Games.findOne({});
 		if(selected_region.get()){
-			return Regions.findOne({region_name: selected_region.get()}).region_market > 0 ? 'up' : 'down';
+			return game.regions[selected_region.get()].region_market > 0 ? 'up' : 'down';
 		}else{
 			var total_market = 0;
-			Regions.find().fetch().forEach(function (region) {
-				total_market += region.region_market;
-			});
+			for (var region in game.regions){
+				total_market +=  game.regions[region].region_market;
+			}
 			return total_market > 0 ? 'up' : 'down';
 		}
 	},
 
 	trend_type: function(){
+		var game = Games.findOne({});
 		if(selected_region.get()){
-			switch(Regions.findOne({region_name: selected_region.get()}).region_trend){
+			switch(game.regions[selected_region.get()].region_trend){
 				case "Negative":
 					return "danger";
 					break;
@@ -570,13 +610,13 @@ Template.world_map.helpers({
     region_profit: function(){
     	var game = Games.findOne({});
         if(selected_region.get()){
-            return Math.round(game.players[Meteor.user().username].regions[selected_region.get()].profit);
+            return parseFloat((game.players[Meteor.user().username].regions[selected_region.get()].profit).toFixed(2));
         }else{
             var world_profit = 0;
 			for (var region in game.players[Meteor.user().username].regions){
 				world_profit += game.players[Meteor.user().username].regions[region].profit;
 			}
-			return parseFloat((world_profit / 6).toFixed(2))
+			return parseFloat((world_profit / 6).toFixed(2));
         }
     },
 

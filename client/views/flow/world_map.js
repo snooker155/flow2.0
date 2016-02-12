@@ -545,7 +545,7 @@ Template.world_map.helpers({
 
 
 	player_balance: function(){
-		return Games.findOne({}).players[Meteor.user().username].player_balance;
+		return parseFloat((Games.findOne({}).players[Meteor.user().username].player_balance).toFixed(2));
 	},
 
 

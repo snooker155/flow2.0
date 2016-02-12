@@ -25,8 +25,8 @@ if(Meteor.isServer){
 			region_name: "EU",
 			region_people: 1000 + Math.floor((Math.random() * 500) + 100),
 			region_pref: "Design",
-			region_market: 15,
-			region_demand: 10,
+			region_market: 5,
+			region_demand: 1,
 			region_trend: "Medium",
 			base_profit_rate: Math.floor((Math.random() * 10) + 7),
 			base_price_rate: Math.floor((Math.random() * 5) + 2),
@@ -61,8 +61,8 @@ if(Meteor.isServer){
 			region_name: "NA",
 			region_people: 1000 + Math.floor((Math.random() * 500) + 100),
 			region_pref: "Technology",
-			region_market: -17,
-			region_demand: -24,
+			region_market: -7,
+			region_demand: -4,
 			region_trend: "Negative",
 			base_profit_rate: Math.floor((Math.random() * 10) + 7),
 			base_price_rate: Math.floor((Math.random() * 5) + 2),
@@ -73,8 +73,8 @@ if(Meteor.isServer){
 			region_name: "AS",
 			region_people: 1000 + Math.floor((Math.random() * 500) + 100),
 			region_pref: "Technology",
-			region_market: 24,
-			region_demand: 30,
+			region_market: 4,
+			region_demand: 0,
 			region_trend: "High",
 			base_profit_rate: Math.floor((Math.random() * 10) + 7),
 			base_price_rate: Math.floor((Math.random() * 5) + 2),
@@ -147,10 +147,10 @@ if(Meteor.isServer){
 		        	var players_people = 0;
 		            for(var region in game.players[player].regions){
 		            	if(game.players[player].regions[region].people > 0){
-		            		game.players[player].player_balance += game.players[player].regions[region].people * Regions.findOne({region_name: region}).base_profit_rate; 
+		            		game.players[player].player_balance += game.players[player].regions[region].people * game.regions[region].base_profit_rate; 
 			            	game.players[player].regions[region].people -= 1;
 			            	players_people += game.players[player].regions[region].people;
-			            	game.players[player].regions[region].share = game.players[player].regions[region].people / Regions.findOne({region_name: region}).region_people * 100;
+			            	game.players[player].regions[region].share = game.players[player].regions[region].people / game.regions[region].region_people * 100;
 			            	game.updatePriceProfit(player, region);
 
 		            	}
@@ -166,21 +166,24 @@ if(Meteor.isServer){
     	}
 
     	// if(i == 20 || i ==40){
-	    	for(var region in game.regions){
-			    game.updateRegionBasePriceRate(region);
-			    game.updateRegionBaseProfitRate(region);
-			}
+	  //   	for(var region in game.regions){
+			//     game.updateRegionBasePriceRate(region);
+			//     game.updateRegionBaseProfitRate(region);
+			// }
 		// }
 
-    	if(i == 30){
+    	//if(i == 60){
 	    	for(var region in game.regions){
+	    		game.updateRegionBasePriceRate(region);
+			    game.updateRegionBaseProfitRate(region);
 				game.updateRegionDemand(region);
 			    game.updateRegionMarket(region);
+			    game.updateRegionTrend(region);
 			}
-			i = 0;
-		}
+			//i = 0;
+		//}
 
-		i++;
+		//i++;
 
     	game.time_period = game.time_period + 1;
 

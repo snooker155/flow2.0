@@ -34,10 +34,18 @@
                                 </tr>
                                 <tr>
                                     <td style="width:50%">
-                                        Price: <strong id="shareHolderValue">{{waiting_region_price}}</strong>
+                                        Base Price: <strong id="shareHolderValue">{{waiting_region_price}}</strong>
                                     </td>
                                     <td style="width:50%">
-                                        Profit: <strong id="shareHolderValue">{{waiting_region_profit}}</strong>
+                                        Base Profit: <strong id="shareHolderValue">{{waiting_region_profit}}</strong>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td style="width:50%">
+                                        Conservatism: <strong id="shareHolderValue">{{waiting_region_conservatism}}</strong>
+                                    </td>
+                                    <td style="width:50%">
+                                        Free people: <strong id="shareHolderValue">{{waiting_region_free_people}}</strong>
                                     </td>
                                 </tr>
                                 </tbody>
@@ -69,8 +77,8 @@
                               Profit: <br><strong id="profitHolderValue">${{region_profit}}</strong>
                             </div>
                             <div class="col-md-3" style="color:white;">
-                              <!-- Price: <br> -->
-                              <button class="btn btn-primary btn-sm" id='buyShare' {{disabled}}>$ {{region_price}}</button>
+                               Price: <br>
+                              <strong>$ {{region_price}}</strong>
                             </div>
                         </div>
                     {{else}}

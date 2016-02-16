@@ -229,6 +229,7 @@ function rainbow(numOfSteps, step) {
           people: 0,
           profit: game.regions[region].base_profit_rate,
           share: 0,
+          price: game.regions[region].base_price_rate,
         };
 
         game.regions[region].players[Meteor.user().username] = game.players[Meteor.user().username];
@@ -241,16 +242,15 @@ function rainbow(numOfSteps, step) {
           game.regions[region].region_color = region_color;
         }
 
-        //console.log(game);
-
       }else{
         var player_regions = {};
 
         player_regions[region] = {
           region_name: region,
-          people: 500,
+          people: 0,
           profit: game.regions[region].base_profit_rate,
           share: 0,
+          price: game.regions[region].base_price_rate,
         };
 
         game.players[Meteor.user().username].regions = player_regions;
@@ -274,8 +274,6 @@ function rainbow(numOfSteps, step) {
         }
       });
 
-
-      //console.log(Games.findOne({}));
     },
 
 
@@ -293,9 +291,9 @@ function rainbow(numOfSteps, step) {
 
     buyShare: function(region_name){
       //var game = Games.findOne({_id: game_id});  #### For the full game version with Rooms
+
       var game = Games.findOne({});
       var price = 0;
-      var total_people = 0;
       if(region_name !== null){
         price = game.players[Meteor.user().username].regions[region_name].price;
         if(game.players[Meteor.user().username].regions[region_name].share < 100){
@@ -313,6 +311,8 @@ function rainbow(numOfSteps, step) {
       }
 
       game.players[Meteor.user().username].player_balance -= price;
+
+      game.updateMarketShare(Meteor.user().username);
 
       Games.update(game._id, {
         $set:{

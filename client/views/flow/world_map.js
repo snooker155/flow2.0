@@ -357,6 +357,35 @@ Template.world_map.helpers({
 	},
 
 
+	waiting_region_conservatism: function(){
+		var game = Games.findOne({});
+		if(selected_region.get()){
+			return parseFloat((game.regions[selected_region.get()].level_of_conservatism).toFixed(2));
+		}else{
+			var level_of_conservatism = 0;
+			for (var region in game.regions){
+				level_of_conservatism += game.regions[region].level_of_conservatism;
+			}
+			return parseFloat((level_of_conservatism / 6).toFixed(2));
+		}
+	},
+
+
+	waiting_region_free_people: function(){
+		var game = Games.findOne({});
+		if(selected_region.get()){
+			var engaged_people = 0;
+			for (var player in game.players){
+				if(game.players[player].regions !== undefined && game.players[player].regions[selected_region.get()] !== undefined)
+				engaged_people += game.players[player].regions[selected_region.get()].people;
+			}
+			return Math.round(game.regions[selected_region.get()].region_people - engaged_people);
+		}else{
+			return Math.round(game.getTotalPeople() - game.getCustomersNumber());
+		}
+	},
+
+
 	waiting_region_price: function(){
 		var game = Games.findOne({});
 		if(selected_region.get()){
@@ -397,13 +426,13 @@ Template.world_map.helpers({
 	waiting_region_people: function(){
 		var game = Games.findOne({});
 		if(selected_region.get()){
-			return game.regions[selected_region.get()].region_people;
+			return Math.round(game.regions[selected_region.get()].region_people);
 		}else{
 			var total_people = 0;
 			for (var region in game.regions){
 				total_people += game.regions[region].region_people;
 			}
-			return total_people;
+			return Math.round(total_people);
 		}
 	},
 
@@ -421,7 +450,23 @@ Template.world_map.helpers({
 		if(selected_region.get()){
 			return game.regions[selected_region.get()].region_trend;
 		}else{
-			return "Low";
+			var total_demand = 0;
+			for (var region in game.regions){
+				total_demand += game.regions[region].region_demand;
+			}
+			var total_market = 0;
+			for (var region in game.regions){
+				total_market += game.regions[region].region_market;
+			}
+			if(total_demand - total_market < 0){
+				return "Negative";
+			}else if(total_demand - total_market < 0.5){
+				return "Low";
+			}else if(total_demand - total_market < 1){
+				return "Medium";
+			}else if (total_demand - total_market > 1) {
+				return "High";
+			}
 		}
 	},
 
@@ -521,7 +566,25 @@ Template.world_map.helpers({
 					break;
 			}
 		}else{
-			switch("Low"){
+			var world_trend;
+			var total_demand = 0;
+			for (var region in game.regions){
+				total_demand += game.regions[region].region_demand;
+			}
+			var total_market = 0;
+			for (var region in game.regions){
+				total_market += game.regions[region].region_market;
+			}
+			if(total_demand - total_market < 0){
+				world_trend = "Negative";
+			}else if(total_demand - total_market < 0.5){
+				world_trend = "Low";
+			}else if(total_demand - total_market < 1){
+				world_trend = "Medium";
+			}else if (total_demand - total_market > 1) {
+				world_trend = "High";
+			}
+			switch(world_trend){
 				case "Negative":
 					return "danger";
 					break;
@@ -603,20 +666,24 @@ Template.world_map.helpers({
 			for (var region in game.players[Meteor.user().username].regions){
 				world_people += game.players[Meteor.user().username].regions[region].people;
 			}
-			return world_people;
+			return Math.round(world_people);
         }
     },
 
     region_profit: function(){
     	var game = Games.findOne({});
         if(selected_region.get()){
-            return parseFloat((game.players[Meteor.user().username].regions[selected_region.get()].profit).toFixed(2));
+            return parseFloat((game.players[Meteor.user().username].regions[selected_region.get()].profit * Math.round(game.players[Meteor.user().username].regions[selected_region.get()].people)).toFixed(2));
         }else{
             var world_profit = 0;
 			for (var region in game.players[Meteor.user().username].regions){
 				world_profit += game.players[Meteor.user().username].regions[region].profit;
 			}
-			return parseFloat((world_profit / 6).toFixed(2));
+			var world_people = 0;
+			for (var region in game.players[Meteor.user().username].regions){
+				world_people += game.players[Meteor.user().username].regions[region].people;
+			}
+			return parseFloat((world_profit / 6 * Math.round(world_people)).toFixed(2));
         }
     },
 

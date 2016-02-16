@@ -23,74 +23,80 @@ if(Meteor.isServer){
 
 		Regions.insert({
 			region_name: "EU",
-			region_people: 1000 + Math.floor((Math.random() * 500) + 100),
+			region_people: 2000 + Math.floor((Math.random() * 500) + 100),
 			region_pref: "Design",
-			region_market: 5,
-			region_demand: 1,
+			region_market: 1.5,
+			region_demand: 4,
 			region_trend: "Medium",
-			base_profit_rate: Math.floor((Math.random() * 10) + 7),
-			base_price_rate: Math.floor((Math.random() * 5) + 2),
+			base_profit_rate: 0.07,
+			base_price_rate: parseFloat(Math.random().toFixed(2)) + 1,
 			region_price: 10000 + Math.floor((Math.random() * 5000) + 1000),
+			level_of_conservatism: 0.05,
 		});
 
 		Regions.insert({
 			region_name: "AF",
-			region_people: 1000 + Math.floor((Math.random() * 500) + 100),
+			region_people: 2000 + Math.floor((Math.random() * 500) + 100),
 			region_pref: "Support",
-			region_market: 5,
-			region_demand: 7,
+			region_market: 1.5,
+			region_demand: 4,
 			region_trend: "Low",
-			base_profit_rate: Math.floor((Math.random() * 10) + 7),
-			base_price_rate: Math.floor((Math.random() * 5) + 2),
+			base_profit_rate: 0.07,
+			base_price_rate: parseFloat(Math.random().toFixed(2)) + 1,
 			region_price: 10000 + Math.floor((Math.random() * 5000) + 1000),
+			level_of_conservatism: 0.05,
 		});
 
 		Regions.insert({
 			region_name: "SA",
-			region_people: 1000 + Math.floor((Math.random() * 500) + 100),
+			region_people: 2000 + Math.floor((Math.random() * 500) + 100),
 			region_pref: "Design",
-			region_market: -2,
-			region_demand: 0,
+			region_market: 1.5,
+			region_demand: 4,
 			region_trend: "Negative",
-			base_profit_rate: Math.floor((Math.random() * 10) + 7),
-			base_price_rate: Math.floor((Math.random() * 5) + 2),
+			base_profit_rate: 0.07,
+			base_price_rate: parseFloat(Math.random().toFixed(2)) + 1,
 			region_price: 10000 + Math.floor((Math.random() * 5000) + 1000),
+			level_of_conservatism: 0.05,
 		});
 
 		Regions.insert({
 			region_name: "NA",
-			region_people: 1000 + Math.floor((Math.random() * 500) + 100),
+			region_people: 2000 + Math.floor((Math.random() * 500) + 100),
 			region_pref: "Technology",
-			region_market: -7,
-			region_demand: -4,
+			region_market: 1.5,
+			region_demand: 4,
 			region_trend: "Negative",
-			base_profit_rate: Math.floor((Math.random() * 10) + 7),
-			base_price_rate: Math.floor((Math.random() * 5) + 2),
+			base_profit_rate: 0.07,
+			base_price_rate: parseFloat(Math.random().toFixed(2)) + 1,
 			region_price: 10000 + Math.floor((Math.random() * 5000) + 1000),
+			level_of_conservatism: 0.05,
 		});
 
 		Regions.insert({
 			region_name: "AS",
-			region_people: 1000 + Math.floor((Math.random() * 500) + 100),
+			region_people: 2000 + Math.floor((Math.random() * 500) + 100),
 			region_pref: "Technology",
-			region_market: 4,
-			region_demand: 0,
+			region_market: 1.5,
+			region_demand: 4,
 			region_trend: "High",
-			base_profit_rate: Math.floor((Math.random() * 10) + 7),
-			base_price_rate: Math.floor((Math.random() * 5) + 2),
+			base_profit_rate: 0.07,
+			base_price_rate: parseFloat(Math.random().toFixed(2)) + 1,
 			region_price: 10000 + Math.floor((Math.random() * 5000) + 1000),
+			level_of_conservatism: 0.05,
 		});
 
 		Regions.insert({
 			region_name: "OC",
-			region_people: 1000 + Math.floor((Math.random() * 500) + 100),
+			region_people: 2000 + Math.floor((Math.random() * 500) + 100),
 			region_pref: "Support",
-			region_market: 2,
-			region_demand: 5,
+			region_market: 1.5,
+			region_demand: 4,
 			region_trend: "Low",
-			base_profit_rate: Math.floor((Math.random() * 10) + 7),
-			base_price_rate: Math.floor((Math.random() * 5) + 2),
+			base_profit_rate: 0.07,
+			base_price_rate: parseFloat(Math.random().toFixed(2)) + 1,
 			region_price: 10000 + Math.floor((Math.random() * 5000) + 1000),
+			level_of_conservatism: 0.05,
 		});
 
 
@@ -113,6 +119,7 @@ if(Meteor.isServer){
 				base_profit_rate: region.base_profit_rate,
 				base_price_rate: region.base_price_rate,
 				region_price: region.region_price,
+				level_of_conservatism: region.level_of_conservatism,
       		}
       	});
 
@@ -124,11 +131,13 @@ if(Meteor.isServer){
         	regions: regions,
         	status: "process",
         	time_period: 0,
-       		total_people: total_people,
+       		//total_people: total_people,
       	});
 
 
       var i = 0;
+      // var flag_price = 0;
+      // var flag_people = 1;
 
 		//////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -143,50 +152,48 @@ if(Meteor.isServer){
 
         if(game.players){
 	        for(var player in game.players){
-	        	if(game.players[player].regions){
-		        	var players_people = 0;
-		            for(var region in game.players[player].regions){
-		            	if(game.players[player].regions[region].people > 0){
-		            		game.players[player].player_balance += game.players[player].regions[region].people * game.regions[region].base_profit_rate; 
-			            	game.players[player].regions[region].people -= 1;
-			            	players_people += game.players[player].regions[region].people;
-			            	game.players[player].regions[region].share = game.players[player].regions[region].people / game.regions[region].region_people * 100;
-			            	game.updatePriceProfit(player, region);
 
-		            	}
-		        	}
-		            game.players[player].player_share = players_people / total_people * 100;
+	        	for (var region in game.players[player].regions){
+	        		game.buyShare(region, player);
 	        	}
 
+	        	game.updateMarketShare(player);
 
-	            if(game.players[player].player_share <= 0 || game.players[player].player_share >= 100){
+
+	            if(game.players[player].player_share <= 0 || game.players[player].player_share >= 100 || game.players[player].player_balance < 0){
 		            Meteor.clearInterval(interval);
 		        }
 	        }
     	}
 
-    	// if(i == 20 || i ==40){
-	  //   	for(var region in game.regions){
-			//     game.updateRegionBasePriceRate(region);
-			//     game.updateRegionBaseProfitRate(region);
-			// }
-		// }
 
-    	//if(i == 60){
+
+
+    	if(i == 20){
 	    	for(var region in game.regions){
-	    		game.updateRegionBasePriceRate(region);
 			    game.updateRegionBaseProfitRate(region);
+
+			    game.updateRegionBasePriceRate(region);
+
+			    game.updateRegionPeople(region);
+
 				game.updateRegionDemand(region);
 			    game.updateRegionMarket(region);
-			    game.updateRegionTrend(region);
 			}
-			//i = 0;
-		//}
+			i = 0;
+		}
 
-		//i++;
+		i++;
+
+
+
+		for(var region in game.regions){
+			game.updateRegionTrend(region);
+		}
+
+
 
     	game.time_period = game.time_period + 1;
-
 
         Games.update(game._id, {
           $set:{

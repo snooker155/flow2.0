@@ -1,0 +1,65 @@
+<template name="world_stat">
+	<div class="ibox">
+					<div class="ibox-content">
+						<div class="profile-info" style="margin-bottom:20px;">
+	                        <div class="row">
+	                            <div class="col-md-4">
+		                            <h4>
+	                                    Sphere: <strong>{{company_sphere}}</strong>
+	                                </h4>
+	                            </div>
+	                            <div class="col-md-8">
+	                           		<h4>
+	                                    Segment: <strong>{{company_segment}}</strong>
+	                                </h4>
+				                </div>
+				            </div>
+				            <div class="row">
+				            	<div class="col-md-10">
+				            		<div class="row">
+				            			<div class="col-md-4">
+	                                		<small>Market share</small>
+	                                		<h2 class="no-margins">{{market_share}}%</h2>
+	                                	</div>
+	                                	<div class="col-md-8">
+	                                		<!-- {{> sparkline type="line" array=shareArray options=shareOptions}} -->
+	                                	</div>
+	                                </div>
+									<div class="progress progress-mini">
+	                                    <div style="width: {{market_share}}%;" class="progress-bar progress-bar-success"></div>
+	                                </div>
+	                            </div>
+	                           	<div class="col-md-2">
+		                            <small>Time period</small>
+					                <h2 class="no-margins">{{time_period}}</h2>
+				                </div>
+	                        </div>
+	                    </div>
+
+	                    <div class="row">
+	                    	<div class="col-md-12">
+			                    <table class="table small m-b-xs">
+			                        <tbody>
+			                        <tr>
+			                            <td>
+			                                <div class="stat-percent font-bold text-danger">12% <i class="fa fa-level-down"></i></div><strong>Demand</strong>
+			                            </td>
+			                            <td>
+			                                <strong>Trend</strong> <span class="label label-info" style="float:right">Social</span>
+			                            </td>
+			                        </tr>
+			                        <tr>
+			                            <td>
+			                                <div class="stat-percent font-bold text-danger">25% <i class="fa fa-level-down"></i></div><strong>Market</strong>
+			                            </td>
+			                            <td>
+			                                <strong>Invest climate</strong> <span class="label label-danger" style="float:right">Low</span>
+			                            </td>
+			                        </tr>
+			                        </tbody>
+			                    </table>
+		                    </div>
+		                </div>
+	                </div>
+	            </div>
+</template>	            

@@ -1,0 +1,52 @@
+<template name="company_stat">
+	<div class="ibox">
+				<div class="ibox-content">
+					<div class="profile-info"  style="margin-bottom:10px;">
+                        <div class="row">
+                            <div class="col-md-5">
+                                <h2 class="no-margins">
+                                    {{company_name}}
+                                </h2>
+                                <h5>{{company_segment}}: <strong>{{company_product}}</strong></h5>
+                                <h5>Level: <strong>{{company_level}}</strong></h5>
+                                <small>Experience: {{company_exp}}%</small>
+								<div class="progress progress-mini">
+                                    <div style="width: {{company_exp}}%;" class="progress-bar progress-bar-warning"></div>
+                                </div>
+                            </div>
+                           	<div class="col-md-7">
+	                            <small>Balance</small>
+				                <h2 class="no-margins">$ {{company_balance}}</h2>
+				                <!-- {{> sparkline type="line" array=balanceArray options=balanceOptions}}-->
+				                <!-- <div id="balanceGraph" style="margin-top:20px;">{{balanceArray}}</div> -->
+			                </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                    	<div class="col-md-12">
+		                    <table class="table small m-b-xs">
+		                        <tbody>
+		                        <tr>
+		                            <td>
+		                                <strong>{{company_partners}}</strong> Partners
+		                            </td>
+		                            <td>
+		                                <strong>{{company_conferences}}</strong> Conferences
+		                            </td>
+		                        </tr>
+		                        <tr>
+		                            <td>
+		                                <strong>{{company_comments}}</strong> Comments
+		                            </td>
+		                            <td>
+		                                <strong>{{company_articles}}</strong> Articles
+		                            </td>
+		                        </tr>
+		                        </tbody>
+		                    </table>
+	                    </div>
+	                </div>
+                </div>
+            </div>
+</template>

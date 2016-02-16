@@ -45,6 +45,34 @@ Router.route('/', {
 
 
 
+Router.route('/startup', function () {
+  if(Meteor.userId()){
+    // if(Companies.findOne({owner: Meteor.userId()})){
+      this.render('startup');
+      this.layout('gameLayout');
+    // }else{
+    //   Router.go('/')
+    // }
+  }else{
+    Router.go('/login');
+  }
+});
+
+
+
+
+Router.route('/world', function () {
+  if(Meteor.userId()){
+    this.render('world');
+    this.layout('gameLayout');
+  }else{
+    Router.go('/login');
+  }
+});
+
+
+
+
 
 //////////////  TEST ENV Routers  ///////////////////
 

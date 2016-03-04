@@ -12,11 +12,17 @@
         	<div class="col-lg-6">
         		<h5 class="text-center">Overall progress</h5>
                 <div class="progress progress-striped">
-                        {{#each players}}
+                        <!-- {{#each players}}
 							<div style="width: {{player_share}}%; background-color:{{player_color}};" class="progress-bar progress-bar-success">
                                 <span style="color: black;">{{player_share_text}}% {{player.username}}</span>
                             </div>
-                        {{/each}}
+                        {{/each}} -->
+                        <div style="width: {{player_share}}%;" class="progress-bar progress-bar-success">
+                            <span>{{player_share}}% {{player.username}}</span>
+                        </div>
+                        <div style="width: {{free_share}}%;" class="progress-bar progress-bar-warning">
+                            <span>{{free_share}}% Other</span>
+                        </div>
                 </div>
                                 
         	</div>

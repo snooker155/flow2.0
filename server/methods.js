@@ -170,6 +170,8 @@ function rainbow(numOfSteps, step) {
         player: Meteor.user(),
         player_balance: 100000,
         player_color: rainbow(12, players_number+1),
+        player_level: 0,
+        player_exp: 0,
         //player_share: 0,
       };
 

@@ -2,7 +2,17 @@
 	<div class="ibox">
 					<div class="ibox-content">
 						<div class="profile-info" style="margin-bottom:20px;">
-	                        <div class="row">
+							<div class="row">
+								<div class="col-md-6">
+									<small>Players</small>
+					                <h2 class="no-margins">{{players_number}}</h2>
+								</div>
+								<div class="col-md-6">
+									<small>Time period</small>
+					                <h2 class="no-margins">{{time_period}}</h2>
+								</div>
+							</div>
+	                        <!-- <div class="row">
 	                            <div class="col-md-4">
 		                            <h4>
 	                                    Sphere: <strong>{{company_sphere}}</strong>
@@ -13,8 +23,8 @@
 	                                    Segment: <strong>{{company_segment}}</strong>
 	                                </h4>
 				                </div>
-				            </div>
-				            <div class="row">
+				            </div> -->
+				            <!-- <div class="row">
 				            	<div class="col-md-10">
 				            		<div class="row">
 				            			<div class="col-md-4">
@@ -22,7 +32,7 @@
 	                                		<h2 class="no-margins">{{market_share}}%</h2>
 	                                	</div>
 	                                	<div class="col-md-8">
-	                                		<!-- {{> sparkline type="line" array=shareArray options=shareOptions}} -->
+	                                		{{> sparkline type="line" array=shareArray options=shareOptions}}
 	                                	</div>
 	                                </div>
 									<div class="progress progress-mini">
@@ -33,10 +43,10 @@
 		                            <small>Time period</small>
 					                <h2 class="no-margins">{{time_period}}</h2>
 				                </div>
-	                        </div>
+	                        </div> -->
 	                    </div>
 
-	                    <div class="row">
+	                    <!-- <div class="row">
 	                    	<div class="col-md-12">
 			                    <table class="table small m-b-xs">
 			                        <tbody>
@@ -59,7 +69,20 @@
 			                        </tbody>
 			                    </table>
 		                    </div>
-		                </div>
+		                </div> -->
+		                <!-- <div class="row">
+	                    	<div class="col-md-12">
+			                    <table class="table small m-b-xs">
+			                        <tbody>
+			                        <tr>
+			                            <td>
+			                                <strong>{{players_number}}</strong> Players
+			                            </td>
+			                        </tr>
+			                        </tbody>
+			                    </table>
+		                    </div>
+		                </div> -->
 	                </div>
 	            </div>
 </template>	            

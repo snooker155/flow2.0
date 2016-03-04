@@ -153,6 +153,8 @@ if(Meteor.isServer){
         if(game.players){
 	        for(var player in game.players){
 
+	        	game.updatePlayerExp(player);
+
 	        	for (var region in game.players[player].regions){
 	        		game.buyShare(region, player);
 	        	}

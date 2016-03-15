@@ -29,42 +29,42 @@ if(Meteor.isServer){
 
 		News.insert({
 			news_type: "check",
-			news_theme: "",
-			news_message: "",
-			news_demand:
-			news: market:
+			news_theme: "Global Mobile Technology Conference",
+			news_message: "People from the industry have forecast a strong increase of mobile messengers.",
+			news_demand: 10,
+			news_market: 15,
 		});
 
 		News.insert({
-			news_type: "newspaper"
-			news_theme:
-			news_message:
-			news_demand:
-			news: market:
+			news_type: "newspaper-o",
+			news_theme: "New wave of innovations are coming",
+			news_message: "The sceintist from MIT have developed new strong algorythm for predicting future price of stock exchange.",
+			news_demand: 5,
+			news_market: 2,
 		});
 
 		News.insert({
-			news_type: "usd"
-			news_theme:
-			news_message:
-			news_demand:
-			news: market:
+			news_type: "usd",
+			news_theme: "USD test news",
+			news_message: "Test news for usd type.",
+			news_demand: 2,
+			news_market: 10,
 		});
 
 		News.insert({
-			news_type: "newspaper"
-			news_theme:
-			news_message:
-			news_demand:
-			news: market:
+			news_type: "user",
+			news_theme: "User test news",
+			news_message: "Test news for user type.",
+			news_demand: 0,
+			news_market: -12,
 		});
 
 		News.insert({
-			news_type: "warning"
-			news_theme:
-			news_message:
-			news_demand:
-			news: market:
+			news_type: "warning",
+			news_theme: "Warning test news",
+			news_message: "Test news for warning type.",
+			news_demand: -7,
+			news_market: -3,
 		});
 
 

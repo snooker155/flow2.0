@@ -25,24 +25,24 @@
                             <div class="timeline-item">
                                 <div class="row">
                                     <div class="col-md-3 date">
-                                        <i class="fa fa-check"></i>
+                                        <i class="fa fa-{{news_type}}"></i>
                                         {{time_period}}
                                         <br>
                                         <small class="text-navy">time period</small>
                                     </div>
                                     <div class="col-md-6 no-top-border" style="width:55%;">
-                                        <p class="m-b-xs"><strong>{{theme}}</strong></p>
-                                        <p>{{message}}</p>
+                                        <p class="m-b-xs"><strong>{{news_theme}}</strong></p>
+                                        <p>{{news_message}}</p>
                                     </div>
                                     <div class="col-md-3 pull-right">
-                                        <div class="stat-percent font-bold text-navy">{{demand}}% <i class="fa fa-level-up"></i></div><strong>Demand: </strong>
-                                        <div class="stat-percent font-bold text-navy">{{market}}% <i class="fa fa-level-up"></i></div><strong>Market: </strong>
+                                        <div class="stat-percent font-bold text-navy">{{news_demand}}% <i class="fa fa-level-up"></i></div><strong>Demand: </strong>
+                                        <div class="stat-percent font-bold text-navy">{{news_market}}% <i class="fa fa-level-up"></i></div><strong>Market: </strong>
                                     </div>
                                 </div>
                             </div>
                         {{/each}}
 
-                        <div class="timeline-item">
+                        <!-- <div class="timeline-item">
                             <div class="row">
                                 <div class="col-md-3 date">
                                     <i class="fa fa-check"></i>
@@ -95,7 +95,7 @@
                                     <div class="stat-percent font-bold text-navy">15% <i class="fa fa-level-up"></i></div><strong>Market: </strong>
                                 </div>
                             </div>
-                        </div>
+                        </div> -->
                         <!-- <div class="timeline-item">
                             <div class="row">
                                 <div class="col-xs-3 date">

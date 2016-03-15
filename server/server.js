@@ -21,6 +21,55 @@ if(Meteor.isServer){
 			Regions.remove(region._id);
 		});
 
+		News.find().fetch().forEach(function (news) {
+			News.remove(news._id);
+		});
+
+
+
+		News.insert({
+			news_type: "check",
+			news_theme: "",
+			news_message: "",
+			news_demand:
+			news: market:
+		});
+
+		News.insert({
+			news_type: "newspaper"
+			news_theme:
+			news_message:
+			news_demand:
+			news: market:
+		});
+
+		News.insert({
+			news_type: "usd"
+			news_theme:
+			news_message:
+			news_demand:
+			news: market:
+		});
+
+		News.insert({
+			news_type: "newspaper"
+			news_theme:
+			news_message:
+			news_demand:
+			news: market:
+		});
+
+		News.insert({
+			news_type: "warning"
+			news_theme:
+			news_message:
+			news_demand:
+			news: market:
+		});
+
+
+
+
 		Regions.insert({
 			region_name: "EU",
 			region_people: 2000 + Math.floor((Math.random() * 500) + 100),

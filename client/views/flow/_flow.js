@@ -51,6 +51,8 @@ if (Meteor.isClient) {
   Meteor.subscribe("users");
   Meteor.subscribe("companies");
   Meteor.subscribe("regions");
+  Meteor.subscribe("news");
+
 
 
   Meteor.subscribe("games");

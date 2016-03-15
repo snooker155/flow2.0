@@ -10,3 +10,6 @@
   Meteor.publish("companies", function() {
     return Companies.find();
   });
+  Meteor.publish("news", function() {
+    return News.find();
+  });

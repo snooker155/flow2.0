@@ -25,14 +25,35 @@ if(Meteor.isServer){
 			News.remove(news._id);
 		});
 
+		Departments.find().fetch().forEach(function (department) {
+			Departments.remove(department._id);
+		});
+
+		Features.find().fetch().forEach(function (feature) {
+			Features.remove(feature._id);
+		});
+
+
+
+		// News.insert({
+		// 	news_type: "check",
+		// 	news_theme: "Global Mobile Technology Conference",
+		// 	news_message: "People from the industry have forecast a strong increase of mobile messengers.",
+		// 	news_demand: 10,
+		// 	news_market: 15,
+		// 	news_region: "World",
+		// 	news_preference: "Technology",
+		// });
 
 
 		News.insert({
-			news_type: "check",
+			news_type: "newspaper-o",
 			news_theme: "Global Mobile Technology Conference",
 			news_message: "People from the industry have forecast a strong increase of mobile messengers.",
 			news_demand: 10,
 			news_market: 15,
+			news_region: "World",
+			news_preference: "Technology",
 		});
 
 		News.insert({
@@ -41,31 +62,82 @@ if(Meteor.isServer){
 			news_message: "The sceintist from MIT have developed new strong algorythm for predicting future price of stock exchange.",
 			news_demand: 5,
 			news_market: 2,
+			news_region: "World",
+			news_preference: "Technology",
 		});
 
-		News.insert({
-			news_type: "usd",
-			news_theme: "USD test news",
-			news_message: "Test news for usd type.",
-			news_demand: 2,
-			news_market: 10,
+
+		// News.insert({
+		// 	news_type: "usd",
+		// 	news_theme: "USD test news",
+		// 	news_message: "Test news for usd type.",
+		// 	news_demand: 2,
+		// 	news_market: 10,
+		// 	news_region: "World",
+		// 	news_preference: "Technology",
+		// });
+
+		// News.insert({
+		// 	news_type: "user",
+		// 	news_theme: "User test news",
+		// 	news_message: "Test news for user type.",
+		// 	news_demand: 0,
+		// 	news_market: -12,
+		// 	news_region: "World",
+		// 	news_preference: "Technology",
+		// });
+
+		// News.insert({
+		// 	news_type: "warning",
+		// 	news_theme: "Warning test news",
+		// 	news_message: "Test news for warning type.",
+		// 	news_demand: -7,
+		// 	news_market: -3,
+		// 	news_region: "World",
+		// 	news_preference: "Technology",
+		// });
+
+
+
+		Departments.insert({
+			department_name: "Technology",
+			employee_price: 100,
 		});
 
-		News.insert({
-			news_type: "user",
-			news_theme: "User test news",
-			news_message: "Test news for user type.",
-			news_demand: 0,
-			news_market: -12,
+
+		Departments.insert({
+			department_name: "Design",
+			employee_price: 150,
 		});
 
-		News.insert({
-			news_type: "warning",
-			news_theme: "Warning test news",
-			news_message: "Test news for warning type.",
-			news_demand: -7,
-			news_market: -3,
+
+
+
+
+		Features.insert({
+			feature_name: "Engine",
+			time_to_achieve: 15,
+			feature_price: 250,
+			neccessary_employees_number: 2,
+			neccessary_level: 1,
 		});
+
+		Features.insert({
+			feature_name: "UI",
+			time_to_achieve: 25,
+			feature_price: 350,
+			neccessary_employees_number: 3,
+			neccessary_level: 1,
+		});
+
+		Features.insert({
+			feature_name: "Adaptive",
+			time_to_achieve: 35,
+			feature_price: 450,
+			neccessary_employees_number: 4,
+			neccessary_level: 1,
+		});
+
 
 
 
@@ -190,71 +262,71 @@ if(Meteor.isServer){
 
 		//////////////////////////////////////////////////////////////////////////////////////////////////////
 
-      var interval = Meteor.setInterval(function(){
+  //     var interval = Meteor.setInterval(function(){
 
-      	var game = Games.findOne({});
+  //     	var game = Games.findOne({});
 
-      	//console.log(game.getPlayerList()+" # "+game.getPlayersNumber());
-        console.log(game.time_period);
+  //     	//console.log(game.getPlayerList()+" # "+game.getPlayersNumber());
+  //       console.log(game.time_period);
 
-        //console.log(Math.floor((Math.random() * 3) - 1)); ###     values: -1/0/1
+  //       //console.log(Math.floor((Math.random() * 3) - 1)); ###     values: -1/0/1
 
-        if(game.players){
-	        for(var player in game.players){
+  //       if(game.players){
+	 //        for(var player in game.players){
 
-	        	game.updatePlayerExp(player);
+	 //        	game.updatePlayerExp(player);
 
-	        	for (var region in game.players[player].regions){
-	        		game.buyShare(region, player);
-	        	}
+	 //        	for (var region in game.players[player].regions){
+	 //        		game.buyShare(region, player);
+	 //        	}
 
-	        	game.updateMarketShare(player);
-
-
-	            if(game.players[player].player_share <= 0 || game.players[player].player_share >= 100 || game.players[player].player_balance < 0){
-		            Meteor.clearInterval(interval);
-		        }
-	        }
-    	}
+	 //        	game.updateMarketShare(player);
 
 
-
-
-    	if(i == 20){
-	    	for(var region in game.regions){
-			    game.updateRegionBaseProfitRate(region);
-
-			    game.updateRegionBasePriceRate(region);
-
-			    game.updateRegionPeople(region);
-
-				game.updateRegionDemand(region);
-			    game.updateRegionMarket(region);
-			}
-			i = 0;
-		}
-
-		i++;
+	 //            if(game.players[player].player_share <= 0 || game.players[player].player_share >= 100 || game.players[player].player_balance < 0){
+		//             Meteor.clearInterval(interval);
+		//         }
+	 //        }
+  //   	}
 
 
 
-		for(var region in game.regions){
-			game.updateRegionTrend(region);
-		}
+
+  // //   	if(i == 20){
+	 // //    	for(var region in game.regions){
+		// // 	    game.updateRegionBaseProfitRate(region);
+
+		// // 	    game.updateRegionBasePriceRate(region);
+
+		// // 	    game.updateRegionPeople(region);
+
+		// // 		game.updateRegionDemand(region);
+		// // 	    game.updateRegionMarket(region);
+		// // 	}
+		// // 	i = 0;
+		// // }
+
+		// // i++;
 
 
 
-    	game.time_period = game.time_period + 1;
+		// // for(var region in game.regions){
+		// // 	game.updateRegionTrend(region);
+		// // }
 
-        Games.update(game._id, {
-          $set:{
-            players: game.players,
-            regions: game.regions,
-            time_period: game.time_period,
-          }
-        });
 
-      }, 1000);
+
+  //   	game.time_period = game.time_period + 1;
+
+  //       Games.update(game._id, {
+  //         $set:{
+  //           players: game.players,
+  //           regions: game.regions,
+  //           time_period: game.time_period,
+  //         }
+  //       });
+
+  //     }, 1000);
 
 	});
 }

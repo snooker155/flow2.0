@@ -52,6 +52,9 @@ if (Meteor.isClient) {
   Meteor.subscribe("companies");
   Meteor.subscribe("regions");
   Meteor.subscribe("news");
+  Meteor.subscribe("departments");
+  Meteor.subscribe("products");
+  Meteor.subscribe("features");
 
 
 

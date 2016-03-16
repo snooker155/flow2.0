@@ -1,0 +1,74 @@
+<template name="company_creation_form">
+    <div class="row" style="margin-top: 20px;" hidden={{company_visible}}>
+                            <div class="col-md-12">
+                            <div class="ibox">
+                                <div class="ibox-content" style="background-color: #f1f1f1">
+                                    <legend>Company Information</legend>
+                                    <form id="company_form">
+                                    <div class="row">
+                                        <div class="col-lg-8">
+                                            <div class="form-group">
+                                                <label>Company name *</label>
+                                                <input id="company_name" name="company_name" type="text" class="form-control required" aria-required="true" placeholder="Company name" minlength="5">
+                                            </div>
+                                            <!-- <div class="form-group">
+                                                <label>Org structure *</label>
+                                                <select class="form-control required" name="org_structure" id="org_structure" aria-required="true">
+                                                    <option value="" selected>Select org structure</option>
+                                                    <option value="Ltd.">Ltd.</option>
+                                                    <option value="GMBH">GMBH</option>
+                                                    <option value="Inc.">Inc.</option>
+                                                    <option value="AG">AG</option>
+                                                </select>
+                                            </div> -->
+                                            <!-- <div class="form-group">
+                                                <label>Sphere *</label>
+                                                <select class="form-control required" name="sphere" id="sphere" aria-required="true">
+                                                    <option value="" selected>Select sphere</option>
+                                                    {{#each spheres}}
+                                                         <option value="{{sphere_name}}">{{sphere_name}}</option>
+                                                    {{/each}}
+                                                </select>
+                                            </div> -->
+                                            <!-- <div class="form-group">
+                                                <label>Segment *</label>
+                                                <select class="form-control required" name="segment" id="segment" aria-required="true">
+                                                    <option value="" selected>Select segment</option>
+                                                    {{#each segments}}
+                                                         <option value="{{segment_name}}">{{segment_name}}</option>
+                                                    {{/each}}
+                                                </select>
+                                            </div> -->
+                                            <div class="form-group">
+                                                <label>Region *</label>
+                                                <select class="form-control required" name="region" id="region" aria-required="true">
+                                                    <option value="" selected>Select region</option>
+                                                    {{#each regions}}
+                                                         <option value="{{country_name}}">{{region_name}}</option>
+                                                    {{/each}}
+                                                </select>
+                                            </div>
+                                            <!-- <div class="form-group">
+                                                <label>Country *</label>
+                                                <select class="form-control required" name="country" id="country" aria-required="true">
+                                                    <option value="" selected>Select country</option>
+                                                    {{#each countries}}
+                                                         <option value="{{country_name}}">{{country_name}}</option>
+                                                    {{/each}}
+                                                </select>
+                                            </div> -->
+                                        </div>
+                                        <div class="col-lg-4">
+                                            <div class="text-center">
+                                                <div style="margin-top: 20px">
+                                                    <i class="fa fa-sign-in" style="font-size: 180px;color: #e5e5e5 "></i>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    </form>
+                                </div>
+                            </div>
+                            </div>
+                            </div>
+</template>

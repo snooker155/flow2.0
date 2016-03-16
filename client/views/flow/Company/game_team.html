@@ -1,0 +1,169 @@
+<template name="game_team">
+        <!--<div class="wrapper wrapper-content animated fadeInUp"> -->
+            <div class="ibox">
+                <div class="ibox-content">
+
+                    <div class="row">
+                    <!-- <div class="col-md-7"> -->
+                    <div class="col-md-12">
+
+                    <div class="team-list">
+                        <table class="table table-hover">
+                            <thead>
+                                <tr>
+                                    <!-- <th class="project-title">#</th> -->
+                                    <th class="project-title" style="width: 20%;">Department</th>
+                                    <th class="project-title" style="width: 20%;">Number of employees</th>
+                                    <th class="project-title" style="width: 10%;">At work</th>
+                                    <th class="project-title" style="width: 10%;">Free</th>
+                                    <th class="project-title" style="width: 10%;">Level</th>
+                                    <th class="project-title" style="width: 10%;">Price</th>
+                                    <th class="project-title" style="width: 10%;">Cost</th>
+                                    <th class="project-actions" style="width: 10%;">Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {{#each employees}}
+                                <tr id="department_info">
+                                    <!-- <td class="project-title">
+                                        1.
+                                    </td> -->
+                                    <td class="project-title">
+                                        {{department_name}} department
+                                    </td>
+                                    <td class="project-title">
+                                        <div class="row">
+                                            <div class="col-md-2">
+                                                <a href="#" id="employee_number_minus" class="btn btn-white btn-xs {{employee_number_minus_enabled}}"><i class="fa fa-lg fa-minus"></i></a>
+                                            </div>
+                                            <div class="col-md-4">
+                                                <p class="text-center">{{employee_number}} / {{max_employee_number}}</p>
+                                            </div>
+                                            <div class="col-md-2">
+                                                <a href="#" id="employee_number_plus" class="btn btn-white btn-xs {{employee_number_plus_enabled}}"><i class="fa fa-lg fa-plus"></i></a>
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td>{{at_work}}</td>
+                                    <td>{{free_employees}}</td>
+                                    <td class="project-title">
+                                        <div class="row">
+                                            <!-- <div class="col-md-2 col-md-offset-2">
+                                                <a href="#" id="level_minus" class="btn btn-white btn-xs {{level_minus_enabled}}"><i class="fa fa-lg fa-minus"></i></a>
+                                            </div> -->
+                                            <div class="col-md-6">
+                                                <p class="text-center">{{employee_level}} / ({{max_employee_level}})</p>
+                                            </div>
+                                            {{#if new_level}}
+                                            <div class="col-md-2">
+                                                <a href="#" id="level_plus" class="btn btn-white btn-xs {{level_plus_enabled}}"><i class="fa fa-lg fa-plus"></i></a>
+                                            </div>
+                                            {{/if}}
+                                        </div>
+                                    </td>
+                                    <td class="project-title">
+                                        $ {{employee_price}}
+                                    </td>
+                                    <td class="project-title">
+                                        <strong>$ {{sum_of_department}}</strong> / month
+                                    </td>
+                                    <td class="project-actions">
+                                        <button class="btn btn-danger btn-xs" id="disband">Disband</button>
+                                    </td>
+                                </tr>
+                                {{/each}}
+
+                                {{#each new_employees}}
+                                    <tr id="department_info">
+                                        <!-- <td class="project-title">
+                                            1.
+                                        </td> -->
+                                        <td class="project-title">
+                                        <form id="new_department{{value}}">
+                                            <select class="form-control department_name required" name="department_name{{value}}" id="department_name{{value}}" aria-required="true">
+                                                <option value="" selected>Select department</option>
+                                                {{#each departments}}
+                                                    <option value="{{department_name}}">{{department_name}}</option>    
+                                                {{/each}}
+                                            </select>
+                                        </form>
+                                        </td>
+                                        <td class="project-title">
+                                            <div class="row">
+                                                <div class="col-md-2">
+                                                    <a href="#" id="new_employee_number_minus" class="btn btn-white btn-xs {{new_employee_number_minus_enabled}}"><i class="fa fa-lg fa-minus"></i></a>
+                                                </div>
+                                                <div class="col-md-4">
+                                                    <p class="text-center">{{employee_number}} / {{max_employee_number}}</p>
+                                                </div>
+                                                <div class="col-md-2">
+                                                    <a href="#" id="new_employee_number_plus" class="btn btn-white btn-xs {{new_employee_number_plus_enabled}}"><i class="fa fa-lg fa-plus"></i></a>
+                                                </div>
+                                            </div>
+                                        </td>
+                                        <td>0</td>
+                                        <td>0</td>
+                                        <td class="project-title">
+                                            {{employee_level}}
+                                        </td>
+                                        <td class="project-title">
+                                            $ {{price_for_employee}}
+                                        </td>
+                                        <td class="project-title">
+                                            <strong>$ {{sum_of_department}}</strong> / month
+                                        </td>
+                                        <td class="project-actions">
+                                            <!-- <div class="row">
+                                                <div class="col-md-2 col-md-offset-2">
+                                                    <a href="#" id="level_minus" class="btn btn-white btn-xs {{level_minus_enabled}}"><i class="fa fa-lg fa-minus"></i></a>
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <p class="text-center">Level {{employee_level}} / ({{max_employee_level}})</p>
+                                                </div>
+                                                <div class="col-md-2">
+                                                    <a href="#" id="level_plus" class="btn btn-white btn-xs {{level_plus_enabled}}"><i class="fa fa-lg fa-plus"></i></a>
+                                                </div>
+                                            </div> -->
+                                            <button class="btn btn-primary btn-xs" id="create_new_department">Create</button>
+                                        </td>
+                                    </tr>
+
+
+                                {{/each}}
+                                    <tr>
+                                        <td></td>
+                                        <td></td>
+                                        <td>
+                                            <strong>{{sum_of_at_work}}</strong>
+                                        </td>
+                                        <td>
+                                            <strong>{{sum_of_free}}</strong>
+                                        </td>
+                                        <td></td>
+                                        <td></td>
+                                        <td>
+                                            <strong>$ {{sum_of_month}}</strong> / month
+                                        </td>
+                                        <td></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        
+                        </div>
+
+
+
+                        <!-- <div class="col-md-3 col-md-offset-1" style="margin-top: 20px;">
+                            <h4 id="department_description_name"><strong>{{department_description_name}} department</strong></h4>
+                            <p style="text-align: left; margin-top: 20px;" id="department_description">
+                                {{department_description}}
+                            </p>
+                        </div> -->
+
+                        </div>
+
+                    </div>
+                </div>
+        <!-- </div> -->
+</template>

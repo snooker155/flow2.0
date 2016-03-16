@@ -1,0 +1,161 @@
+<template name="game_company">
+  <!-- <div class="wrapper wrapper-content animated fadeInUp"> -->
+    <div class="row">
+            <div class="col-lg-9">
+                    <div class="ibox">
+                        <div class="ibox-content" style="padding-bottom:5px;">
+                            <div class="row m-t-sm">
+                                <div class="col-lg-12">
+                                        <table class="table table-striped">
+                                            <thead>
+                                            <tr>
+                                                <th>Status</th>
+                                                <th>Title</th>
+                                                <th>Start Time</th>
+                                                <th>End Time</th>
+                                                <th class="text-center">Comments</th>
+                                            </tr>
+                                            </thead>
+                                            <tbody>
+                                            {{#each activities_list}}
+                                                <tr>
+                                                    <td>
+                                                        <span class="label label-primary"><i class="fa fa-check"></i> {{status}}</span>
+                                                    </td>
+                                                    <td>
+                                                       {{title}}
+                                                    </td>
+                                                    <td>
+                                                       {{start_time}}
+                                                    </td>
+                                                    <td>
+                                                        {{end_time}}
+                                                    </td>
+                                                    <td>
+                                                    <p>
+                                                        {{comments}}
+                                                    </p>
+                                                    </td>
+
+                                                </tr>
+                                            {{/each}}
+                                           <!--  <tr>
+                                                <td>
+                                                    <span class="label label-primary"><i class="fa fa-check"></i> Completed</span>
+                                                </td>
+                                                <td>
+                                                   Create project in webapp
+                                                </td>
+                                                <td>
+                                                   12.07.2014 10:10:1
+                                                </td>
+                                                <td>
+                                                    14.07.2014 10:16:36
+                                                </td>
+                                                <td>
+                                                <p class="small">
+                                                    Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using 'Content here, content here', making it look like readable.
+                                                </p>
+                                                </td>
+
+                                            </tr>-->
+
+                                            </tbody>
+                                        </table>
+                                </div>
+                            </div>
+                        </div>
+                </div>
+            </div>
+
+            <div class="col-lg-3">
+                    <!-- <div class="row">
+                        <div class="col-md-8 col-md-offset-2">
+                            <img src="House_Stark.png" class="img-responsive">
+                        </div>
+                    </div> -->
+                    <div class="row">
+                        <div class="col-md-12">
+                                <h1 style="text-align: center;"><strong>{{company_name}}</strong></h1>
+                                <h4 style="text-align: center;">{{org_structure}}</h4>
+                                <!-- <p>
+                                    Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitat.
+                                </p> -->
+                                <div class="row m-t-lg">
+                                    <div class="col-md-4">
+                                        <h5><strong>{{company_level}}</strong> Level</h5>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <h5><strong>{{company_partners}}</strong> Partners</h5>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <h5><strong>{{company_articles}}</strong> Articles</h5>
+                                    </div>
+                                </div>
+                                <!-- <div class="user-button">
+                                    <div class="row">
+                                        <div class="col-md-8 col-md-offset-2">
+                                            <button type="button" class="btn btn-primary btn-sm btn-block"><i class="fa fa-envelope"></i> Send Message</button>
+                                        </div>
+                                    </div>
+                                </div> -->
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-12">
+                    <table class="table" style="margin-top:20px;">
+                      <tbody>
+                        <tr>
+                          <td><strong>Sphere</strong></td>
+                          <td>
+                            {{company_sphere}}
+                          </td>
+                        </tr>
+                        <tr>
+                          <td><strong>Segment</strong></td>
+                          <td>
+                            {{company_segment}}
+                          </td>
+                        </tr>
+                        <tr>
+                          <td><strong>Country</strong></td>
+                          <td>
+                            {{company_country}}
+                          </td>
+                        </tr>
+                        <tr>
+                          <td><strong>Number of departments</strong></td>
+                          <td>
+                            {{number_of_departments}}
+                          </td>
+                        </tr>
+                        <tr>
+                          <td><strong>Number of employees</strong></td>
+                          <td>
+                            {{number_of_employees}}
+                          </td>
+                        </tr>
+                        <tr>
+                          <td><strong>Company product</strong></td>
+                          <td>
+                            {{company_product}}
+                          </td>
+                        </tr>
+                        <tr>
+                          <td><strong>Owner</strong></td>
+                          <td>
+                            {{username}}
+                          </td>
+                        </tr>
+                      </tbody>
+                    </table>
+                    <!-- <div class="text-center m-t-md">
+                        <a href="#" class="btn btn-xs btn-primary">Add contact</a>
+                        <a href="#" class="btn btn-xs btn-primary">Report contact</a>
+                    </div> -->
+                    </div>
+                    </div>
+            </div>
+        </div>
+    <!-- </div> -->
+</template>

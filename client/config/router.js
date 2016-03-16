@@ -47,16 +47,33 @@ Router.route('/', {
 
 Router.route('/startup', function () {
   if(Meteor.userId()){
-    // if(Companies.findOne({owner: Meteor.userId()})){
+    if(Companies.findOne({owner: Meteor.userId()})){
       this.render('startup');
       this.layout('gameLayout');
-    // }else{
-    //   Router.go('/')
-    // }
+    }else{
+      Router.go('/company_creation');
+    }
   }else{
     Router.go('/login');
   }
 });
+
+
+
+Router.route('/company_creation', function () {
+  if(Meteor.userId()){
+    if(Companies.findOne({owner: Meteor.userId()})){
+      Router.go('/startup');
+    }else{
+      this.render('registration_form');
+      this.layout('gameLayout');
+    }
+  }else{
+    Router.go('/login');
+  }
+});
+
+
 
 
 

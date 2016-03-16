@@ -1,0 +1,79 @@
+<template name="registration_form">
+
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="ibox">
+                        <div class="ibox-title">
+                            <h5>Create a company</h5>
+                        </div>
+                        <div class="ibox-content">
+                            <h2>
+                                Company starter form
+                            </h2>
+                            <p>
+                                This form helps you to create a new company with a choosing sphere and segment of market.
+                            </p>
+
+                            <div class="row">
+                                <div class="col-sm-3">
+                                {{#if company_visible}}
+                                    <a href="#" class="btn btn-block btn-default m-t">1. Company</a>
+                                {{else}}
+                                    <a href="#" class="btn btn-block btn-primary m-t">1. Company</a>
+                                {{/if}}
+                                </div>
+                                <div class="col-sm-3">
+                                {{#if team_visible}}
+                                    <a href="#" class="btn btn-block btn-default m-t">2. Team</a>
+                                {{else}}
+                                    <a href="#" class="btn btn-block btn-primary m-t">2. Team</a>
+                                {{/if}}
+                                </div>
+                                <div class="col-sm-3">
+                                {{#if product_visible}}
+                                    <a href="#" class="btn btn-block btn-default m-t">3. Product</a>
+                                {{else}}
+                                    <a href="#" class="btn btn-block btn-primary m-t">3. Product</a>
+                                {{/if}}
+                                </div>
+                                <div class="col-sm-3">
+                                {{#if finish_visible}}
+                                    <a href="#" class="btn btn-block btn-default m-t">4. Finish</a>
+                                {{else}}
+                                    <a href="#" class="btn btn-block btn-primary m-t">4. Finish</a>
+                                {{/if}}
+                                </div>
+                            </div>
+
+                            <!-- {{#if company_index}}
+                                {{>company_creation_form}}
+                            {{/if}}
+                            {{#if team_index}}
+                                {{>team_creator_form}}
+                            {{/if}}
+                            {{#if product_index}}
+                                {{>product_creation_form}}
+                            {{/if}}
+                            {{#if finish_index}}
+                                {{>finish}}
+                            {{/if}} -->
+
+                            {{>company_creation_form company_visible=company_visible}}
+                            {{>team_creator_form team_visible=team_visible}}
+                            {{>product_creation_form product_visible=product_visible}}
+                            {{>finish finish_visible=finish_visible}}
+
+                            <div class="row">
+                                <div class="col-sm-3 pull-right">
+                                    <button id="finish" class="btn btn-{{finish_primary}} pull-right" style="margin-left:10px;" {{finish_disabled}}>Finish</button>
+                                    <button id="next" class="btn btn-{{next_primary}} pull-right" style="margin-left:10px;" {{next_disabled}}>Next</button>
+                                    <button id="previous" class="btn btn-{{previous_primary}} pull-right" style="margin-left:10px;" {{previous_disabled}}>Previous</button>
+                                </div>
+                            </div>
+                    </div>
+                    </div>
+
+                </div>
+            </div>
+
+</template>

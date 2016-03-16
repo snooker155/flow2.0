@@ -1,0 +1,134 @@
+<template name="finish">
+	    <!-- <div class="wrapper wrapper-content animated fadeInUp"> -->
+    <div class="row" style="margin-top: 20px;" hidden={{finish_visible}}>
+        <div class="col-md-12">
+    <div class="ibox">
+            <!-- <div class="ibox-title">
+
+            </div>
+        -->
+
+        <div class="ibox-content" style="background-color: #f1f1f1">
+            <div class="row">
+                <div class="col-md-12">
+                <!--     <div class="ibox e-margins">
+                        <div class="ibox-content"> -->
+                            <h2>
+                                Finish
+                            </h2>
+
+                            <div class="ibox">
+                                <div class="ibox-content">
+
+                                    <h4>
+                                        Company
+                                    </h4>
+
+                                    <table class="table">
+                                        <thead>
+                                            <tr>
+                                                <td>Company name</td>
+                                                <td>Org structure</td>
+                                                <td>Sphere</td>
+                                                <td>Segment</td>
+                                                <td>Country</td>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td><strong>{{company_name}}</strong></td>
+                                                <td><strong>{{company_org_structure}}</strong></td>
+                                                <td><strong>{{company_sphere}}</strong></td>
+                                                <td><strong>{{company_segment}}</strong></td>
+                                                <td><strong>{{company_country}}</strong></td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+
+                                </div>
+                            </div>
+
+
+                            <div class="ibox">
+                                <div class="ibox-content">
+
+                                    <h4>
+                                        Team
+                                    </h4>
+
+                                    <table class="table">
+                                        <thead>
+                                            <tr>
+                                                <td>Department</td>
+                                                <td>Employees number</td>
+                                                <td>Level</td>
+                                                <td>Price</td>
+                                                <td>Sum</td>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            {{#each employees}}
+                                            <tr>
+                                                <td><strong>{{department_name}}</strong></td>
+                                                <td>{{employee_number}}</td>
+                                                <td>{{employee_level}}</td>
+                                                <td>$ {{price_for_employee}}</td>
+                                                <td>$ <strong>{{sum_of_department}}</strong></td>
+                                            </tr>
+                                            {{/each}}
+                                        </tbody>
+                                    </table>
+
+                                </div>
+                            </div>
+
+
+
+                            <div class="ibox">
+                                <div class="ibox-content">
+
+                                    <h4>
+                                        Product
+                                    </h4>
+
+                                    <h3>
+                                        <strong>{{product_name}}</strong>
+                                    </h3>
+
+                                    <table class="table">
+                                        <thead>
+                                            <tr>
+                                                <td>Feature</td>
+                                                <td>Time</td>
+                                                <td>Neccessary employees</td>
+                                                <td>Level</td>
+                                                <td>Price</td>
+                                                <td>Sum</td>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            {{#each features}}
+                                            <tr>
+                                                <td><strong>{{feature_name}}</strong></td>
+                                                <td>{{time_to_achieve}} sec</td>
+                                                <td>{{neccessary_employees_number}}</td>
+                                                <td>{{feature_level}}</td>
+                                                <td>$ {{feature_price}}</td>
+                                                <td>$ <strong>{{feature_sum}}</strong></td>
+                                            </tr>
+                                            {{/each}}
+                                        </tbody>
+                                    </table>
+
+                                </div>
+                            </div>
+
+                        
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+    </div>
+</template>

@@ -30,13 +30,19 @@
                                         <br>
                                         <small class="text-navy">time period</small>
                                     </div>
-                                    <div class="col-md-6 no-top-border" style="width:55%;">
-                                        <p class="m-b-xs"><strong>{{news_theme}}</strong></p>
-                                        <p>{{news_message}}</p>
-                                    </div>
-                                    <div class="col-md-3 pull-right">
-                                        <div class="stat-percent font-bold text-navy">{{news_demand}}% <i class="fa fa-level-up"></i></div><strong>Demand: </strong>
-                                        <div class="stat-percent font-bold text-navy">{{news_market}}% <i class="fa fa-level-up"></i></div><strong>Market: </strong>
+                                    <div class="col-md-9 no-top-border content" style="width:80%">
+                                        <div class="row">
+                                            <div class="col-md-8">
+                                                <p class="m-b-xs"><strong>{{news_theme}}</strong></p>
+                                                <p>{{news_message}}</p>
+                                            </div>
+                                            <div class="col-md-4">
+                                                <div class="stat-percent font-bold text-navy">{{news_demand}}% <i class="fa fa-level-up"></i></div><strong>Demand: </strong><br>
+                                                <div class="stat-percent font-bold text-navy">{{news_market}}% <i class="fa fa-level-up"></i></div><strong>Market: </strong><br>
+                                                <strong>Region: </strong> {{news_region}}<br>
+                                                <strong>Pref.: </strong> {{news_preference}}
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
                             </div>

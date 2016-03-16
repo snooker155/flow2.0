@@ -342,6 +342,18 @@ function rainbow(numOfSteps, step) {
     },
 
 
+    addCompany: function(company_name, company_region, team_array, product_name, product_array){
+      Companies.insert({
+        company_name: company_name,
+        company_region: company_region,
+        team_array: team_array,
+        product_name: product_name,
+        product_array: product_array,
+        createdAt: new Date(),
+        owner: Meteor.userId(),
+        username: Meteor.user().username,
+      });
+    },
 
 
 

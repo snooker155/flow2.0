@@ -1,0 +1,190 @@
+<template name="team_creator_form">
+        <!--<div class="wrapper wrapper-content animated fadeInUp"> -->
+    <div class="row" style="margin-top: 20px;" hidden={{team_visible}}>
+        <div class="col-md-12">
+    <div class="ibox">
+
+        <div class="ibox-content" style="background-color: #f1f1f1">
+
+
+            <div class="row">
+                <!-- <div class="col-md-7"> -->
+                <div class="12">
+
+            <!--    <div class="ibox e-margins">
+                        <div class="ibox-content"> -->
+                            <h2>
+                                Team starter form
+                            </h2>
+                            <form id="team_form">
+                            <div class="row">
+                                <div class="col-lg-12 col-sm-12">
+                                    <!-- <table class="table table-hover"> -->
+                                    <table class="table">
+                                        <thead>
+                                            <tr>
+                                                <th class="project-title" style="width: 5%;">#</th>
+                                                <th class="project-title" style="width: 25%;">Department</th>
+                                                <th class="project-title" style="width: 25%;">Number of employees</th>
+                                                <th class="project-title" style="width: 15%;">Level</th>
+                                                <th class="project-title" style="width: 15%;">Price</th>
+                                                <th class="project-title" style="width: 15%;">Cost</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                        {{#each available_departments}}
+                                            <tr id="department_info">
+                                                <td class="project-title">
+                                                    {{value}}
+                                                </td>
+                                                <td class="project-title">
+                                                    <select class="form-control required department_name" name="department_name{{value}}" id="department_name{{value}}" aria-required="true">
+                                                        <option value="" selected>Select department</option>
+                                                        {{#each departments}}
+                                                            <option value="{{department_name}}">{{department_name}}</option>    
+                                                        {{/each}}
+                                                    </select>
+                                                </td>
+                                                <td class="project-title">
+                                                    <div class="row">
+                                                        <div class="col-md-2">
+                                                            <a href="#" id="new_employee_number_minus" class="btn btn-white btn-xs {{new_employee_number_minus_enabled}}"><i class="fa fa-lg fa-minus"></i></a>
+                                                        </div>
+                                                        <div class="col-md-4">
+                                                            <p class="text-center">{{employee_number}} / {{max_employee_number}}</p>
+                                                        </div>
+                                                        <div class="col-md-2">
+                                                            <a href="#" id="new_employee_number_plus" class="btn btn-white btn-xs {{new_employee_number_plus_enabled}}"><i class="fa fa-lg fa-plus"></i></a>
+                                                        </div>
+                                                    </div>
+                                                </td>
+                                                <td class="project-title">
+                                                    {{employee_level}}
+                                                </td>
+                                                <td class="project-title">
+                                                    $ {{price_for_employee}}
+                                                </td>
+                                                <td class="project-title">
+                                                    <strong>$ {{sum_of_department}}</strong> / month
+                                                </td>
+                                            </tr>
+                                            {{/each}}
+                                            <tr>
+                                                <td></td>
+                                                <td></td>
+                                                <td></td>
+                                                <td></td>
+                                                <td></td>
+                                                <td>
+                                                    <strong>$ {{sum_of_month}}</strong> / month
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                    {{#if in_game}}
+                                        <div class="form-group">
+                                          <div class="col-md-9 col-md-offset-3">
+                                            <button type="submit" class="btn btn-sm btn-primary">Make team</button>
+                                          </div>
+                                        </div>
+                                    {{/if}}
+                                </div>
+                              </div>
+                              </form>
+                       <!--  </div>
+                    </div> -->
+                    </div>
+
+
+                    <!-- <div class="col-md-3 col-md-offset-1" style="margin-top: 20px;">
+                        <h4 id="department_description_name"><strong>{{department_description_name}} department</strong></h4>
+                        <p style="text-align: left; margin-top: 20px;" id="department_description">
+                            {{department_description}}
+                        </p>
+                    </div> -->
+
+
+                </div>
+            </div>
+        </div>
+    </div>
+    </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- 
+
+
+
+
+<div class="row">
+                <div class="col-lg-12">
+                    <div class="ibox">
+                        <div class="ibox-content">
+
+                <form id="example-advanced-form" action="#">
+    <h3>Account</h3>
+    <fieldset>
+        <legend>Account Information</legend>
+ 
+        <label for="userName-2">User name *</label>
+        <input id="userName-2" name="userName" type="text" class="required">
+        <label for="password-2">Password *</label>
+        <input id="password-2" name="password" type="text" class="required">
+        <label for="confirm-2">Confirm Password *</label>
+        <input id="confirm-2" name="confirm" type="text" class="required">
+        <p>(*) Mandatory</p>
+    </fieldset>
+ 
+    <h3>Profile</h3>
+    <fieldset>
+        <legend>Profile Information</legend>
+ 
+        <label for="name-2">First name *</label>
+        <input id="name-2" name="name" type="text" class="required">
+        <label for="surname-2">Last name *</label>
+        <input id="surname-2" name="surname" type="text" class="required">
+        <label for="email-2">Email *</label>
+        <input id="email-2" name="email" type="text" class="required email">
+        <label for="address-2">Address</label>
+        <input id="address-2" name="address" type="text">
+        <label for="age-2">Age (The warning step will show up if age is less than 18) *</label>
+        <input id="age-2" name="age" type="text" class="required number">
+        <p>(*) Mandatory</p>
+    </fieldset>
+ 
+    <h3>Warning</h3>
+    <fieldset>
+        <legend>You are to young</legend>
+ 
+        <p>Please go away ;-)</p>
+    </fieldset>
+ 
+    <h3>Finish</h3>
+    <fieldset>
+        <legend>Terms and Conditions</legend>
+ 
+        <input id="acceptTerms-2" name="acceptTerms" type="checkbox" class="required"> <label for="acceptTerms-2">I agree with the Terms and Conditions.</label>
+    </fieldset>
+</form>
+</div>
+</div>
+</div>
+</div> -->
+
+
+</template>

@@ -1,0 +1,59 @@
+<template name="startup">
+    <div class="wrapper wrapper-content animated fadeInUp" style="padding-bottom:0px; padding-top:10px;">
+	   <div class="row">
+                <div class="col-lg-12">
+                	<div class="ibox">
+                	<div class="ibox-content">
+                    <div class="tabs-container">
+                        <ul class="nav nav-pills startup nav-justified">
+                            <li class="active" style="border-left:none;"><a data-toggle="tab" href="#tab-1" aria-expanded="true">Company</a></li>
+                            <li class="" style="border-left:none;"><a data-toggle="tab" href="#tab-2" aria-expanded="false">Team</a></li>
+                            <li class="" style="border-left:none;"><a data-toggle="tab" href="#tab-3" aria-expanded="false">Product</a></li>
+                            <li class="" style="border-left:none;"><a data-toggle="tab" href="#tab-4" aria-expanded="false">Marketing</a></li>
+                        </ul>
+                    </div>
+                    </div>
+                    </div>
+                    <!-- <div class="ibox">
+                    <div class="ibox-content"> -->
+                        <div class="tab-content">
+                            <div id="tab-1" class="tab-pane active">
+                                <div class="panel-body" style="padding: 0px;">
+                                    {{>game_company}}
+                                </div>
+                            </div>
+                            <div id="tab-2" class="tab-pane">
+                                <div class="panel-body" style="padding: 0px;">
+                                {{#if has_team}}
+                                    {{>game_team}}
+                                {{else}}
+                                    {{>team_creator_form in_game='true'}}
+                                {{/if}}
+                                </div>
+                            </div>
+                            <div id="tab-3" class="tab-pane">
+                                <div class="panel-body" style="padding: 0px;">
+                                {{#if has_product}}
+                                    {{>game_product}}
+                                {{else}}
+                                    {{>product_creation_form in_game='true'}}
+                                {{/if}}
+                                </div>
+                            </div>
+                            <div id="tab-4" class="tab-pane">
+                                <div class="panel-body" style="padding: 0px;">
+                                    {{>game_marketing}}
+                                </div>
+                            </div>
+                        </div>
+
+
+                    </div>
+                   <!--  </div>
+                    </div> -->
+            </div>
+	
+   
+    </div>
+</template>
+

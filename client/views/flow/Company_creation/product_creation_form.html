@@ -1,0 +1,111 @@
+<template name="product_creation_form">
+    <!-- <div class="wrapper wrapper-content animated fadeInUp"> -->
+    <div class="row" style="margin-top: 20px;" hidden={{product_visible}}>
+        <div class="col-md-12">
+    <div class="ibox">
+            <!-- <div class="ibox-title">
+
+            </div>
+            -->
+
+        <div class="ibox-content" style="background-color: #f1f1f1">
+            <div class="row">
+                <!-- <div class="col-md-7"> -->
+                <div class="col-md-12">
+                <!--     <div class="ibox e-margins">
+                        <div class="ibox-content"> -->
+                            <h2>
+                                Product starter form
+                            </h2>
+
+                            <form id="product_form">
+                            <div class="row">
+                                <div class="col-lg-4 col-sm-4">
+                                    <div class="form-group">
+                                        <input type="text" placeholder="Product name" id="product_name" class="form-control required" minlength="5">
+                                    </div>
+                                </div>
+                            </div>
+
+
+                            <div class="row" style="margin-top:20px;">
+                                <div class="col-lg-12 col-sm-12">
+                                  <h3>Features</h3>
+                                  
+                                    <table class="table table-hover">
+                                        <thead>
+                                            <tr>
+                                                <td>#</td>
+                                                <td>Name</td>
+                                                <td>Neccessary time (sec)</td>
+                                                <td>Neccessary employees</td>
+                                                <td>Price</td>
+                                                <td>Level</td>
+                                                <td>Sum</td>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            {{#each features_list}}
+                                                <tr>
+                                                    <td>{{value}}</td>
+                                                    <td>
+                                                        <select class="form-control required feature_name" name="feature_name{{value}}" id="feature_name{{value}}" aria-required="true">
+                                                            <option value="" selected>Select feature</option>
+                                                            {{#each features}}
+                                                                <option value="{{feature_name}}">{{feature_name}}</option>    
+                                                            {{/each}}
+                                                        </select>
+                                                    </td>
+                                                    <td>{{time_to_achieve}}</td>
+                                                    <td>{{neccessary_employees_number}}</td>
+                                                    <td>$ {{feature_price}}</td>
+                                                    <td>
+                                                        <!-- <div class="row">
+                                                            <div class="col-md-3">
+                                                                <a href="#" id="feature_level_decrease" class="btn btn-white btn-xs {{feature_level_decrease_enabled}}"><i class="fa fa-lg fa-minus"></i></a>
+                                                            </div>
+                                                            <div class="col-md-6">
+                                                                <p class="text-center" id="feature_number">{{feature_level}} / {{max_feature_level}}</p>
+                                                            </div>
+                                                            <div class="col-md-3">
+                                                                <a href="#" id="feature_level_increase" class="btn btn-white btn-xs {{feature_level_increase_enabled}}"><i class="fa fa-lg fa-plus"></i></a>
+                                                            </div>
+                                                        </div> -->
+                                                        {{feature_level}}
+                                                    </td>
+                                                    <td><strong>$ {{feature_sum}}</strong></td>
+                                                </tr>
+                                            {{/each}}
+                                        </tbody>
+                                    </table>
+                                    {{#if in_game}}
+                                        <div class="form-group">
+                                          <div class="col-md-9 col-md-offset-3">
+                                            <button type="submit" class="btn btn-sm btn-primary">Make product</button>
+                                          </div>
+                                        </div>
+                                    {{/if}}
+                                </div>
+                              </div>
+                            </form>
+                       <!--  </div>
+                    </div> -->
+                    </div>
+
+
+                    <!-- <div class="col-md-3 col-md-offset-1" style="margin-top: 20px;">
+                        <h4 id="feature_description_name"><strong>{{feature_description_name}} feature</strong></h4>
+                        <p style="text-align: left; margin-top: 20px;" id="feature_description">
+                            {{feature_description}}
+                        </p>
+                    </div>
+ -->
+
+                </div>
+            </div>
+        </div>
+    </div>
+    </div>
+
+
+</template>

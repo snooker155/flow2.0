@@ -33,6 +33,10 @@ if(Meteor.isServer){
 			Features.remove(feature._id);
 		});
 
+		Companies.find().fetch().forEach(function (company) {
+			Companies.remove(company._id);
+		});
+
 
 
 		// News.insert({
@@ -144,6 +148,7 @@ if(Meteor.isServer){
 
 		Regions.insert({
 			region_name: "EU",
+			region_full_name: "Europe",
 			region_people: 2000 + Math.floor((Math.random() * 500) + 100),
 			region_pref: "Design",
 			region_market: 1.5,
@@ -157,6 +162,7 @@ if(Meteor.isServer){
 
 		Regions.insert({
 			region_name: "AF",
+			region_full_name: "Africa",
 			region_people: 2000 + Math.floor((Math.random() * 500) + 100),
 			region_pref: "Support",
 			region_market: 1.5,
@@ -170,6 +176,7 @@ if(Meteor.isServer){
 
 		Regions.insert({
 			region_name: "SA",
+			region_full_name: "South America",
 			region_people: 2000 + Math.floor((Math.random() * 500) + 100),
 			region_pref: "Design",
 			region_market: 1.5,
@@ -183,6 +190,7 @@ if(Meteor.isServer){
 
 		Regions.insert({
 			region_name: "NA",
+			region_full_name: "North America",
 			region_people: 2000 + Math.floor((Math.random() * 500) + 100),
 			region_pref: "Technology",
 			region_market: 1.5,
@@ -196,6 +204,7 @@ if(Meteor.isServer){
 
 		Regions.insert({
 			region_name: "AS",
+			region_full_name: "Asia",
 			region_people: 2000 + Math.floor((Math.random() * 500) + 100),
 			region_pref: "Technology",
 			region_market: 1.5,
@@ -209,6 +218,7 @@ if(Meteor.isServer){
 
 		Regions.insert({
 			region_name: "OC",
+			region_full_name: "Oceania",
 			region_people: 2000 + Math.floor((Math.random() * 500) + 100),
 			region_pref: "Support",
 			region_market: 1.5,
@@ -226,12 +236,15 @@ if(Meteor.isServer){
       	var connections = {};
 
       	var total_people = 0;
+      	var i = 0;
 
       	Regions.find().forEach(function (region) {
       		total_people += region.region_people;
       		regions[region.region_name] = {
+      			region_id: ++i,
       			players: players,
       			region_name: region.region_name,
+      			region_full_name: region.region_full_name,
 				region_people: region.region_people,
 				region_pref: region.region_pref,
 				region_market: region.region_market,

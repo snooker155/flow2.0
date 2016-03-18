@@ -207,9 +207,6 @@ function computeTextRotation(d) {
 }
 
 
-// $('.pie').peity('pie');
-
-
 });
 
 
@@ -239,9 +236,7 @@ Template.world_info.helpers({
 		return [44,56];
 	},
 
-	pie_options: function(){
-		return {
-			fill: "green",
-		};
+	colours: function(){
+		return ["#1ab394", "#ccc"];
 	},
 });

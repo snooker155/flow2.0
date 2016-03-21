@@ -68,12 +68,12 @@
                                         <tbody>
                                             {{#each regions}}
                                                 <tr>
-                                                    <td>{{region_id}}</td>
-                                                    <td>{{region_full_name}}</td>
+                                                    <td>{{region.region_id}}</td>
+                                                    <td>{{region.region_full_name}}</td>
                                                     <td>
-                                                        {{>peity chart="pie" data=values fill=colours}}
+                                                        {{>peity chart="pie" data=region_fullness_array fill=colours}}
                                                     </td>
-                                                    <td class="text-navy"> <i class="fa fa-level-up"></i> {{region_demand}}% </td>
+                                                    <td class="text-navy"> {{region_fullness}}% </td>
                                                 </tr>
                                             {{/each}}
                                             <!-- <tr>
@@ -128,116 +128,121 @@
                 </div> -->
             </div>
 
-
-            <div class="col-lg-3">
-                    <!-- <div class="row">
-                        <div class="col-md-8 col-md-offset-2">
-                            <img src="House_Stark.png" class="img-responsive">
-                        </div>
-                    </div> -->
-                    <div class="row">
-                        <div class="col-md-12">
-                                <h1 style="text-align: center;"><strong>Russia</strong></h1>
-                                <h4 style="text-align: center;">Moscow</h4>
-                                <!-- <p>
-                                    Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitat.
-                                </p> -->
-                                <div class="row m-t-lg">
-                                    <div class="col-md-6 text-center">
-                                        <h5><strong>146M</strong> Population</h5>
-                                    </div>
-                                    <div class="col-md-6 text-center">
-                                        <h5><strong>$1.23T</strong> GDP</h5>
-                                    </div>
-                                </div>
-                                <!-- <div class="user-button">
-                                    <div class="row">
-                                        <div class="col-md-8 col-md-offset-2">
-                                            <button type="button" class="btn btn-primary btn-sm btn-block"><i class="fa fa-envelope"></i> Send Message</button>
-                                        </div>
-                                    </div>
-                                </div> -->
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-md-12">
-                    <table class="table" style="margin-top:20px;">
-                      <tbody>
-                        <tr>
-                          <td><strong>Market</strong></td>
-                          <td>
-                            <div class="font-bold text-danger">25% <i class="fa fa-level-down"></i></div>
-                          </td>
-                        </tr>
-                        <tr>
-                          <td><strong>Demand</strong></td>
-                          <td>
-                            <div class="font-bold text-danger">25% <i class="fa fa-level-down"></i></div>
-                          </td>
-                        </tr>
-                        <tr>
-                          <td><strong>Trend</strong></td>
-                          <td>
-                            <span class="label label-info">Social</span>
-                          </td>
-                        </tr>
-                        <tr>
-                          <td><strong>Internet using</strong></td>
-                          <td>
-                            <span class="label label-primary">High</span>
-                          </td>
-                        </tr>
-                        <tr>
-                          <td><strong>Infrastructure</strong></td>
-                          <td>
-                            <span class="label label-danger">Low</span>
-                          </td>
-                        </tr>
-                        <tr>
-                          <td><strong>Intellectual property rights</strong></td>
-                          <td>
-                            <span class="label label-danger">Low</span>
-                          </td>
-                        </tr>
-                        <tr>
-                          <td><strong>Invest climate</strong></td>
-                          <td>
-                            <span class="label label-danger">Low</span>
-                          </td>
-                        </tr>
-                        <tr>
-                          <td><strong>Taxes</strong></td>
-                          <td>
-                            <span class="label label-warning">Medium</span>
-                          </td>
-                        </tr>
-                        <tr>
-                          <td><strong>Economic regulations</strong></td>
-                          <td>
-                            <span class="label label-danger">High</span>
-                          </td>
-                        </tr>
-                        <tr>
-                          <td><strong>Burocracy</strong></td>
-                          <td>
-                            <span class="label label-danger">High</span>
-                          </td>
-                        </tr>
-                        <tr>
-                          <td><strong>Unemployment</strong></td>
-                          <td>
-                            <span class="label label-warning">Medium</span>
-                          </td>
-                        </tr>
-                      </tbody>
-                    </table>
-                    <!-- <div class="text-center m-t-md">
-                        <a href="#" class="btn btn-xs btn-primary">Add contact</a>
-                        <a href="#" class="btn btn-xs btn-primary">Report contact</a>
-                    </div> -->
-                    </div>
-                    </div>
-            </div>
+            {{>region_info selected_region=selected_region}}
+            
         </div>
     <!-- </div> -->
+</template>
+
+
+
+
+
+
+
+<template name="region_info">
+    <div class="col-lg-3">
+        <div class="row">
+            <div class="col-md-12">
+                <h1 style="text-align: center;"><strong>{{selected_region.region_full_name}}</strong></h1>
+                <h4 style="text-align: center;">{{selected_region.region_name}}</h4>
+                <div class="row m-t-lg">
+                    <div class="col-md-6 text-center">
+                        <h5><strong>{{selected_region.region_people}}</strong> Population</h5>
+                    </div>
+                    <div class="col-md-6 text-center">
+                        <h5><strong>$ {{selected_region.base_price_rate}}</strong> Base Price</h5>
+                    </div>
+                </div>
+                <div class="row m-t-lg">
+                    <div class="col-md-6 text-center">
+                        <h5><strong>$ {{selected_region.base_profit_rate}}</strong> Base Profit</h5>
+                    </div>
+                    <div class="col-md-6 text-center">
+                        <h5><strong>{{selected_region.level_of_conservatism}}</strong> Conservatism</h5>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+        <div class="col-md-12">
+            <table class="table" style="margin-top:20px;">
+              <tbody>
+                <tr>
+                  <td><strong>Market</strong></td>
+                  <td>
+                    <div class="font-bold text-danger">{{selected_region.region_market}}% <i class="fa fa-level-down"></i></div>
+                  </td>
+                </tr>
+                <tr>
+                  <td><strong>Demand</strong></td>
+                  <td>
+                    <div class="font-bold text-danger">{{selected_region.region_demand}}% <i class="fa fa-level-down"></i></div>
+                  </td>
+                </tr>
+                <tr>
+                  <td><strong>Trend</strong></td>
+                  <td>
+                    <span class="label label-info">{{selected_region.region_trend}}</span>
+                  </td>
+                </tr>
+                <tr>
+                  <td><strong>Preferences</strong></td>
+                  <td>
+                    <span class="label label-info">{{selected_region.region_pref}}</span>
+                  </td>
+                </tr>
+                <tr>
+                  <td>Internet using</td>
+                  <td>
+                    <span class="label label-primary">High</span>
+                  </td>
+                </tr>
+                <tr>
+                  <td>Infrastructure</td>
+                  <td>
+                    <span class="label label-danger">Low</span>
+                  </td>
+                </tr>
+                <tr>
+                  <td>Intellectual property rights</td>
+                  <td>
+                    <span class="label label-danger">Low</span>
+                  </td>
+                </tr>
+                <tr>
+                  <td>Invest climate</td>
+                  <td>
+                    <span class="label label-danger">Low</span>
+                  </td>
+                </tr>
+                <tr>
+                  <td>Taxes</td>
+                  <td>
+                    <span class="label label-warning">Medium</span>
+                  </td>
+                </tr>
+                <tr>
+                  <td>Economic regulations</td>
+                  <td>
+                    <span class="label label-danger">High</span>
+                  </td>
+                </tr>
+                <tr>
+                  <td>Burocracy</td>
+                  <td>
+                    <span class="label label-danger">High</span>
+                  </td>
+                </tr>
+                <tr>
+                  <td>Unemployment</td>
+                  <td>
+                    <span class="label label-warning">Medium</span>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+            </div>
+        </div>
+    </div>
 </template>

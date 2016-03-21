@@ -1,0 +1,94 @@
+{
+    "name": "world",
+    "children": [{
+        "name": "EU",
+        "children": [{
+            "name": "Player1",
+            "size": 3938
+        }, {
+            "name": "Player2",
+            "size": 3812
+        }, {
+            "name": "Player3",
+            "size": 6714
+        }, {
+            "name": "Player4",
+            "size": 743
+        }]
+    }, {
+        "name": "Asia",
+        "children": [{
+            "name": "Player1",
+            "size": 1983
+        }, {
+            "name": "Player2",
+            "size": 2047
+        }, {
+            "name": "Player3",
+            "size": 1375
+        }, {
+            "name": "Player4",
+            "size": 8746
+        }]
+    }, {
+        "name": "South America",
+        "children": [{
+            "name": "Player1",
+            "size": 1983
+        }, {
+            "name": "Player2",
+            "size": 2047
+        }, {
+            "name": "Player3",
+            "size": 1375
+        }, {
+            "name": "Player4",
+            "size": 8746
+        }]     
+    }, {
+        "name": "North america",
+        "children": [{
+            "name": "Player1",
+            "size": 721
+        }, {
+            "name": "Player2",
+            "size": 4294
+        }, {
+            "name": "Player3",
+            "size": 9800
+        }, {
+            "name": "Player4",
+            "size": 1314
+        }]
+    }, {
+        "name": "Oceania",
+        "children": [{
+            "name": "Player1",
+            "size": 1759
+        }, {
+            "name": "Player2",
+            "size": 2165
+        }, {
+            "name": "Player3",
+            "size": 586
+        }, {
+            "name": "Player4",
+            "size": 3331
+        }]
+    }, {
+        "name": "Africa",
+        "children": [{
+            "name": "Player1",
+            "size": 8833
+        }, {
+            "name": "Player2",
+            "size": 1732
+        }, {
+            "name": "Player3",
+            "size": 3623
+        }, {
+            "name": "Player4",
+            "size": 10066
+        }]
+    }]
+}

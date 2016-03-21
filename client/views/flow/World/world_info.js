@@ -1,4 +1,8 @@
-Template.world.onRendered(function(){
+var selected_region = new ReactiveVar(null);
+
+
+
+Template.world_info.onRendered(function(){
 	
 
 	// var width = 600,
@@ -122,7 +126,7 @@ Template.world.onRendered(function(){
 
 
 
-var width = 600,
+var width = 500,
     height = 570,
     radius = Math.min(width, height) / 2;
 
@@ -149,7 +153,7 @@ var arc = d3.svg.arc()
     .innerRadius(function(d) { return Math.max(0, y(d.y)); })
     .outerRadius(function(d) { return Math.max(0, y(d.y + d.dy)); });
 
-d3.json("flare.json", function(error, root) {
+d3.json("regions.json", function(error, root) {
   var g = svg.selectAll("g")
       .data(partition.nodes(root))
     .enter().append("g");
@@ -167,6 +171,7 @@ d3.json("flare.json", function(error, root) {
     .text(function(d) { return d.name; });
 
   function click(d) {
+
     // fade out all text elements
     text.transition().attr("opacity", 0);
 
@@ -211,6 +216,14 @@ function computeTextRotation(d) {
 
 
 
+
+
+///////////////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////
+
+
+
 Template.world_info.helpers({
 	players: function () {
 		var game = Games.findOne({});
@@ -227,16 +240,25 @@ Template.world_info.helpers({
 		var game = Games.findOne({});
 		var regions_arr = [];
         for(var region in game.regions){
-			regions_arr.push(game.regions[region]);
+			regions_arr.push({
+				region: game.regions[region],
+				region_fullness_array: [game.getRegionFullness(region), 100-game.getRegionFullness(region)],
+				region_fullness: 100 - game.getRegionFullness(region),
+			});
      	}
         return regions_arr;
 	},
 
-	values: function(){
-		return [44,56];
+	selected_region: function(){
+		var game = Games.findOne({});
+		if(selected_region.get() === null){
+			return game.regions["EU"];
+		}else{
+			return game.regions[selected_region.get()];
+		}		
 	},
 
 	colours: function(){
-		return ["#1ab394", "#ccc"];
+		return ["#ccc", "#1ab394"];
 	},
 });

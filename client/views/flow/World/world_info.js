@@ -123,7 +123,27 @@ Template.world_info.onRendered(function(){
  //      return (x(d.x + d.dx / 2) - Math.PI / 2) / Math.PI * 180;
  //    }
 
-
+var game = Games.findOne({});
+var regions_state = [];
+for(var region in game.regions){
+	regions_state.push({
+		name: region,
+		children: [{
+			name: "Player1",
+			size: Math.floor(Math.random()*10000),
+		},{
+			name: "Player2",
+			size: Math.floor(Math.random()*10000),
+		},{
+			name: "Player3",
+			size: Math.floor(Math.random()*10000),
+		}],
+	});
+}
+var regions_state1 = {
+	name: "world",
+	children: regions_state,
+}
 
 
 var width = 500,
@@ -141,7 +161,7 @@ var color = d3.scale.category20c();
 var svg = d3.select("#sunburst").append("svg")
     .attr("width", width)
     .attr("height", height)
-  .append("g")
+  	.append("g")
     .attr("transform", "translate(" + width / 2 + "," + (height / 2 + 10) + ")");
 
 var partition = d3.layout.partition()
@@ -153,9 +173,9 @@ var arc = d3.svg.arc()
     .innerRadius(function(d) { return Math.max(0, y(d.y)); })
     .outerRadius(function(d) { return Math.max(0, y(d.y + d.dy)); });
 
-d3.json("regions.json", function(error, root) {
+
   var g = svg.selectAll("g")
-      .data(partition.nodes(root))
+    .data(partition.nodes(regions_state1))
     .enter().append("g");
 
   var path = g.append("path")
@@ -171,7 +191,7 @@ d3.json("regions.json", function(error, root) {
     .text(function(d) { return d.name; });
 
   function click(d) {
-
+	selected_region.set(d.name);
     // fade out all text elements
     text.transition().attr("opacity", 0);
 
@@ -191,11 +211,11 @@ d3.json("regions.json", function(error, root) {
           }
       });
   }
-});
+
 
 d3.select(self.frameElement).style("height", height + "px");
 
-// Interpolate the scales!
+//Interpolate the scales!
 function arcTween(d) {
   var xd = d3.interpolate(x.domain(), [d.x, d.x + d.dx]),
       yd = d3.interpolate(y.domain(), [d.y, 1]),

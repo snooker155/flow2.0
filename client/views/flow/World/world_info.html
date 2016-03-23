@@ -6,7 +6,7 @@
                         <div class="ibox-content">
                             <div class="row m-t-sm">
                                 <div class="col-lg-12">
-                                    <h3>Market shares: <strong>World</strong></h3>
+                                    <h3>Market shares: <strong>{{selected_region.region_full_name}}</strong></h3>
                                     <div class="hr-line-dashed"></div>
                                     {{#if players}}
                                         {{#each players}}
@@ -151,7 +151,7 @@
                         <h5><strong>{{selected_region.region_people}}</strong> Population</h5>
                     </div>
                     <div class="col-md-6 text-center">
-                        <h5><strong>$ {{selected_region.base_price_rate}}</strong> Base Price</h5>
+                        <h5><strong>{{selected_region.level_of_conservatism}}</strong> Conservatism</h5>
                     </div>
                 </div>
                 <div class="row m-t-lg">
@@ -159,7 +159,7 @@
                         <h5><strong>$ {{selected_region.base_profit_rate}}</strong> Base Profit</h5>
                     </div>
                     <div class="col-md-6 text-center">
-                        <h5><strong>{{selected_region.level_of_conservatism}}</strong> Conservatism</h5>
+                        <h5><strong>$ {{selected_region.base_price_rate}}</strong> Base Price</h5>
                     </div>
                 </div>
             </div>

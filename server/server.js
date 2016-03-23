@@ -275,71 +275,73 @@ if(Meteor.isServer){
 
 		//////////////////////////////////////////////////////////////////////////////////////////////////////
 
-  //     var interval = Meteor.setInterval(function(){
+      var interval = Meteor.setInterval(function(){
 
-  //     	var game = Games.findOne({});
+      	var game = Games.findOne({});
 
-  //     	//console.log(game.getPlayerList()+" # "+game.getPlayersNumber());
-  //       console.log(game.time_period);
+      	//console.log(game.getPlayerList()+" # "+game.getPlayersNumber());
+        console.log(game.time_period);
 
-  //       //console.log(Math.floor((Math.random() * 3) - 1)); ###     values: -1/0/1
+        //console.log(Math.floor((Math.random() * 3) - 1)); ###     values: -1/0/1
 
-  //       if(game.players){
-	 //        for(var player in game.players){
+        if(game.players){
+	        for(var player in game.players){
 
-	 //        	game.updatePlayerExp(player);
+	        	game.updatePlayerExp(player);
 
-	 //        	for (var region in game.players[player].regions){
-	 //        		game.buyShare(region, player);
-	 //        	}
+	        	for (var region in game.players[player].regions){
+	        		game.buyShare(region, player);
+	        	}
 
-	 //        	game.updateMarketShare(player);
-
-
-	 //            if(game.players[player].player_share <= 0 || game.players[player].player_share >= 100 || game.players[player].player_balance < 0){
-		//             Meteor.clearInterval(interval);
-		//         }
-	 //        }
-  //   	}
+	        	game.updateMarketShare(player);
 
 
-
-
-  // //   	if(i == 20){
-	 // //    	for(var region in game.regions){
-		// // 	    game.updateRegionBaseProfitRate(region);
-
-		// // 	    game.updateRegionBasePriceRate(region);
-
-		// // 	    game.updateRegionPeople(region);
-
-		// // 		game.updateRegionDemand(region);
-		// // 	    game.updateRegionMarket(region);
-		// // 	}
-		// // 	i = 0;
-		// // }
-
-		// // i++;
+	            if(game.players[player].player_share <= 0 || game.players[player].player_share >= 100 || game.players[player].player_balance < 0){
+		            Meteor.clearInterval(interval);
+		        }
+	        }
+    	}
 
 
 
-		// // for(var region in game.regions){
-		// // 	game.updateRegionTrend(region);
-		// // }
 
 
 
-  //   	game.time_period = game.time_period + 1;
+  //   	if(i == 20){
+	 //    	for(var region in game.regions){
+		// 	    game.updateRegionBaseProfitRate(region);
 
-  //       Games.update(game._id, {
-  //         $set:{
-  //           players: game.players,
-  //           regions: game.regions,
-  //           time_period: game.time_period,
-  //         }
-  //       });
+		// 	    game.updateRegionBasePriceRate(region);
 
-  //     }, 1000);
+		// 	    game.updateRegionPeople(region);
+
+		// 		game.updateRegionDemand(region);
+		// 	    game.updateRegionMarket(region);
+		// 	}
+		// 	i = 0;
+		// }
+
+		// i++;
+
+
+
+		// for(var region in game.regions){
+		// 	game.updateRegionTrend(region);
+		// }
+
+
+
+    	game.time_period = game.time_period + 1;
+
+        Games.update(game._id, {
+          $set:{
+            players: game.players,
+            regions: game.regions,
+            time_period: game.time_period,
+          }
+        });
+
+      }, 1000);
 
 	});
 }

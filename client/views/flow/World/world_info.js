@@ -123,28 +123,44 @@ Template.world_info.onRendered(function(){
  //      return (x(d.x + d.dx / 2) - Math.PI / 2) / Math.PI * 180;
  //    }
 
+//Tracker.autorun(function () {
 var game = Games.findOne({});
 var regions_state = [];
+
 for(var region in game.regions){
-	regions_state.push({
-		name: region,
-		children: [{
-			name: "Player1",
-			size: Math.floor(Math.random()*10000),
-		},{
-			name: "Player2",
-			size: Math.floor(Math.random()*10000),
-		},{
-			name: "Player3",
-			size: Math.floor(Math.random()*10000),
-		}],
-	});
+	var region_state = [];
+	var free_people = 0;
+	if(game.regions[region].players !== undefined){
+		for(var player in game.regions[region].players){
+			if(game.regions[region].players[player] !== undefined && game.regions[region].players[player].share !== 0){
+				region_state.push({
+					name: game.regions[region].players[player].player.username,
+					size: game.regions[region].players[player].share,
+				});
+			}
+		}
+		region_state.push({
+			name: "Free people",
+			size: game.regions[region].region_people - game.getCustomersInRegion(region),
+		});
+	}
+
+	if(region_state[1]){
+		regions_state.push({
+			name: region,
+			children: region_state,
+		});
+	}else{
+		regions_state.push({
+			name: region,
+			size: game.regions[region].region_people,
+		});
+	}
 }
 var regions_state1 = {
-	name: "world",
+	name: "World",
 	children: regions_state,
 }
-
 
 var width = 500,
     height = 570,
@@ -178,6 +194,7 @@ var arc = d3.svg.arc()
     .data(partition.nodes(regions_state1))
     .enter().append("g");
 
+
   var path = g.append("path")
     .attr("d", arc)
     .style("fill", function(d) { return color((d.children ? d : d.parent).name); })
@@ -191,7 +208,16 @@ var arc = d3.svg.arc()
     .text(function(d) { return d.name; });
 
   function click(d) {
-	selected_region.set(d.name);
+  	if(d.name){
+	  	if(d.name == "World"){
+	  		selected_region.set(null);
+	  	}else{
+	  		selected_region.set(d.name);	
+	  	}
+  	}else{
+  		selected_region.set(null);
+  	}
+
     // fade out all text elements
     text.transition().attr("opacity", 0);
 
@@ -230,7 +256,7 @@ function arcTween(d) {
 function computeTextRotation(d) {
   return (x(d.x + d.dx / 2) - Math.PI / 2) / Math.PI * 180;
 }
-
+//});
 
 });
 
@@ -272,7 +298,7 @@ Template.world_info.helpers({
 	selected_region: function(){
 		var game = Games.findOne({});
 		if(selected_region.get() === null){
-			return game.regions["EU"];
+			return game.getWorldState();
 		}else{
 			return game.regions[selected_region.get()];
 		}		

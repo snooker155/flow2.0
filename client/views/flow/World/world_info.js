@@ -153,131 +153,126 @@ var arc = d3.svg.arc()
 
 
 
-Tracker.autorun(function () {
+var getSunburstData = function(){
 
+	var game = Games.findOne({});
+	var regions_state = [];
 
-var game = Games.findOne({});
-var regions_state = [];
+	var regions_state1 = {
+		name: "World",
+		children: regions_state,
+	}
 
-var regions_state1 = {
-	name: "World",
-	children: regions_state,
-}
-
-for(var region in game.regions){
-	var region_state = [];
-	var free_people = 0;
-	if(game.regions[region].players !== undefined){
-		for(var player in game.regions[region].players){
-			if(game.regions[region].players[player] !== undefined && game.players[player].regions[region].people !== 0){
-				region_state.push({
-					name: game.players[player].player.username,
-					size: game.players[player].regions[region].people,
-				});
+	for(var region in game.regions){
+		var region_state = [];
+		var free_people = 0;
+		if(game.regions[region].players !== undefined){
+			for(var player in game.regions[region].players){
+				if(game.regions[region].players[player] !== undefined && game.players[player].regions[region].people !== 0){
+					region_state.push({
+						name: game.players[player].player.username,
+						size: game.players[player].regions[region].people,
+					});
+				}
 			}
+			region_state.push({
+				name: "Free people",
+				size: game.regions[region].region_people - game.getCustomersInRegion(region),
+			});
 		}
-		region_state.push({
-			name: "Free people",
-			size: game.regions[region].region_people - game.getCustomersInRegion(region),
-		});
-	}
 
-	if(region_state[1]){
-		regions_state.push({
-			name: region,
-			children: region_state,
-		});
-	}else{
-		regions_state.push({
-			name: region,
-			size: game.regions[region].region_people,
-		});
+		if(region_state[1]){
+			regions_state.push({
+				name: region,
+				children: region_state,
+			});
+		}else{
+			regions_state.push({
+				name: region,
+				size: game.regions[region].region_people,
+			});
+		}
 	}
+	return regions_state1;
 }
+  
 
-console.log(regions_state1);
-
-var f = svg.selectAll("g");
-console.log(f);
 
   var g = svg.selectAll("g")
-    .data(partition.nodes(regions_state1))
-    .enter();
-
-
-  console.log(g);
-
-  var path = g.append("path")
+    .data(partition.nodes(getSunburstData()))
+    .enter().append("path")
     .attr("d", arc)
-    .style("fill", function(d) { return color((d.children ? d : d.parent).name); });
-    //.on("click", click);
+    .style("fill", function(d) { return color((d.children ? d : d.parent).name); })
+    .on("click", click);
 
-  console.log(path);
-
-  // var text = g.append("text")
-  //   .attr("transform", function(d) { return "rotate(" + computeTextRotation(d) + ")"; })
-  //   .attr("x", function(d) { return y(d.y); })
-  //   .attr("dx", "6") // margin
-  //   .attr("dy", ".35em") // vertical-align
-  //   .text(function(d) { return d.name; });
+  var text = g.append("text")
+    .attr("transform", function(d) { return "rotate(" + computeTextRotation(d) + ")"; })
+    .attr("x", function(d) { return y(d.y); })
+    .attr("dx", "6") // margin
+    .attr("dy", ".35em") // vertical-align
+    .text(function(d) { return d.name; });
 
 
-  //g.remove();
+  function click(d) {
+  	if(d.name){
+	  	if(d.name == "World"){
+	  		selected_region.set(null);
+	  	}else{
+	  		selected_region.set(d.name);	
+	  	}
+  	}else{
+  		selected_region.set(null);
+  	}
+
+    // fade out all text elements
+    text.transition().attr("opacity", 0);
+
+    path.transition()
+      .duration(750)
+      .attrTween("d", arcTween(d))
+      .each("end", function(e, i) {
+          // check if the animated element's data e lies within the visible angle span given in d
+          if (e.x >= d.x && e.x < (d.x + d.dx)) {
+            // get a selection of the associated text element
+            var arcText = d3.select(this.parentNode).select("text");
+            // fade in the text element and recalculate positions
+            arcText.transition().duration(750)
+              .attr("opacity", 1)
+              .attr("transform", function() { return "rotate(" + computeTextRotation(e) + ")" })
+              .attr("x", function(d) { return y(d.y); });
+          }
+      });
+  }
 
 
-  // function click(d) {
-  // 	if(d.name){
-	 //  	if(d.name == "World"){
-	 //  		selected_region.set(null);
-	 //  	}else{
-	 //  		selected_region.set(d.name);	
-	 //  	}
-  // 	}else{
-  // 		selected_region.set(null);
-  // 	}
-
-  //   // fade out all text elements
-  //   text.transition().attr("opacity", 0);
-
-  //   path.transition()
-  //     .duration(750)
-  //     .attrTween("d", arcTween(d))
-  //     .each("end", function(e, i) {
-  //         // check if the animated element's data e lies within the visible angle span given in d
-  //         if (e.x >= d.x && e.x < (d.x + d.dx)) {
-  //           // get a selection of the associated text element
-  //           var arcText = d3.select(this.parentNode).select("text");
-  //           // fade in the text element and recalculate positions
-  //           arcText.transition().duration(750)
-  //             .attr("opacity", 1)
-  //             .attr("transform", function() { return "rotate(" + computeTextRotation(e) + ")" })
-  //             .attr("x", function(d) { return y(d.y); });
-  //         }
-  //     });
-  // }
-
-
-//d3.select(self.frameElement).style("height", height + "px");
+d3.select(self.frameElement).style("height", height + "px");
 
 
 
 //Interpolate the scales!
-// function arcTween(d) {
-//   var xd = d3.interpolate(x.domain(), [d.x, d.x + d.dx]),
-//       yd = d3.interpolate(y.domain(), [d.y, 1]),
-//       yr = d3.interpolate(y.range(), [d.y ? 20 : 0, radius]);
-//   return function(d, i) {
-//     return i
-//         ? function(t) { return arc(d); }
-//         : function(t) { x.domain(xd(t)); y.domain(yd(t)).range(yr(t)); return arc(d); };
-//   };
-// }
+function arcTween(d) {
+  var xd = d3.interpolate(x.domain(), [d.x, d.x + d.dx]),
+      yd = d3.interpolate(y.domain(), [d.y, 1]),
+      yr = d3.interpolate(y.range(), [d.y ? 20 : 0, radius]);
+  return function(d, i) {
+    return i
+        ? function(t) { return arc(d); }
+        : function(t) { x.domain(xd(t)); y.domain(yd(t)).range(yr(t)); return arc(d); };
+  };
+}
 
-// function computeTextRotation(d) {
-//   return (x(d.x + d.dx / 2) - Math.PI / 2) / Math.PI * 180;
-// }
+function computeTextRotation(d) {
+  return (x(d.x + d.dx / 2) - Math.PI / 2) / Math.PI * 180;
+}
 
 
+
+Tracker.autorun(function () {
+	//console.log(getSunburstData());
+
+  	var path = svg.selectAll("path")
+     .data(partition.nodes(getSunburstData())).transition().duration(400).attr("d", arc)
+    .style("fill", function(d) { return color((d.children ? d : d.parent).name); });
 
 });
 

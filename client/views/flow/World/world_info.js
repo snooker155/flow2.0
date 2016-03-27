@@ -205,7 +205,9 @@ var getSunburstData = function(){
     .style("fill", function(d) { return color((d.children ? d : d.parent).name); })
     .on("click", click);
 
-  var text = g.append("text")
+  var path = svg.selectAll("path");
+
+  var text = path.append("text")
     .attr("transform", function(d) { return "rotate(" + computeTextRotation(d) + ")"; })
     .attr("x", function(d) { return y(d.y); })
     .attr("dx", "6") // margin

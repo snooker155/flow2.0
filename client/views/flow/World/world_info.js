@@ -1,4 +1,4 @@
-var selected_region = new ReactiveVar(null);
+var selected_region = new ReactiveVar("World");
 
 
 
@@ -145,9 +145,17 @@ var svg = d3.select("#sunburst").append("svg")
 var partition = d3.layout.partition()
     .value(function(d) { return d.size; });
 
+var startAngle = function(d){
+	return Math.max(0, Math.min(2 * Math.PI, x(d.x)));
+}
+
+var endAngle = function(d){
+	return Math.max(0, Math.min(2 * Math.PI, x(d.x + d.dx)));
+}
+
 var arc = d3.svg.arc()
-    .startAngle(function(d) { return Math.max(0, Math.min(2 * Math.PI, x(d.x))); })
-    .endAngle(function(d) { return Math.max(0, Math.min(2 * Math.PI, x(d.x + d.dx))); })
+    .startAngle(function(d) {return Math.max(0, Math.min(2 * Math.PI, x(d.x)));})
+    .endAngle(function(d) {return Math.max(0, Math.min(2 * Math.PI, x(d.x + d.dx)));})
     .innerRadius(function(d) { return Math.max(0, y(d.y)); })
     .outerRadius(function(d) { return Math.max(0, y(d.y + d.dy)); });
 
@@ -176,7 +184,7 @@ var getSunburstData = function(){
 				}
 			}
 			region_state.push({
-				name: "Free people",
+				name: "Free",
 				size: game.regions[region].region_people - game.getCustomersInRegion(region),
 			});
 		}
@@ -200,37 +208,88 @@ var getSunburstData = function(){
 
   var g = svg.selectAll("g")
     .data(partition.nodes(getSunburstData()))
-    .enter().append("path")
+    .enter().append("g").attr("id", function(d, i) {return "part"+i; } );
+
+
+
+  var path = g.append("path")
     .attr("d", arc)
     .style("fill", function(d) { return color((d.children ? d : d.parent).name); })
     .on("click", click);
 
-  var path = svg.selectAll("path");
+	// Updated Angle Calculation Function...
+    function angle(d, offset, threshold) {
+      var a = (startAngle(d) + endAngle(d)) * 90 / Math.PI + offset;
+      return a > threshold ? a - 180 : a;
+    }
 
-  var text = path.append("text")
-    .attr("transform", function(d) { return "rotate(" + computeTextRotation(d) + ")"; })
-    .attr("x", function(d) { return y(d.y); })
-    .attr("dx", "6") // margin
-    .attr("dy", ".35em") // vertical-align
-    .text(function(d) { return d.name; });
+
+  // Add link names to the arcs, translated to the arc centroid and rotated.
+    var text = g.append("text")
+            .attr("dy", function(d) {
+           	  if(d.name != selected_region.get()){
+              	return ".35em";
+          	  }else{
+          	  	return 7;
+          	  }
+            })
+            .attr("dx", function(d) {
+           	  if(d.name != selected_region.get()){
+              	var a = angle(d, 0, 0);
+              	return a < 0 ? "-16px" : "16px";
+          	  }else{
+          	  	return 2;
+          	  }
+            })
+            .attr("text-anchor", function(d) {
+              if(d.name != selected_region.get()){
+              	var a = angle(d, 0, 0);
+              	return a < 0 ? "start" : "end";
+              }else{
+          	  	return "middle";
+          	  }
+            })
+            .attr("transform", function(d) {return computeTextRotation(d)})
+  			.style("cursor", "default")
+  			.style("-webkit-user-select", "none")
+  			.style("z-index", -1)
+            .style("fill", "Black")
+            .style("font", function(d) {
+           	  if(d.name != selected_region.get()){
+              	return "normal 16px Arial";
+          	  }else{
+          	  	return "bold 16px Arial";
+          	  }
+            })
+            .text(function(d) { return d.name; })
+            .on("click", click);
+
+
+
+  // var text = g.append("text")
+  //   .attr("transform", function(d) { return "rotate(" + angle(d, -90, 90) + ")"; })
+  //   .attr("x", function(d) { return y(d.y); })
+  //   .attr("dx", "6") // margin
+  //   .attr("dy", ".35em") // vertical-align
+  //   .text(function(d) { return d.name; });
 
 
   function click(d) {
   	if(d.name){
 	  	if(d.name == "World"){
-	  		selected_region.set(null);
+	  		selected_region.set("World");
 	  	}else{
 	  		selected_region.set(d.name);	
 	  	}
   	}else{
-  		selected_region.set(null);
+  		selected_region.set("World");
   	}
 
     // fade out all text elements
     text.transition().attr("opacity", 0);
 
     path.transition()
-      .duration(750)
+      .duration(250)
       .attrTween("d", arcTween(d))
       .each("end", function(e, i) {
           // check if the animated element's data e lies within the visible angle span given in d
@@ -238,10 +297,9 @@ var getSunburstData = function(){
             // get a selection of the associated text element
             var arcText = d3.select(this.parentNode).select("text");
             // fade in the text element and recalculate positions
-            arcText.transition().duration(750)
+            arcText.transition().duration(250)
               .attr("opacity", 1)
-              .attr("transform", function() { return "rotate(" + computeTextRotation(e) + ")" })
-              .attr("x", function(d) { return y(d.y); });
+              .attr("transform", function(d) { return computeTextRotation(d) });
           }
       });
   }
@@ -263,18 +321,28 @@ function arcTween(d) {
   };
 }
 
-function computeTextRotation(d) {
-  return (x(d.x + d.dx / 2) - Math.PI / 2) / Math.PI * 180;
+function computeTextRotation(d) {//set text'ss origin to the centroid
+  //we have to make sure to set these before calling arc.centroid
+  d.innerRadius = (width/8); // Set Inner Coordinate
+  d.outerRadius = (width/4); // Set Outer Coordinate
+  if(d.name == "World") {
+  	return "translate(0,0)rotate(" + angle(d, 0, 0) + ")";
+  }else if(d.name != selected_region.get()) {
+  	return "translate(" + arc.centroid(d) + ")rotate(" + angle(d, -90, 90) + ")";
+  }else{
+  	return "translate(0,40)rotate(" + angle(d, 0, 0) + ")";
+  }
+  //return (x(d.x + d.dx / 2) - Math.PI / 2) / Math.PI * 180;
 }
 
 
 
 Tracker.autorun(function () {
-	//console.log(getSunburstData());
 
-  	var path = svg.selectAll("path")
-     .data(partition.nodes(getSunburstData())).transition().duration(400).attr("d", arc)
-    .style("fill", function(d) { return color((d.children ? d : d.parent).name); });
+  	var g = svg.selectAll("g");
+  	g.select("path").data(partition.nodes(getSunburstData())).transition().duration(1000).attr("d", arc);
+    console.log(g);
+    g.select("text").data(partition.nodes(getSunburstData())).transition().duration(1000).attr("transform", function(d) { return computeTextRotation(d) });
 
 });
 
@@ -317,7 +385,7 @@ Template.world_info.helpers({
 
 	selected_region: function(){
 		var game = Games.findOne({});
-		if(selected_region.get() === null){
+		if(selected_region.get() == "World"){
 			return game.getWorldState();
 		}else{
 			return game.regions[selected_region.get()];

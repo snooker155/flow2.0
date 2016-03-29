@@ -1,4 +1,5 @@
 var selected_region = new ReactiveVar("World");
+var semaphore = new ReactiveVar(0);
 
 
 
@@ -275,33 +276,43 @@ var getSunburstData = function(){
 
 
   function click(d) {
-  	if(d.name){
-	  	if(d.name == "World"){
-	  		selected_region.set("World");
+  	var timeout = setTimeout(function(){
+	  	semaphore.set(1);
+	  	if(d.name){
+		  	if(d.name == "World"){
+		  		selected_region.set("World");
+		  	}else{
+		  		selected_region.set(d.name);	
+		  	}
 	  	}else{
-	  		selected_region.set(d.name);	
+	  		selected_region.set("World");
 	  	}
-  	}else{
-  		selected_region.set("World");
-  	}
 
-    // fade out all text elements
-    text.transition().attr("opacity", 0);
+	    // fade out all text elements
+	    text.transition().attr("opacity", 0);
 
-    path.transition()
-      .duration(250)
-      .attrTween("d", arcTween(d))
-      .each("end", function(e, i) {
-          // check if the animated element's data e lies within the visible angle span given in d
-          if (e.x >= d.x && e.x < (d.x + d.dx)) {
-            // get a selection of the associated text element
-            var arcText = d3.select(this.parentNode).select("text");
-            // fade in the text element and recalculate positions
-            arcText.transition().duration(250)
-              .attr("opacity", 1)
-              .attr("transform", function(d) { return computeTextRotation(d) });
-          }
-      });
+	    path.transition()
+	      .delay(100)
+	      .duration(750)
+	      .attrTween("d", arcTween(d))
+	      .each("end", function(e, i) {
+	          // check if the animated element's data e lies within the visible angle span given in d
+	          if (e.x >= d.x && e.x < (d.x + d.dx)) {
+	            // get a selection of the associated text element
+	            var arcText = d3.select(this.parentNode).select("text");
+	            // fade in the text element and recalculate positions
+	            arcText.transition().duration(750)
+	              .attr("opacity", 1)
+	              .attr("transform", function(d) { return computeTextRotation(d) });
+	          }
+	      });
+	    var timeout_in = setTimeout(function(){
+	    	semaphore.set(0);
+	    	clearTimeout(timeout_in);
+	    }, 2000);
+	clearTimeout(timeout);
+	}, 300);
+
   }
 
 
@@ -313,7 +324,7 @@ d3.select(self.frameElement).style("height", height + "px");
 function arcTween(d) {
   var xd = d3.interpolate(x.domain(), [d.x, d.x + d.dx]),
       yd = d3.interpolate(y.domain(), [d.y, 1]),
-      yr = d3.interpolate(y.range(), [d.y ? 20 : 0, radius]);
+      yr = d3.interpolate(y.range(), [d.y ? 40 : 0, radius]);
   return function(d, i) {
     return i
         ? function(t) { return arc(d); }
@@ -330,7 +341,7 @@ function computeTextRotation(d) {//set text'ss origin to the centroid
   }else if(d.name != selected_region.get()) {
   	return "translate(" + arc.centroid(d) + ")rotate(" + angle(d, -90, 90) + ")";
   }else{
-  	return "translate(0,40)rotate(" + angle(d, 0, 0) + ")";
+  	return "translate(0,60)rotate(" + angle(d, 0, 0) + ")";
   }
   //return (x(d.x + d.dx / 2) - Math.PI / 2) / Math.PI * 180;
 }
@@ -338,11 +349,12 @@ function computeTextRotation(d) {//set text'ss origin to the centroid
 
 
 Tracker.autorun(function () {
-
-  	var g = svg.selectAll("g");
-  	g.select("path").data(partition.nodes(getSunburstData())).transition().duration(1000).attr("d", arc);
-    console.log(g);
-    g.select("text").data(partition.nodes(getSunburstData())).transition().duration(1000).attr("transform", function(d) { return computeTextRotation(d) });
+	console.log(semaphore.get());
+	if(semaphore.get() == 0){
+  		var g = svg.selectAll("g");
+  		g.select("path").data(partition.nodes(getSunburstData())).transition().duration(200).attr("d", arc);
+    	g.select("text").data(partition.nodes(getSunburstData())).transition().attr("transform", function(d) { return computeTextRotation(d) });
+	}
 
 });
 

@@ -30,7 +30,6 @@ cramhead:jquery-validate
 romanrdgz:jquery-steps
 manuel:reactivearray
 clubfest:raphael
-benmgreene:jquery-sparklines
 d3js:d3
 
 mfpierre:chartist-js
@@ -38,3 +37,6 @@ em0ney:chartjs
 maazalik:highcharts
 ando:persistent-session
 mrt:peity
+benmgreene:jquery-sparklines
+check
+mrt:flot

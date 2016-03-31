@@ -26,9 +26,9 @@
 // 	});
 // });
 
-Template.customers.helpers ({
-	customers: function(){
-		console.log(user_array.get());
-		return user_array.get();
-	}
-});
+// Template.customers.helpers ({
+// 	customers: function(){
+// 		console.log(user_array.get());
+// 		return user_array.get();
+// 	}
+// });

@@ -1,4 +1,6 @@
 <template name="world_info">
+    <div class="wrapper wrapper-content animated fadeInUp" style="padding-bottom:0px; padding-top:10px;">
+    {{>world}}
   <!-- <div class="wrapper wrapper-content animated fadeInUp"> -->
     <div class="row">
             <div class="col-lg-4">
@@ -12,7 +14,7 @@
                                         {{#each players}}
                                             <h5>{{player.username}}</h5>
                                             <div class="progress progress-mini">
-                                                <div style="width: {{player_share}}%" aria-valuemax="100" aria-valuemin="0" aria-valuenow="35" role="progressbar" class="progress-bar progress-bar-primary">
+                                                <div style="width: {{player_share}}%; background-color:{{player_color}};" aria-valuemax="100" aria-valuemin="0" aria-valuenow="35" role="progressbar" class="progress-bar progress-bar-primary">
                                                     <span class="sr-only">{{player_share}}% Complete (success)</span>
                                                 </div>
                                             </div>
@@ -81,30 +83,6 @@
                                                 <td>Europe</td>
                                                 <td><span class="pie" style="display: none;">0.52,1.041</span><svg class="peity" height="16" width="16"><path d="M 8 8 L 8 0 A 8 8 0 0 1 14.933563796318165 11.990700825968545 Z" fill="#1ab394"></path><path d="M 8 8 L 14.933563796318165 11.990700825968545 A 8 8 0 1 1 7.999999999999998 0 Z" fill="#d7d7d7"></path></svg></td>
                                                 <td class="text-navy"> <i class="fa fa-level-up"></i> 40% </td>
-                                            </tr>
-                                            <tr>
-                                                <td>2</td>
-                                                <td>North America</td>
-                                                <td><span class="pie" style="display: none;">226,134</span><svg class="peity" height="16" width="16"><path d="M 8 8 L 8 0 A 8 8 0 1 1 2.2452815972907922 13.55726696367198 Z" fill="#1ab394"></path><path d="M 8 8 L 2.2452815972907922 13.55726696367198 A 8 8 0 0 1 7.999999999999998 0 Z" fill="#d7d7d7"></path></svg></td>
-                                                <td class="text-warning"> <i class="fa fa-level-down"></i> -20% </td>
-                                            </tr>
-                                            <tr>
-                                                <td>3</td>
-                                                <td>Asia</td>
-                                                <td><span class="pie" style="display: none;">0.52/1.561</span><svg class="peity" height="16" width="16"><path d="M 8 8 L 8 0 A 8 8 0 0 1 14.933563796318165 11.990700825968545 Z" fill="#1ab394"></path><path d="M 8 8 L 14.933563796318165 11.990700825968545 A 8 8 0 1 1 7.999999999999998 0 Z" fill="#d7d7d7"></path></svg></td>
-                                                <td class="text-navy"> <i class="fa fa-level-up"></i> 26% </td>
-                                            </tr>
-                                            <tr>
-                                                <td>4</td>
-                                                <td>South America</td>
-                                                <td><span class="pie" style="display: none;">0.52,1.041</span><svg class="peity" height="16" width="16"><path d="M 8 8 L 8 0 A 8 8 0 0 1 14.933563796318165 11.990700825968545 Z" fill="#1ab394"></path><path d="M 8 8 L 14.933563796318165 11.990700825968545 A 8 8 0 1 1 7.999999999999998 0 Z" fill="#d7d7d7"></path></svg></td>
-                                                <td class="text-navy"> <i class="fa fa-level-up"></i> 40% </td>
-                                            </tr>
-                                            <tr>
-                                                <td>5</td>
-                                                <td>Oceania</td>
-                                                <td><span class="pie" style="display: none;">226,134</span><svg class="peity" height="16" width="16"><path d="M 8 8 L 8 0 A 8 8 0 1 1 2.2452815972907922 13.55726696367198 Z" fill="#1ab394"></path><path d="M 8 8 L 2.2452815972907922 13.55726696367198 A 8 8 0 0 1 7.999999999999998 0 Z" fill="#d7d7d7"></path></svg></td>
-                                                <td class="text-warning"> <i class="fa fa-level-down"></i> -20% </td>
                                             </tr> -->
                                         </tbody>
                                     </table>
@@ -132,6 +110,7 @@
             
         </div>
     <!-- </div> -->
+    </div>
 </template>
 
 
@@ -154,7 +133,7 @@
                         <h5><strong>{{selected_region.level_of_conservatism}}</strong> Conservatism</h5>
                     </div>
                 </div>
-                <div class="row m-t-lg">
+                <div class="row m-t-lg" style="margin-top:0;">
                     <div class="col-md-6 text-center">
                         <h5><strong>$ {{selected_region.base_profit_rate}}</strong> Base Profit</h5>
                     </div>

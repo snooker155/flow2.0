@@ -161,9 +161,10 @@ var arc = d3.svg.arc()
     .outerRadius(function(d) { return Math.max(0, y(d.y + d.dy)); });
 
 
+var game = Games.findOne({});
+
 
 var getSunburstData = function(){
-
 	var game = Games.findOne({});
 	var regions_state = [];
 
@@ -184,10 +185,12 @@ var getSunburstData = function(){
 					});
 				}
 			}
-			region_state.push({
-				name: "Free",
-				size: game.regions[region].region_people - game.getCustomersInRegion(region),
-			});
+			if(game.regions[region].region_people - game.getCustomersInRegion(region) >= 0){
+				region_state.push({
+					name: "Free",
+					size: game.regions[region].region_people - game.getCustomersInRegion(region),
+				});
+			}
 		}
 
 		if(region_state[1]){
@@ -215,7 +218,15 @@ var getSunburstData = function(){
 
   var path = g.append("path")
     .attr("d", arc)
-    .style("fill", function(d) { return color((d.children ? d : d.parent).name); })
+    .style("fill", function(d) { 
+    	for (var player in game.players){
+    		if(d.name == game.players[player].player.username){
+    			return game.players[player].player_color;
+    		}
+    	}
+
+    	return color((d.children ? d : d.parent).name);
+    })
     .on("click", click);
 
 	// Updated Angle Calculation Function...
@@ -223,7 +234,6 @@ var getSunburstData = function(){
       var a = (startAngle(d) + endAngle(d)) * 90 / Math.PI + offset;
       return a > threshold ? a - 180 : a;
     }
-
 
   // Add link names to the arcs, translated to the arc centroid and rotated.
     var text = g.append("text")
@@ -276,8 +286,8 @@ var getSunburstData = function(){
 
 
   function click(d) {
+  	semaphore.set(1);
   	var timeout = setTimeout(function(){
-	  	semaphore.set(1);
 	  	if(d.name){
 		  	if(d.name == "World"){
 		  		selected_region.set("World");
@@ -386,11 +396,19 @@ Template.world_info.helpers({
 		var game = Games.findOne({});
 		var regions_arr = [];
         for(var region in game.regions){
-			regions_arr.push({
-				region: game.regions[region],
-				region_fullness_array: [game.getRegionFullness(region), 100-game.getRegionFullness(region)],
-				region_fullness: 100 - game.getRegionFullness(region),
-			});
+        	if(100-game.getRegionFullness(region) > 0.009){
+				regions_arr.push({
+					region: game.regions[region],
+					region_fullness_array: [parseFloat(game.getRegionFullness(region).toFixed(2)), parseFloat((100 - game.getRegionFullness(region)).toFixed(2))],
+					region_fullness: parseFloat((100 - game.getRegionFullness(region)).toFixed(2)),
+				});
+			}else{
+				regions_arr.push({
+					region: game.regions[region],
+					region_fullness_array: [100, 0],
+					region_fullness: 0,
+				});
+			}
      	}
         return regions_arr;
 	},

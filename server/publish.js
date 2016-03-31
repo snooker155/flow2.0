@@ -22,4 +22,7 @@
   Meteor.publish("features", function() {
     return Features.find();
   });
+  Meteor.publish("customers", function() {
+    return Customers.find();
+  });
 

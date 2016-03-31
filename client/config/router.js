@@ -80,7 +80,26 @@ Router.route('/company_creation', function () {
 
 Router.route('/world', function () {
   if(Meteor.userId()){
-    this.render('world');
+    this.render('world_info');
+    this.layout('gameLayout');
+  }else{
+    Router.go('/login');
+  }
+});
+
+Router.route('/segment', function () {
+  if(Meteor.userId()){
+    this.render('segment_info');
+    this.layout('gameLayout');
+  }else{
+    Router.go('/login');
+  }
+});
+
+
+Router.route('/customers', function () {
+  if(Meteor.userId()){
+    this.render('customers_info');
     this.layout('gameLayout');
   }else{
     Router.go('/login');

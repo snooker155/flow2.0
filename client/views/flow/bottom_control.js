@@ -16,7 +16,9 @@ Template.bottom_control.helpers({
 
     player: function(){
     	var game = Games.findOne({});
-    	return game.players[Meteor.user().username];
+        if(game.players[Meteor.user().username]){
+    	   return game.players[Meteor.user().username].player;
+        }
     },
 
     player_share: function(){

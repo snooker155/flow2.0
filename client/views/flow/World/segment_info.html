@@ -1,10 +1,12 @@
 <template name="segment_info">
+    <div class="wrapper wrapper-content animated fadeInUp" style="padding-bottom:0px; padding-top:10px;">
+{{>world}}
         <!--<div class="wrapper wrapper-content animated fadeInUp"> -->
             <div class="ibox">
                 <div class="ibox-content">
                     <div class="p-w-md m-t-sm">
                     <div class="row">
-                        <div class="col-md-8">
+                        <div class="col-md-12">
                             <div class="row">
 
                                 <div class="col-sm-4">
@@ -150,7 +152,24 @@
                                 </div>
                             </div>
 
-                            <div class="row" style="margin-top:50px;">
+                            <div class="row text-center">
+                                <div class="col-xs-4">
+                                    <div class=" m-l-md">
+                                    <span class="h4 font-bold m-t block">$ 406,100</span>
+                                    <small class="text-muted m-b block">Sales marketing report</small>
+                                    </div>
+                                </div>
+                                <div class="col-xs-4">
+                                    <span class="h4 font-bold m-t block">$ 150,401</span>
+                                    <small class="text-muted m-b block">Annual sales revenue</small>
+                                </div>
+                                <div class="col-xs-4">
+                                    <span class="h4 font-bold m-t block">$ 16,822</span>
+                                    <small class="text-muted m-b block">Half-year revenue margin</small>
+                                </div>
+                            </div>
+
+                            <div class="row">
                                 <div class="col-md-12">
                                     <div class="small pull-left col-md-3 m-l-lg m-t-md">
                                         <strong>Sales char</strong> have evolved over the years sometimes.
@@ -158,18 +177,27 @@
                                     <div class="small pull-right col-md-3 m-t-md text-right">
                                         <strong>There are many</strong> variations of passages of Lorem Ipsum available, but the majority have suffered.
                                     </div>
-                                    <div class="flot-chart m-b-xl">
-                                        <div class="flot-chart-content" id="flot-dashboard5-chart" style="padding: 0px; position: relative;">
-                                            
-                                        </div>
+
+                                    <div class="flot-chart dashboard-chart">
+                                        <div class="flot-chart-content" id="flot-dashboard1-chart"></div>
                                     </div>
                                 </div>
                             </div>
 
                         </div>
+                    </div>
 
 
-                        <div class="col-md-4">
+
+
+                    <!-- ///////////////////////////////////////////////////////////////////////
+                    /////////////////////////////////////////////////////////////////////////-->
+
+
+
+
+                    <div class="row">
+                        <div class="col-md-12">
                             <h4 class="text-center">News for <strong>Messengers</strong></h4>
                             
                             <div class="ibox-content inspinia-timeline">
@@ -307,4 +335,5 @@
                 </div>
             </div>
         <!-- </div> -->
+        </div>
 </template>

@@ -37,6 +37,10 @@ if(Meteor.isServer){
 			Companies.remove(company._id);
 		});
 
+		Customers.find().fetch().forEach(function (customer) {
+			Customers.remove(customer._id);
+		});
+
 
 
 		// News.insert({
@@ -149,7 +153,8 @@ if(Meteor.isServer){
 		Regions.insert({
 			region_name: "EU",
 			region_full_name: "Europe",
-			region_people: 2000 + Math.floor((Math.random() * 500) + 100),
+			// region_people: 2000 + Math.floor((Math.random() * 500) + 100),
+			region_people: 5 + Math.floor((Math.random() * 5) + 2),
 			region_pref: "Design",
 			region_market: 1.5,
 			region_demand: 4,
@@ -163,7 +168,7 @@ if(Meteor.isServer){
 		Regions.insert({
 			region_name: "AF",
 			region_full_name: "Africa",
-			region_people: 2000 + Math.floor((Math.random() * 500) + 100),
+			region_people: 5 + Math.floor((Math.random() * 5) + 2),
 			region_pref: "Support",
 			region_market: 1.5,
 			region_demand: 4,
@@ -177,7 +182,7 @@ if(Meteor.isServer){
 		Regions.insert({
 			region_name: "SA",
 			region_full_name: "South America",
-			region_people: 2000 + Math.floor((Math.random() * 500) + 100),
+			region_people: 5 + Math.floor((Math.random() * 5) + 2),
 			region_pref: "Design",
 			region_market: 1.5,
 			region_demand: 4,
@@ -191,7 +196,7 @@ if(Meteor.isServer){
 		Regions.insert({
 			region_name: "NA",
 			region_full_name: "North America",
-			region_people: 2000 + Math.floor((Math.random() * 500) + 100),
+			region_people: 5 + Math.floor((Math.random() * 5) + 2),
 			region_pref: "Technology",
 			region_market: 1.5,
 			region_demand: 4,
@@ -205,7 +210,7 @@ if(Meteor.isServer){
 		Regions.insert({
 			region_name: "AS",
 			region_full_name: "Asia",
-			region_people: 2000 + Math.floor((Math.random() * 500) + 100),
+			region_people: 5 + Math.floor((Math.random() * 5) + 2),
 			region_pref: "Technology",
 			region_market: 1.5,
 			region_demand: 4,
@@ -219,7 +224,7 @@ if(Meteor.isServer){
 		Regions.insert({
 			region_name: "OC",
 			region_full_name: "Oceania",
-			region_people: 2000 + Math.floor((Math.random() * 500) + 100),
+			region_people: 5 + Math.floor((Math.random() * 5) + 2),
 			region_pref: "Support",
 			region_market: 1.5,
 			region_demand: 4,
@@ -255,6 +260,20 @@ if(Meteor.isServer){
 				region_price: region.region_price,
 				level_of_conservatism: region.level_of_conservatism,
       		}
+
+      		// if(region.region_name == "EU"){
+	      		for (var i = 0; i < region.region_people; i++){
+	      			Customers.insert({
+						customer_id: i,
+						customer_region: region.region_name,
+						customer_money: 2000 + Math.floor((Math.random() * 500) + 100),
+						customer_conservatism: Math.random() / 10,
+						customer_period_income: 20 + Math.floor((Math.random() * 5) + 1),
+						customer_pref: region.region_pref,
+						customer_activity: Math.round(Math.random()),
+					});
+	      		}
+      		// }
       	});
 
 
@@ -277,69 +296,82 @@ if(Meteor.isServer){
 
       var interval = Meteor.setInterval(function(){
 
-      	var game = Games.findOne({});
 
-      	//console.log(game.getPlayerList()+" # "+game.getPlayersNumber());
-        console.log(game.time_period);
+      	console.log('0');
 
-        //console.log(Math.floor((Math.random() * 3) - 1)); ###     values: -1/0/1
+      	Customers.find().fetch().forEach(function (customer) {
+      		Customers.update(customer._id, {
+      			$set:{
+      				customer_money: customer.customer_money + customer.customer_period_income,
+      				customer_conservatism: customer.customer_conservatism - 0.00001,
+      				customer_activity: Math.round(Math.random()),
+      			}
+      		});
+      	});
 
-        if(game.players){
-	        for(var player in game.players){
+  //     	var game = Games.findOne({});
 
-	        	game.updatePlayerExp(player);
+  //     	//console.log(game.getPlayerList()+" # "+game.getPlayersNumber());
+  //       console.log(game.time_period);
 
-	        	for (var region in game.players[player].regions){
-	        		game.buyShare(region, player);
-	        	}
+  //       //console.log(Math.floor((Math.random() * 3) - 1)); ###     values: -1/0/1
 
-	        	game.updateMarketShare(player);
+  //       if(game.players){
+	 //        for(var player in game.players){
 
+	 //        	game.updatePlayerExp(player);
 
-	            if(game.players[player].player_share <= 0 || game.players[player].player_share >= 100 || game.players[player].player_balance < 0){
-		            Meteor.clearInterval(interval);
-		        }
-	        }
-    	}
+	 //        	for (var region in game.players[player].regions){
+	 //        		game.buyShare(region, player);
+	 //        	}
 
-
+	 //        	game.updateMarketShare(player);
 
 
-
-
-  //   	if(i == 20){
-	 //    	for(var region in game.regions){
-		// 	    game.updateRegionBaseProfitRate(region);
-
-		// 	    game.updateRegionBasePriceRate(region);
-
-		// 	    game.updateRegionPeople(region);
-
-		// 		game.updateRegionDemand(region);
-		// 	    game.updateRegionMarket(region);
-		// 	}
-		// 	i = 0;
-		// }
-
-		// i++;
+	 //            if(game.players[player].player_share <= 0 || game.players[player].player_share >= 100 || game.players[player].player_balance < 0){
+		//             Meteor.clearInterval(interval);
+		//         }
+	 //        }
+  //   	}
 
 
 
-		// for(var region in game.regions){
-		// 	game.updateRegionTrend(region);
-		// }
 
 
 
-    	game.time_period = game.time_period + 1;
+  // //   	if(i == 20){
+	 // //    	for(var region in game.regions){
+		// // 	    game.updateRegionBaseProfitRate(region);
 
-        Games.update(game._id, {
-          $set:{
-            players: game.players,
-            regions: game.regions,
-            time_period: game.time_period,
-          }
-        });
+		// // 	    game.updateRegionBasePriceRate(region);
+
+		// // 	    game.updateRegionPeople(region);
+
+		// // 		game.updateRegionDemand(region);
+		// // 	    game.updateRegionMarket(region);
+		// // 	}
+		// // 	i = 0;
+		// // }
+
+		// // i++;
+
+
+
+		// // for(var region in game.regions){
+		// // 	game.updateRegionTrend(region);
+		// // }
+
+
+
+  //   	game.time_period = game.time_period + 1;
+
+  //       Games.update(game._id, {
+  //         $set:{
+  //           players: game.players,
+  //           regions: game.regions,
+  //           time_period: game.time_period,
+  //         }
+  //       });
 
       }, 1000);
 

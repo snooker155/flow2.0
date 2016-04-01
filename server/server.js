@@ -154,7 +154,7 @@ if(Meteor.isServer){
 			region_name: "EU",
 			region_full_name: "Europe",
 			// region_people: 2000 + Math.floor((Math.random() * 500) + 100),
-			region_people: 5 + Math.floor((Math.random() * 5) + 2),
+			region_people: 50 + Math.floor((Math.random() * 5) + 2),
 			region_pref: "Design",
 			region_market: 1.5,
 			region_demand: 4,
@@ -168,7 +168,7 @@ if(Meteor.isServer){
 		Regions.insert({
 			region_name: "AF",
 			region_full_name: "Africa",
-			region_people: 5 + Math.floor((Math.random() * 5) + 2),
+			region_people: 50 + Math.floor((Math.random() * 5) + 2),
 			region_pref: "Support",
 			region_market: 1.5,
 			region_demand: 4,
@@ -182,7 +182,7 @@ if(Meteor.isServer){
 		Regions.insert({
 			region_name: "SA",
 			region_full_name: "South America",
-			region_people: 5 + Math.floor((Math.random() * 5) + 2),
+			region_people: 50 + Math.floor((Math.random() * 5) + 2),
 			region_pref: "Design",
 			region_market: 1.5,
 			region_demand: 4,
@@ -196,7 +196,7 @@ if(Meteor.isServer){
 		Regions.insert({
 			region_name: "NA",
 			region_full_name: "North America",
-			region_people: 5 + Math.floor((Math.random() * 5) + 2),
+			region_people: 50 + Math.floor((Math.random() * 5) + 2),
 			region_pref: "Technology",
 			region_market: 1.5,
 			region_demand: 4,
@@ -210,7 +210,7 @@ if(Meteor.isServer){
 		Regions.insert({
 			region_name: "AS",
 			region_full_name: "Asia",
-			region_people: 5 + Math.floor((Math.random() * 5) + 2),
+			region_people: 50 + Math.floor((Math.random() * 5) + 2),
 			region_pref: "Technology",
 			region_market: 1.5,
 			region_demand: 4,
@@ -224,7 +224,7 @@ if(Meteor.isServer){
 		Regions.insert({
 			region_name: "OC",
 			region_full_name: "Oceania",
-			region_people: 5 + Math.floor((Math.random() * 5) + 2),
+			region_people: 50 + Math.floor((Math.random() * 5) + 2),
 			region_pref: "Support",
 			region_market: 1.5,
 			region_demand: 4,
@@ -242,6 +242,7 @@ if(Meteor.isServer){
 
       	var total_people = 0;
       	var i = 0;
+      	var j = 0;
 
       	Regions.find().forEach(function (region) {
       		total_people += region.region_people;
@@ -262,9 +263,9 @@ if(Meteor.isServer){
       		}
 
       		// if(region.region_name == "EU"){
-	      		for (var i = 0; i < region.region_people; i++){
+	      		for (var d = 0; d < region.region_people; d++){
 	      			Customers.insert({
-						customer_id: i,
+						customer_id: ++j,
 						customer_region: region.region_name,
 						customer_money: 2000 + Math.floor((Math.random() * 500) + 100),
 						customer_conservatism: Math.random() / 10,
@@ -303,7 +304,7 @@ if(Meteor.isServer){
       		Customers.update(customer._id, {
       			$set:{
       				customer_money: customer.customer_money + customer.customer_period_income,
-      				customer_conservatism: customer.customer_conservatism - 0.00001,
+      				customer_conservatism: customer.customer_conservatism + 0.00001,
       				customer_activity: Math.round(Math.random()),
       			}
       		});

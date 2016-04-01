@@ -1,59 +1,153 @@
 Template.customers_info.onRendered(function(){
-	var times = function(n) {
-	  return Array.apply(null, new Array(n));
-	};
+	// var times = function(n) {
+	//   return Array.apply(null, new Array(n));
+	// };
 
-	var data = times(Customers.find().count()).map(Math.random).reduce(function(data, rnd, index) {
-	  data.labels.push(index + 1);
-	  data.series.forEach(function(series) {
-	    series.push(Math.random() * 100)
-	  });
+    // var a = _.values(_.groupBy(Customers.find().fetch(), function(customer){ return customer.customer_region; }));
+    // var b = a.reduce(function(b, customer) { b.push(customer.map(function(customer){return [customer.customer_money, customer.customer_conservatism];})); return b;}, []);
 
-	  return data;
-	}, {
-	  labels: [],
-	  series: times(6).map(function() { return new Array() })
-	});
+	// var data = Customers.find().fetch().reduce(function(data, customer, index) {
+	//   data.labels.push(parseFloat(customer.customer_conservatism).toFixed(2));
+
+ //   //    var i = 0;
+ //   //    var array = _.values(_.groupBy(Customers.find().fetch(), function(customer){ return customer.customer_region; }));
+	//   // data.series.forEach(function(series) {
+ //   //      series.push(array[i]);
+ //   //      i++;
+ //   //    });
+
+	//   return data;
+	// }, {
+	//   //labels: [],
+	//   series: b
+	// });
 
 
-    // var eu_array = [];
-    // Customers.find().fetch().forEach(function (customer) {
-    //     if(customer.customer_region == "EU"){
-    //         eu_array.push(customer.customer_money);
-    //     }
+ //    var times = function(n) {
+ //      return Array.apply(null, new Array(n));
+ //    };
+
+ //    var data = times(52).map(Math.random).reduce(function(data, rnd, index) {
+ //      data.labels.push(index + 1);
+ //      data.series.forEach(function(series) {
+ //        series.push([Math.random() * 100, Math.random() * 100])
+ //      });
+
+ //      return data;
+ //    }, {
+ //      labels: [],
+ //      series: times(4).map(function() { return new Array() })
+ //    });
+
+
+ //    console.log(data);
+
+
+	// var options = {
+	//   showLine: false,
+	//   axisX: {
+	//     labelInterpolationFnc: function(value, index) {
+	//       return index % 13 === 0 ? 'W' + value : null;
+	//     }
+	//   }
+	// };
+
+	// var responsiveOptions = [
+	//   ['screen and (min-width: 640px)', {
+	//     axisX: {
+	//       labelInterpolationFnc: function(value, index) {
+	//         return index % 4 === 0 ? 'W' + value : null;
+	//       }
+	//     }
+	//   }]
+	// ];
+
+	// new Chartist.Line('#scatter_digramm', data, options, responsiveOptions);
+
+    var data = (_.values(_.groupBy(Customers.find().fetch(), function(customer){ 
+        return customer.customer_region; 
+    })))
+    .reduce(function(data, customers){ 
+        data.push({
+            name: customers[0].customer_region,
+            //color: ,
+            data:customers.map(function(customer){return [parseFloat(customer.customer_conservatism).toFixed(4)*1, customer.customer_period_income];})
+        }); 
+        return data;
+    }, []);
+
+
+    // a.forEach(function (customers) {
+    //     console.log(customers);
+    //     customers.map(function(customer){return [customer.customer_conservatism, customer.customer_money];});
+    //     console.log(customers.map(function(customer){return [customer.customer_conservatism, customer.customer_money];}))
     // });
-
-    // console.log(eu_array);
-
-    // var data = {
-    //     labels: [0, 0.025, 0.05, 0.075, 0.1, 0.125, 0.15, 0.5],
-    //     series: [eu_array],
-    // }
-
 
     console.log(data);
 
+    $('#scatter_digramm').highcharts({
+        chart: {
+            type: 'scatter',
+            zoomType: 'xy'
+        },
+        title: {
+            text: 'Income ($) / Conservatism'
+        },
+        // subtitle: {
+        //     text: 'Source: Heinz  2003'
+        // },
+        xAxis: {
+            title: {
+                enabled: true,
+                text: 'Conservatism level'
+            },
+            startOnTick: true,
+            endOnTick: true,
+            showLastLabel: true
+        },
+        yAxis: {
+            title: {
+                text: 'Money ($)'
+            }
+        },
+        legend: {
+            layout: 'vertical',
+            align: 'left',
+            verticalAlign: 'top',
+            x: 500,
+            y: 50,
+            floating: true,
+            backgroundColor: (Highcharts.theme && Highcharts.theme.legendBackgroundColor) || '#FFFFFF',
+            borderWidth: 1
+        },
+        plotOptions: {
+            scatter: {
+                marker: {
+                    radius: 5,
+                    states: {
+                        hover: {
+                            enabled: true,
+                            lineColor: 'rgb(100,100,100)'
+                        }
+                    }
+                },
+                states: {
+                    hover: {
+                        marker: {
+                            enabled: false
+                        }
+                    }
+                },
+                tooltip: {
+                    headerFormat: '<b>{series.name}</b><br>',
+                    pointFormat: '{point.x} <b>/</b> {point.y} $'
+                }
+            }
+        },
 
-	var options = {
-	  showLine: false,
-	  axisX: {
-	    labelInterpolationFnc: function(value, index) {
-	      return index % 13 === 0 ? 'W' + value : null;
-	    }
-	  }
-	};
+        series: data
+    });
 
-	var responsiveOptions = [
-	  ['screen and (min-width: 640px)', {
-	    axisX: {
-	      labelInterpolationFnc: function(value, index) {
-	        return index % 4 === 0 ? 'W' + value : null;
-	      }
-	    }
-	  }]
-	];
-
-	new Chartist.Line('#scatter_digramm', data, options, responsiveOptions);
 
 
 	var doughnutData = [

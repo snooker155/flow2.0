@@ -32,12 +32,12 @@ var WorldMapData = {
 
 
 
-var WorldMap = {};
-var buttons = {};
+// var WorldMap = {};
+// var buttons = {};
 
-var createDot = function(R,x,y,color){
-     R.circle(x,y,2).attr({fill: color, stroke: "#fff", "stroke-width": 2, r: 0}).animate({r: 5}, 1000, "elastic");
-};
+// var createDot = function(R,x,y,color){
+//      R.circle(x,y,2).attr({fill: color, stroke: "#fff", "stroke-width": 2, r: 0}).animate({r: 5}, 1000, "elastic");
+// };
 
 
 
@@ -46,266 +46,425 @@ Template.world_map.onRendered(function(){
 
     selected_region.set(null);
 
-
 //////////////////////////////////////////////////////////////////
+/////////////////////      WORLD MAP      ////////////////////////
 //////////////////////////////////////////////////////////////////
 
 
-    var current = null;
-    var current_region = null;
-    var m = {};
-    var game = Games.findOne({});
-    var attr = {
-	    fill: "#eee",
-	    stroke: "#888",
-	    "stroke-width": 0.5,
-	    "stroke-linejoin": "round"
-	};      
+ //    var current = null;
+ //    var current_region = null;
+ //    var m = {};
+ //    var game = Games.findOne({});
+
+
+ //    var attr = {
+	//     fill: "#eee",
+	//     stroke: "#888",
+	//     "stroke-width": 0.5,
+	//     "stroke-linejoin": "round"
+	// };      
              
 
     
-    var svgHeight = 320;
-    var svgWidth = 600;
+ //    var svgHeight = 320;
+ //    var svgWidth = 600;
       
-    var R = Raphael("holder_1000", "100%", "100%");
-    R.setViewBox(0, 0, svgWidth, svgHeight, false);
+ //    var R = Raphael("holder_1000", "100%", "100%");
+ //    R.setViewBox(0, 0, svgWidth, svgHeight, false);
 
 
 
-    for(var regionId in WorldMapData) {
-	 //    attr = {
-		//     //fill: game.regions[regionId].region_color,
-		//     stroke: "#888",
-		//     "stroke-width": 0.5,
-		//     "stroke-linejoin": "round"
-		// };
-	    WorldMap[regionId] = R.path(WorldMapData[regionId].path).attr(attr);
-    }
+ //    for(var regionId in WorldMapData) {
+	//  //    attr = {
+	// 	//     //fill: game.regions[regionId].region_color,
+	// 	//     stroke: "#888",
+	// 	//     "stroke-width": 0.5,
+	// 	//     "stroke-linejoin": "round"
+	// 	// };
+	//     WorldMap[regionId] = R.path(WorldMapData[regionId].path).attr(attr);
+ //    }
 
 
-    Tracker.autorun(function () {
-    	var game = Games.findOne({});
-    	for (var state in WorldMap) {
-    		if(game.regions[state].region_color !== undefined){
-    			var fill_color = "90-";
-    			var color_share = 0;
-				for (var player in game.players){
-					if(game.players[player].regions !== undefined && game.players[player].regions[state] !== undefined){
-						for(var i=0; i<2; i++){
-							fill_color += game.regions[state].region_color[player]+":"+color_share+"-";
-							color_share += Math.round(game.players[player].regions[state].share)/2;
-						}
-					}
-				}
-				fill_color += "#eee:"+color_share;
-				//var fill_color = "90-#ff7f00-#ff7f00:50-#ffff00:55-#ffff00:85-#eee:95";
+ //    Tracker.autorun(function () {
+ //    	var game = Games.findOne({});
+ //    	for (var state in WorldMap) {
+ //    		if(game.regions[state].region_color !== undefined){
+ //    			var fill_color = "90-";
+ //    			var color_share = 0;
+	// 			for (var player in game.players){
+	// 				if(game.players[player].regions !== undefined && game.players[player].regions[state] !== undefined){
+	// 					for(var i=0; i<2; i++){
+	// 						fill_color += game.regions[state].region_color[player]+":"+color_share+"-";
+	// 						color_share += Math.round(game.players[player].regions[state].share)/2;
+	// 					}
+	// 				}
+	// 			}
+	// 			fill_color += "#eee:"+color_share;
+	// 			//var fill_color = "90-#ff7f00-#ff7f00:50-#ffff00:55-#ffff00:85-#eee:95";
 
-				//WorldMap[state].attr({fill: "90-"+fill_color+"-#eee:"+color_share, stroke: "#666"});			
-				WorldMap[state].attr({fill: fill_color, stroke: "#666"});
-			}else{
-				var fill_color = "#eee";
-				WorldMap[state].attr({fill: fill_color, stroke: "#666"});
-			}
-			//var fill_color = "#f00";
+	// 			//WorldMap[state].attr({fill: "90-"+fill_color+"-#eee:"+color_share, stroke: "#666"});			
+	// 			WorldMap[state].attr({fill: fill_color, stroke: "#666"});
+	// 		}else{
+	// 			var fill_color = "#eee";
+	// 			WorldMap[state].attr({fill: fill_color, stroke: "#666"});
+	// 		}
+	// 		//var fill_color = "#f00";
 	
-			//var basic_color_share = 100 - color_share;
-		    //WorldMap[state].attr({fill: "90-"+fill_color+"-#eee:"+color_share, stroke: "#666"});
-		    //WorldMap[state].attr({fill: "90-"+fill_color+"-#eee:85", stroke: "#666"});
-           	//R.safari();
-		}
-    });
+	// 		//var basic_color_share = 100 - color_share;
+	// 	    //WorldMap[state].attr({fill: "90-"+fill_color+"-#eee:"+color_share, stroke: "#666"});
+	// 	    //WorldMap[state].attr({fill: "90-"+fill_color+"-#eee:85", stroke: "#666"});
+ //           	//R.safari();
+	// 	}
+ //    });
 
 
 
-    for (var state in WorldMap) {
-    	var point = WorldMap[state].getBBox(0);
+ //    for (var state in WorldMap) {
+ //    	var point = WorldMap[state].getBBox(0);
 
-    	var rect = R.rect(point.cx-25, point.cy-10, 60, 20, 2).attr({
-				    fill: '#1ab394',
-				    stroke: '#1ab394',
-				    'stroke-width': 2,
-				});
+ //    	var rect = R.rect(point.cx-25, point.cy-10, 60, 20, 2).attr({
+	// 			    fill: '#1ab394',
+	// 			    stroke: '#1ab394',
+	// 			    'stroke-width': 2,
+	// 			});
 
-		(function (st, state) {
-            st[0].style.cursor = "pointer";
+	// 	(function (st, state) {
+ //            st[0].style.cursor = "pointer";
           
-            st[0].onclick = function (e) {
-            	console.log('it is clicked ' + state);
-            };
-        })(rect, state);
+ //            st[0].onclick = function (e) {
+ //            	console.log('it is clicked ' + state);
+ //            };
+ //        })(rect, state);
 
 
-    	var text = R.text(rect.attrs.x + rect.attrs.width / 2, rect.attrs.y + rect.attrs.height / 2, 'Choose '+state).attr({
-				    "font-family": "Helvetica",
-				    "font-size": 10,
-				    fill: '#fff'
-				});
+ //    	var text = R.text(rect.attrs.x + rect.attrs.width / 2, rect.attrs.y + rect.attrs.height / 2, 'Choose '+state).attr({
+	// 			    "font-family": "Helvetica",
+	// 			    "font-size": 10,
+	// 			    fill: '#fff'
+	// 			});
 
-		(function (st, state) {
-            st[0].style.cursor = "pointer";
+	// 	(function (st, state) {
+ //            st[0].style.cursor = "pointer";
           
-            st[0].onclick = function (e) {
-            	//console.log('it is clicked ' + state);
-            	Meteor.call("addRegionToPlayer", state, function(error, result){
-            		if(!error){
-	            		var point1 = WorldMap[state].getBBox(0);
-	            		createDot(R, point1.cx, point1.cy, game.players[Meteor.user().username].player_color);
-	            		buttons[state].hide();
-            		}
-            	});
-            };
-        })(text, state);
+ //            st[0].onclick = function (e) {
+ //            	//console.log('it is clicked ' + state);
+ //            	Meteor.call("addRegionToPlayer", state, function(error, result){
+ //            		if(!error){
+	//             		var point1 = WorldMap[state].getBBox(0);
+	//             		createDot(R, point1.cx, point1.cy, game.players[Meteor.user().username].player_color);
+	//             		buttons[state].hide();
+ //            		}
+ //            	});
+ //            };
+ //        })(text, state);
 
 
 
-    	$(text.node).css({
-			"-webkit-touch-callout": "none",
-			"-webkit-user-select": "none",
-			"-khtml-user-select": "none",
-			"-moz-user-select": "none",
-			"-ms-user-select": "none",
-			"user-select": "none",
-		});
+ //    	$(text.node).css({
+	// 		"-webkit-touch-callout": "none",
+	// 		"-webkit-user-select": "none",
+	// 		"-khtml-user-select": "none",
+	// 		"-moz-user-select": "none",
+	// 		"-ms-user-select": "none",
+	// 		"user-select": "none",
+	// 	});
 
-		buttons[state] = R.set().attr({
-		    cursor: 'pointer'
-		});
-    	buttons[state].push(rect);
-    	buttons[state].push(text);
+	// 	buttons[state] = R.set().attr({
+	// 	    cursor: 'pointer'
+	// 	});
+ //    	buttons[state].push(rect);
+ //    	buttons[state].push(text);
 
-		buttons[state].hide();
-
-
-    	//console.log(buttons);
-    };
+	// 	buttons[state].hide();
 
 
-    Tracker.autorun(function(){
+ //    	//console.log(buttons);
+ //    };
 
-    var game = Games.findOne({});
 
-    for (var state in WorldMap) {
+ //    Tracker.autorun(function(){
 
-        (function (st, state) {
-            st[0].style.cursor = "pointer";
-            st[0].onmouseover = function () {
-            	//current && WorldMap[current].animate({fill: curr_over_color, stroke: "#666"}, 300);
-                st.animate({opacity: 0.6}, 300);
-                R.safari();
-                current = state;
-            };
-            st[0].onmouseout = function () {
-			    var out_color = game.regions[state].region_color;
-				st.animate({opacity: 1}, 300);
-                R.safari();
-            };
+ //    var game = Games.findOne({});
+
+ //    for (var state in WorldMap) {
+
+ //        (function (st, state) {
+ //            st[0].style.cursor = "pointer";
+ //            st[0].onmouseover = function () {
+ //            	//current && WorldMap[current].animate({fill: curr_over_color, stroke: "#666"}, 300);
+ //                st.animate({opacity: 0.6}, 300);
+ //                R.safari();
+ //                current = state;
+ //            };
+ //            st[0].onmouseout = function () {
+	// 		    var out_color = game.regions[state].region_color;
+	// 			st.animate({opacity: 1}, 300);
+ //                R.safari();
+ //            };
             
-            st[0].onclick = function (e) {
-            	if(game.players[Meteor.user().username].regions !== undefined){
-	            	if (current_region == state){
-	            		current_region = null;
-	            		selected_region.set(null);
-	            	}else{
-	            		current_region = state;
-	            		selected_region.set(state);
-	            	}
-            	}else{
-            		if (current_region == state){
-	                    buttons[current_region].hide();
-	                    current_region = null;
-	                    selected_region.set(null);
-	                }else{
-	                    if(buttons[current_region]){
-	                    	buttons[current_region].hide()	
-	                    };
-	                    buttons[state].show();
-	                    selected_region.set(state);
-	                    current_region = state;
-	                }
-            	}
-            };
-        })(WorldMap[state], state);
-    }; // end for
+ //            st[0].onclick = function (e) {
+ //            	if(game.players[Meteor.user().username].regions !== undefined){
+	//             	if (current_region == state){
+	//             		current_region = null;
+	//             		selected_region.set(null);
+	//             	}else{
+	//             		current_region = state;
+	//             		selected_region.set(state);
+	//             	}
+ //            	}else{
+ //            		if (current_region == state){
+	//                     buttons[current_region].hide();
+	//                     current_region = null;
+	//                     selected_region.set(null);
+	//                 }else{
+	//                     if(buttons[current_region]){
+	//                     	buttons[current_region].hide()	
+	//                     };
+	//                     buttons[state].show();
+	//                     selected_region.set(state);
+	//                     current_region = state;
+	//                 }
+ //            	}
+ //            };
+ //        })(WorldMap[state], state);
+ //    }; // end for
 
-  });
+ //  });
 
                 
 
-    function lon2x(lon) {
-        var xfactor = 2.752;
-        var xoffset = 473.75;
-        var x = (lon * xfactor) + xoffset;
-        return x;
-    }
-    function lat2y(lat) {
-        var yfactor = -2.753;
-        var yoffset = 231;
-        var y = (lat * yfactor) + yoffset;
-        return y;
-    }
+ //    function lon2x(lon) {
+ //        var xfactor = 2.752;
+ //        var xoffset = 473.75;
+ //        var x = (lon * xfactor) + xoffset;
+ //        return x;
+ //    }
+ //    function lat2y(lat) {
+ //        var yfactor = -2.753;
+ //        var yoffset = 231;
+ //        var y = (lat * yfactor) + yoffset;
+ //        return y;
+ //    }
 
-    var city_attr = {
-        fill: "#0f0",
-        stroke: "#000",
-        opacity: .3
-    };
-    function plot(lat,lon,size) {
-        size = size * .5 + 4;
-        return R.circle(lon2x(lon), lat2y(lat), size).attr(city_attr);
-    }
+ //    var city_attr = {
+ //        fill: "#0f0",
+ //        stroke: "#000",
+ //        opacity: .3
+ //    };
+ //    function plot(lat,lon,size) {
+ //        size = size * .5 + 4;
+ //        return R.circle(lon2x(lon), lat2y(lat), size).attr(city_attr);
+ //    }
 
 
-    var cities = {};
+ //    var cities = {};
 
-    var current_city = null;
-    var city_box = null;
-    for (var city in cities) {                                  
-        WorldMap[state].color = Raphael.getColor();
-        (function (st, city) {
-            st[0].style.cursor = "pointer";
-            st[0].onmouseover = function () {
-                current_city && cities[current_city].animate({fill: "#0f0", opacity: .3}, 300);
-                st.animate({fill: "#0f0", opacity: 1}, 300);
-                R.safari();
-                current_city = city;
-            };
-            st[0].onmouseout = function () {
-                st.animate({fill: "#0f0", opacity: .3}, 300);
-                R.safari();
-            };
+ //    var current_city = null;
+ //    var city_box = null;
+ //    for (var city in cities) {                                  
+ //        WorldMap[state].color = Raphael.getColor();
+ //        (function (st, city) {
+ //            st[0].style.cursor = "pointer";
+ //            st[0].onmouseover = function () {
+ //                current_city && cities[current_city].animate({fill: "#0f0", opacity: .3}, 300);
+ //                st.animate({fill: "#0f0", opacity: 1}, 300);
+ //                R.safari();
+ //                current_city = city;
+ //            };
+ //            st[0].onmouseout = function () {
+ //                st.animate({fill: "#0f0", opacity: .3}, 300);
+ //                R.safari();
+ //            };
             
-            st[0].onclick = function (e) {
-                if (city_box == city){
-                    if (t = document.getElementById(city_box)) { 
-                        t.style.display = "none";
-                        // t.style.left = e.clientX + 'px';
-                        // t.style.top = e.clientY + 'px';
-                    }
-                    city_box = null;
-                }else{
-                    if (t = document.getElementById(city_box)) { 
-                        t.style.display = "none";
-                        // t.style.left = e.clientX + 'px';
-                        // t.style.top = e.clientY + 'px';
-                    }
-                    if (t = document.getElementById(city)) { 
-                        t.style.display = "block";
-                        t.style.left = (e.clientX-100) + 'px';
-                        t.style.top = (e.clientY-70) + 'px';
-                    }
-                    city_box = city;
-                }
-            };
+ //            st[0].onclick = function (e) {
+ //                if (city_box == city){
+ //                    if (t = document.getElementById(city_box)) { 
+ //                        t.style.display = "none";
+ //                        // t.style.left = e.clientX + 'px';
+ //                        // t.style.top = e.clientY + 'px';
+ //                    }
+ //                    city_box = null;
+ //                }else{
+ //                    if (t = document.getElementById(city_box)) { 
+ //                        t.style.display = "none";
+ //                        // t.style.left = e.clientX + 'px';
+ //                        // t.style.top = e.clientY + 'px';
+ //                    }
+ //                    if (t = document.getElementById(city)) { 
+ //                        t.style.display = "block";
+ //                        t.style.left = (e.clientX-100) + 'px';
+ //                        t.style.top = (e.clientY-70) + 'px';
+ //                    }
+ //                    city_box = city;
+ //                }
+ //            };
 
 
-            // if (t = document.getElementById(city)) {
-            // 	console.log(cities[city]);
-            //     t.style.left = cities[city].attr('cx') + 'px';
-            //     t.style.top = cities[city].attr('cy') -20 + 'px';
-            // }
+ //            // if (t = document.getElementById(city)) {
+ //            // 	console.log(cities[city]);
+ //            //     t.style.left = cities[city].attr('cx') + 'px';
+ //            //     t.style.top = cities[city].attr('cy') -20 + 'px';
+ //            // }
 
-        })(cities[city], city);
-    }; // end for
+ //        })(cities[city], city);
+ //    }; // end for
+
+
+//////////////////////////////////////////////////////////////////
+/////////////////////    WORLD MAP END    ////////////////////////
+//////////////////////////////////////////////////////////////////
+
+
+d3.select(window).on("resize", resize);
+
+    var width = document.querySelector('#map').offsetWidth;
+    var mapRatio = 0.7;
+    var height = width * mapRatio;
+    var active;
+
+    var projection = d3.geo.mercator().scale(width / 2 / Math.PI)
+            .rotate([-11, 0])
+            .translate([(width) / 2, height * 1.35 / 2])
+            .precision(.1);
+
+    var path = d3.geo.path().projection(projection);
+
+    var svg = d3.select("#map")
+            .append("svg")
+            .attr("preserveAspectRatio", "xMinYMin")
+            .attr("width", width)
+            .attr("height", height)
+            .append("g");
+
+    svg.append("rect")
+	    .attr("width", width)
+	    .attr("height", height)
+	    .on("click", reset);
+
+
+    var sets = [
+        {
+            name: 'Central Europe',
+            set: d3.set(['BEL', 'CHE', 'DEU', 'AUT', 'ESP', 'FRA', 'ATF', 'GBR', 'GGY', 'JEY', 'FLK', 'SGS', 'GRC', 'MLT', 'IRL', 'ITA', 'LUX', 'NLD', 'AND', 'POL', 'PRT', 'TUR', 'CYP', 'CYN', 'MON', 'ALD', 'IMN', 'LTU', 'LVA', 'EST', 'BLR', 'UKR', 'MDA', 'ROU', 'HUN', 'SVK', 'SVN', 'HRV', 'BIH', 'CZE', 'BGR', 'KOS', 'MKD', 'ALB', 'MNE', 'SRB']),
+        },
+        {
+            name: 'Northern Europe',
+            set: d3.set(['DNK', 'FRO', 'FIN', 'GRL', 'ISL', 'NOR', 'SWE'])
+        },
+        {
+            name: 'North America',
+            set: d3.set(['CAN', 'MEX', 'USA'])
+        },
+        {
+            name: 'Caribbean',
+            set: d3.set(['BLZ', 'CRI', 'CUB', 'GTM', 'HND', 'NIC', 'PAN', 'SLV', 'HTI', 'JAM', 'DOM', 'PRI', 'BHS', 'TCA', 'ATG', 'DMA', 'BRB', 'GRD'])
+        },
+        {
+            name: 'South America',
+            set: d3.set(['ARG', 'BOL', 'BRA', 'CHL', 'COL', 'ECU', 'FLK', 'GUY', 'PRY', 'PER', 'SUR', 'URY', 'VEN', 'TTO'])
+        },
+        {
+            name: 'Africa',
+            set: d3.set(['AGO', 'BDI', 'BEN', 'BFA', 'BWA', 'CAF', 'CIV', 'CMR', 'COD', 'COD', 'COG', 'COM', 'CPV', 'DJI', 'DZA', 'EGY', 'ERI', 'ETH', 'GAB', 'GHA', 'GIN', 'GMB', 'GNB', 'GNQ', 'KEN', 'LBR', 'LBY', 'LSO', 'MAR', 'MDG', 'MLI', 'MOZ', 'MRT', 'MUS', 'MWI', 'MYT', 'NAM', 'NER', 'NGA', 'REU', 'RWA', 'ESH', 'SDN', 'SDS', 'SEN', 'SHN', 'SHN', 'SLE', 'SOM', 'SOL', 'SSD', 'STP', 'STP', 'SWZ', 'SYC', 'TCD', 'TGO', 'TUN', 'TZA', 'TZA', 'UGA', 'ZAF', 'ZMB', 'ZWE'])
+        },
+        {
+            name: 'South Pacific',
+            set: d3.set(['AUS', 'NZL'])
+        },
+        {
+            name: 'India',
+            set: d3.set(['IND', 'BGD', 'LKA'])
+        },
+        {
+            name: 'Orient',
+            set: d3.set(['AZE', 'ARE', 'QAT', 'IRN', 'AFG', 'PAK', 'BHR', 'SAU', 'YEM', 'OMN', 'SYR', 'JOR', 'IRQ', 'KWT', 'ISR', 'LBN', 'PSX', 'PSR', 'GEO', 'ARM'])
+        },
+        {
+            name: 'Russia',
+            set: d3.set(['RUS', 'KAZ', 'UZB', 'TKM', 'KGZ', 'TJK'])
+        },
+        {
+            name: 'Asia',
+            set: d3.set(['BTN', 'CHN', 'JPN', 'IDN', 'MNG', 'NPL', 'MMR', 'THA', 'KHM', 'LAO', 'VNM', 'PRK', 'KOR', 'TWN', 'MYS', 'PNG', 'SLB', 'VUT', 'NCL', 'BRN', 'PHL', 'TLS', 'HKG', 'FJI', 'GUM', 'PLW', 'FSM', 'MNP', 'KAS'])
+        }
+    ];
+
+
+    function click(d) {
+	  if (active === d) return reset();
+	  svg.selectAll(".active").classed("active", false);
+	  d3.select(this).classed("active", active = d);
+
+	  var b = path.bounds(d);
+	  svg.transition().duration(750).attr("transform",
+	      "translate(" + projection.translate() + ")"
+	      + "scale(" + .95 / Math.max((b[1][0] - b[0][0]) / width, (b[1][1] - b[0][1]) / height) + ")"
+	      + "translate(" + -(b[1][0] + b[0][0]) / 2 + "," + -(b[1][1] + b[0][1]) / 2 + ")");
+	}
+
+	function reset() {
+	  svg.selectAll(".active").classed("active", active = false);
+	  svg.transition().duration(750).attr("transform", "");
+	}
+
+
+    d3.json("countries.json", function (error, w) {
+        if (error) throw error;
+
+        svg.append("path").datum(topojson.merge(w, w.objects.units.geometries.filter(function (d) {
+                    return d.id !== 'ATA'; // Sorry Antarctica
+                })))
+                //.attr("class", "border")
+                .attr("d", path);
+
+        for (var i = 0; i < sets.length; i++) {
+            svg.append("path").datum(topojson.merge(w, w.objects.units.geometries.filter(function (d) {
+                        return sets[i].set.has(d.id);
+                    })))
+                    .attr('class', "regions selected")
+                    .attr("d", path)
+                    .on("click", click)
+                    .attr({'data-name': sets[i].name})
+                    .on('mouseover', function () {
+                        var region = d3.select(this);
+                        //document.querySelector('.legend').innerText = region.attr('data-name');
+                    }).on('mouseout', function () {
+                        //document.querySelector('.legend').innerText = '';
+                    });
+        }
+
+    });
+
+
+	///////   ANOTHER OPTION (BUILT FROM ARRAY)   //////////////
+
+	// for(var regionId in WorldMapData) {
+
+ //        svg.append("path").datum(WorldMapData[regionId])
+ //                .attr("class", "border")
+ //                .attr("d", function(d){return d.path});
+
+ //    }
+
+ 	///////////////////////////////////////////////////////////
+
+    function resize() {
+        // adjust things when the window size changes
+        width = document.querySelector('#map').offsetWidth;
+        // width = width - margin.left - margin.right;
+        height = width * mapRatio;
+
+        // update projection
+        projection.scale(width / 2 / Math.PI)
+                .translate([(width) / 2, height * 1.35 / 2])
+                .precision(.1);
+        // resize the map container
+        document.querySelector('svg').setAttribute('width', width);
+        document.querySelector('svg').setAttribute('height', height);
+
+        // resize the map
+        svg.selectAll('.regions, .border').attr('d', path);
+    }
 
 
 
